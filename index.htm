@@ -19,13 +19,13 @@ function showLocale(objD){
 	if  ( ww==0 )  colorhead="<font color=\"#000000\">";
 	if  ( ww > 0 && ww < 6 )  colorhead="<font color=\"#000000\">";
 	if  ( ww==6 )  colorhead="<font color=\"#000000\">";
-	if  (ww==0)  ww="星期日";
-	if  (ww==1)  ww="星期一";
-	if  (ww==2)  ww="星期二";
-	if  (ww==3)  ww="星期三";
-	if  (ww==4)  ww="星期四";
-	if  (ww==5)  ww="星期五";
-	if  (ww==6)  ww="星期六";
+	if  (ww==0)  ww="7";
+	if  (ww==1)  ww="1";
+	if  (ww==2)  ww="2";
+	if  (ww==3)  ww="3";
+	if  (ww==4)  ww="4";
+	if  (ww==5)  ww="5";
+	if  (ww==6)  ww="6";
 	colorfoot="</font>"
 	str = colorhead + yy + "-" + MM + "-" + dd + "/" + hh + ":" + mm + ":" + ss + "/" + ww + colorfoot;
 	return(str);
