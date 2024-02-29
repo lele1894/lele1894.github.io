@@ -1,0 +1,33 @@
+#EXTM3U
+#EXTINF:-1 tvg-name="CCTV1综合" group-title="CCTV",CCTV1综合
+http://[2409:8087:2001:20:2800:0:df6e:eb02]/ott.mobaibox.com/PLTV/3/224/3221228149/index.m3u8
+#EXTINF:-1 tvg-name="CCTV2财经" group-title="CCTV",CCTV2财经
+http://[2409:8087:2001:20:2800:0:df6e:eb17]/ott.mobaibox.com/PLTV/3/224/3221228094/index.m3u8
+#EXTINF:-1 tvg-name="CCTV3文艺" group-title="CCTV",CCTV3文艺
+http://[2409:8087:2001:20:2800:0:df6e:eb20]/ott.mobaibox.com/PLTV/3/224/3221228499/index.m3u8
+#EXTINF:-1 tvg-name="CCTV4亚洲" group-title="CCTV",CCTV4亚洲
+http://[2409:8087:2001:20:2800:0:df6e:eb13]/ott.mobaibox.com/PLTV/3/224/3221227549/index.m3u8
+#EXTINF:-1 tvg-name="CCTV5体育" group-title="CCTV",CCTV5体育
+http://[2409:8087:2001:20:2800:0:df6e:eb23]/ott.mobaibox.com/PLTV/e/224/3221228502/index.m3u8
+#EXTINF:-1 tvg-name="CCTV6电影" group-title="CCTV",CCTV6电影
+http://[2409:8087:2001:20:2800:0:df6e:eb23]/ott.mobaibox.com/PLTV/d/224/3221228516/index.m3u8
+#EXTINF:-1 tvg-name="CCTV7军事农业" group-title="CCTV",CCTV7军事农业
+http://[2409:8087:2001:20:2800:0:df6e:eb12]/ott.mobaibox.com/PLTV/3/224/3221227690/index.m3u8
+#EXTINF:-1 tvg-name="CCTV8电视剧" group-title="CCTV",CCTV8电视剧
+http://[2409:8087:2001:20:2800:0:df6e:eb26]/ott.mobaibox.com/PLTV/7/224/3221228578/index.m3u8
+#EXTINF:-1 tvg-name="CCTV9记录" group-title="CCTV",CCTV9记录
+http://[2409:8087:2001:20:2800:0:df6e:eb12]/ott.mobaibox.com/PLTV/3/224/3221227614/index.m3u8
+#EXTINF:-1 tvg-name="CCTV10科教" group-title="CCTV",CCTV10科教
+http://[2409:8087:2001:20:2800:0:df6e:eb0e]/ott.mobaibox.com/PLTV/3/224/3221227620/index.m3u8
+#EXTINF:-1 tvg-name="CCTV11戏曲" group-title="CCTV",CCTV11戏曲
+http://[2409:8087:2001:20:2800:0:df6e:eb22]/ott.mobaibox.com/PLTV/3/224/3221228289/index.m3u8
+#EXTINF:-1 tvg-name="CCTV12社会与法" group-title="CCTV",CCTV12社会与法
+http://[2409:8087:2001:20:2800:0:df6e:eb0e]/ott.mobaibox.com/PLTV/3/224/3221227637/index.m3u8
+#EXTINF:-1 tvg-name="CCTV13新闻" group-title="CCTV",CCTV13新闻
+http://[2409:8087:2001:20:2800:0:df6e:eb16]/ott.mobaibox.com/PLTV/3/224/3221228224/index.m3u8
+#EXTINF:-1 tvg-name="CCTV8K" group-title="CCTV",CCTV8K
+http://[2409:8087:2001:20:2800:0:df6e:eb02]/ott.mobaibox.com/PLTV/c/224/3221228165/index.m3u8
+#EXTINF:-1 tvg-name="CCTV15音乐" group-title="CCTV",CCTV15音乐
+http://[2409:8087:2001:20:2800:0:df6e:eb22]/ott.mobaibox.com/PLTV/3/224/3221228404/index.m3u8
+#EXTINF:-1 tvg-name="CCTV体育赛事" group-title="CCTV",CCTV体育赛事
+http://[2409:8087:2001:20:2800:0:df6e:eb16]/ott.mobaibox.com/PLTV/3/224/3221228176/index.m3u8
