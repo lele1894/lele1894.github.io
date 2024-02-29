@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随机搜图-点一次换一图-看中保存哦~</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #topFrame {
+            width: 100%;
+            height: 5%;
+            background-color: #f2f2f2;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        #bottomFrame {
+            width: 100%;
+            height: 95%;
+            position: fixed;
+            top: 5%;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #bottomContent {
+            width: 100%;
+            height: 100%;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+    <script>
+        function updateImage() {
+            var customInput = document.getElementById('customInput').value;
+            var iframe = document.querySelector('iframe');
+            iframe.src = 'https://source.unsplash.com/featured/?' + customInput;
+        }
+    </script>
+    
+</head>
+<body>
+    <div id="topFrame">
+        <a href="https://source.unsplash.com/featured/?Men" target="bottomFrame">Men（男人）</a>
+        <a href="https://source.unsplash.com/featured/?Woman" target="bottomFrame">Woman（女人）</a>
+        <a href="https://source.unsplash.com/featured/?boy" target="bottomFrame">boy（男孩）</a>
+        <a href="https://source.unsplash.com/featured/?girl" target="bottomFrame">girl（女孩）</a>
+        <form onsubmit="updateImage(); return false;">
+            <input type="text" id="customInput" placeholder="输入英文内容">
+            <button type="submit">打开</button>
+        </form>
+    </div>
+    
+    <div id="bottomFrame">
+        <div id="bottomContent">
+            <iframe name="bottomFrame"></iframe>
+        </div>
+    </div>
+</body>
+</html>
