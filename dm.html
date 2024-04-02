@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ffmpeg把一部电影制作成几分钟的预览-代码</title>
+    <script>
+        function copyCode() {
+            var code = document.getElementById("code");
+            code.select();
+            document.execCommand("copy");
+            alert("代码已复制到剪贴板！");
+        }
+    </script>
+</head>
+<body>
+    <textarea id="code" rows="50" cols="100">@echo off 
+setlocal enabledelayedexpansion
+chcp 65001
+set /p input_file="要转换的视频(视频拖到这里):"
+set output_folder=output
+set /p clip_duration="每分钟截取几秒:"
+echo "影片时长(秒):"
+ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 %input_file%
+set /p time="请填入影片有多少秒:"
+if not exist %output_folder% mkdir %output_folder%
+for /l %%i in (0,60,%time%) do (
+set /a "start_time=%%i"
+ffmpeg -ss !start_time! -t %clip_duration% -i %input_file% -c copy -avoid_negative_ts make_zero %output_folder%\output_%%i.mp4
+echo file '%output_folder%\output_%%i.mp4' >> list.txt
+)
+ffmpeg -f concat -safe 0 -i list.txt -c copy final_output.mp4 -y
+rd /S /Q "output"
+del list.txt
+echo "按任意键继续。. ."
+pause
+exit</textarea><br>
+    <button onclick="copyCode()">复制代码</button>
+</body>
+</html>
