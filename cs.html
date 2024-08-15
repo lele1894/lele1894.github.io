@@ -5,12 +5,12 @@
 document.getElementById("api_iframe_bmcx").src = "https://www.bmcx.com/apiiframe/?api_from=bmcx&api_url=https://keyboard.bmcx.com/&api_width=60%&api_backgroundcolor=FFFFFF";
 </script>
 <br>
-<!--时间-->
-<div id="datetime" style="text-align:center;">
 screen -ls #查看
 screen -d id #后台 Ctrl+A+D
 screen -r id #切换
 screen -X -S id quit #关闭
+<!--时间-->
+<div id="datetime" style="text-align:center;">
     <script>
         setInterval("document.getElementById('datetime').innerHTML=new Date().toLocaleString();", 1000);
     </script>
