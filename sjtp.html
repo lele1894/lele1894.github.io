@@ -1,63 +1,44 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>随机搜图-点一次换一图-看中保存哦~</title>
     <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-        #topFrame {
-            width: 100%;
-            height: 5%;
-            background-color: #f2f2f2;
-            position: fixed;
-            top: 0;
-            left: 0;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-        #bottomFrame {
-            width: 100%;
-            height: 95%;
-            position: fixed;
-            top: 5%;
-            left: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        #bottomContent {
-            width: 100%;
-            height: 100%;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        body, html { height: 100%; margin: 0; padding: 0; }
+        #topFrame { width: 100%; height: 5%; background-color: #f2f2f2; position: fixed; top: 0; left: 0; display: flex; justify-content: space-around; align-items: center; }
+        #bottomFrame { width: 100%; height: 95%; position: fixed; top: 5%; left: 0; display: flex; align-items: center; justify-content: center; }
+        #bottomContent { width: 100%; height: 100%; }
+        iframe { width: 100%; height: 100%; border: none; }
     </style>
     <script>
-        function updateImage() {
-            var customInput = document.getElementById('customInput').value;
-            var iframe = document.querySelector('iframe');
-            iframe.src = 'https://source.unsplash.com/featured/?' + customInput;
-        }
+        const accessKey = 'mWxr50iDW2wiPqALocs8ixdMxSYr_68fj3TIZbYq8Lw'; // Replace with Unsplash API key
+
+async function updateImage(query = 'random') {
+    const iframe = document.querySelector('iframe');
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    try {
+        const response = await fetch(`https://api.unsplash.com/photos/random?client_id=${accessKey}&query=${query}`);
+        const data = await response.json();
+        
+        iframe.src = `${data.urls.raw}&w=${width}&h=${height}&fit=crop&auto=format`;
+    } catch (error) {
+        console.error("Error fetching image:", error);
+    }
+}
+
     </script>
-    
 </head>
 <body>
     <div id="topFrame">
         <a href="/" >回首页</a>
-        <a href="https://source.unsplash.com/featured/?Men" target="bottomFrame">Men（男人）</a>
-        <a href="https://source.unsplash.com/featured/?Woman" target="bottomFrame">Woman（女人）</a>
-        <a href="https://source.unsplash.com/featured/?boy" target="bottomFrame">boy（男孩）</a>
-        <a href="https://source.unsplash.com/featured/?girl" target="bottomFrame">girl（女孩）</a>
-        <form onsubmit="updateImage(); return false;">
+        <a href="#" onclick="updateImage('men')">Men（男人）</a>
+        <a href="#" onclick="updateImage('woman')">Woman（女人）</a>
+        <a href="#" onclick="updateImage('boy')">boy（男孩）</a>
+        <a href="#" onclick="updateImage('girl')">girl（女孩）</a>
+        <form onsubmit="updateImage(document.getElementById('customInput').value); return false;">
             <input type="text" id="customInput" placeholder="输入英文内容">
             <button type="submit">打开</button>
         </form>
