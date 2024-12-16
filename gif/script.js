@@ -253,6 +253,48 @@ class GIFEditor {
             this.saveGIF();
         });
 
+        // 文字显示时间控制
+        document.getElementById('textStartFrame').addEventListener('input', (e) => {
+            this.textStartFrame = parseInt(e.target.value) || 0;
+            if (this.textStartFrame < 0) this.textStartFrame = 0;
+            if (this.textStartFrame >= this.totalFrames) {
+                this.textStartFrame = this.totalFrames - 1;
+            }
+            this.renderFrame();
+        });
+
+        document.getElementById('textEndFrame').addEventListener('input', (e) => {
+            this.textEndFrame = parseInt(e.target.value) || this.totalFrames - 1;
+            if (this.textEndFrame >= this.totalFrames) {
+                this.textEndFrame = this.totalFrames - 1;
+            }
+            if (this.textEndFrame < this.textStartFrame) {
+                this.textEndFrame = this.textStartFrame;
+            }
+            this.renderFrame();
+        });
+
+        // 覆盖图片显示时间控制
+        document.getElementById('overlayStartFrame').addEventListener('input', (e) => {
+            this.overlayStartFrame = parseInt(e.target.value) || 0;
+            if (this.overlayStartFrame < 0) this.overlayStartFrame = 0;
+            if (this.overlayStartFrame >= this.totalFrames) {
+                this.overlayStartFrame = this.totalFrames - 1;
+            }
+            this.renderFrame();
+        });
+
+        document.getElementById('overlayEndFrame').addEventListener('input', (e) => {
+            this.overlayEndFrame = parseInt(e.target.value) || this.totalFrames - 1;
+            if (this.overlayEndFrame >= this.totalFrames) {
+                this.overlayEndFrame = this.totalFrames - 1;
+            }
+            if (this.overlayEndFrame < this.overlayStartFrame) {
+                this.overlayEndFrame = this.overlayStartFrame;
+            }
+            this.renderFrame();
+        });
+
         // 其他控制事件监听器...
     }
 
@@ -290,8 +332,18 @@ class GIFEditor {
             // 获取所有帧
             this.frames = [];
             this.totalFrames = gr.numFrames();
+            
+            // 更新显示时间输入框的最大值
+            document.getElementById('textStartFrame').max = this.totalFrames - 1;
+            document.getElementById('textEndFrame').max = this.totalFrames - 1;
+            document.getElementById('overlayStartFrame').max = this.totalFrames - 1;
+            document.getElementById('overlayEndFrame').max = this.totalFrames - 1;
+            
+            // 设置结束帧的默认值为最后一帧
             document.getElementById('textEndFrame').value = this.totalFrames - 1;
             document.getElementById('overlayEndFrame').value = this.totalFrames - 1;
+            this.textEndFrame = this.totalFrames - 1;
+            this.overlayEndFrame = this.totalFrames - 1;
             
             // 创建临时canvas用于解码
             const tempCanvas = document.createElement('canvas');
@@ -337,14 +389,16 @@ class GIFEditor {
         // 绘制当前帧
         this.ctx.drawImage(frame, 0, 0);
 
-        // 绘制文字
-        if (this.text && this.currentFrame >= this.textStartFrame && 
+        // 绘制文字（检查是否在显示时间范围内）
+        if (this.text && 
+            this.currentFrame >= this.textStartFrame && 
             this.currentFrame <= this.textEndFrame) {
             this.drawText();
         }
 
-        // 绘制覆盖图片
-        if (this.overlayImage && this.currentFrame >= this.overlayStartFrame && 
+        // 绘制覆盖图片（检查是否在显示时间范围内）
+        if (this.overlayImage && 
+            this.currentFrame >= this.overlayStartFrame && 
             this.currentFrame <= this.overlayEndFrame) {
             this.drawOverlay();
         }
@@ -503,6 +557,10 @@ class GIFEditor {
     // 添加保存方法
     async saveGIF() {
         try {
+            // 显示保存对话框
+            const filename = await this.showSaveDialog();
+            if (!filename) return; // 用户取消了保存
+
             // 显示进度条
             const overlay = document.querySelector('.progress-overlay');
             const progressFill = document.querySelector('.progress-fill');
@@ -585,7 +643,7 @@ class GIFEditor {
             // 完成GIF编码
             encoder.finish();
             
-            // 获取GIF数据并创建下载链接
+            // 完成GIF编码后保存
             const binary_gif = encoder.stream().getData();
             const byteArray = new Uint8Array(binary_gif.length);
             for (let i = 0; i < binary_gif.length; i++) {
@@ -593,14 +651,20 @@ class GIFEditor {
             }
             
             const blob = new Blob([byteArray], {type: 'image/gif'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'output.gif';
-            a.click();
+
+            // 使用系统保存对话框
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            
+            // 触发系统保存对话框
+            link.click();
             
             // 清理
-            URL.revokeObjectURL(url);
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
             overlay.style.display = 'none';
             this.showMessage('GIF保存成功!');
             
@@ -609,6 +673,84 @@ class GIFEditor {
             this.showMessage('GIF保存失败: ' + error.message, true);
             console.error(error);
         }
+    }
+
+    // 添加保存对话框方法
+    async showSaveDialog() {
+        // 创建对话框HTML
+        const dialog = document.createElement('div');
+        dialog.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        `;
+        
+        dialog.innerHTML = `
+            <h3 style="margin-bottom: 15px;">保存GIF</h3>
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px;">文件名:</label>
+                <input type="text" id="saveFilename" value="output.gif" 
+                    style="width: 100%; padding: 5px; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                <button id="cancelSave" style="padding: 5px 15px; border: none; border-radius: 4px; cursor: pointer;">取消</button>
+                <button id="confirmSave" style="padding: 5px 15px; border: none; border-radius: 4px; background: #4CAF50; color: white; cursor: pointer;">保存</button>
+            </div>
+        `;
+
+        // 创建遮罩层
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        `;
+
+        document.body.appendChild(overlay);
+        document.body.appendChild(dialog);
+
+        // 返回Promise以等待用户操作
+        return new Promise((resolve) => {
+            const input = dialog.querySelector('#saveFilename');
+            const cancelBtn = dialog.querySelector('#cancelSave');
+            const confirmBtn = dialog.querySelector('#confirmSave');
+
+            // 取消保存
+            cancelBtn.onclick = () => {
+                document.body.removeChild(dialog);
+                document.body.removeChild(overlay);
+                resolve(null);
+            };
+
+            // 确认保存
+            confirmBtn.onclick = () => {
+                let filename = input.value.trim();
+                if (!filename) filename = 'output.gif';
+                if (!filename.toLowerCase().endsWith('.gif')) {
+                    filename += '.gif';
+                }
+                document.body.removeChild(dialog);
+                document.body.removeChild(overlay);
+                resolve(filename);
+            };
+
+            // 按Enter键确认
+            input.onkeyup = (e) => {
+                if (e.key === 'Enter') {
+                    confirmBtn.click();
+                }
+            };
+        });
     }
 }
 
