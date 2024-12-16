@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIF编辑器</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧预览区域 -->
+        <div class="preview-panel">
+            <div class="preview-container">
+                <canvas id="previewCanvas"></canvas>
+                <div id="dropZone" class="drop-zone">
+                    <p>拖拽GIF文件到此处</p>
+                </div>
+            </div>
+            <!-- 播放控制区域 -->
+            <div class="control-bar">
+                <button id="playPauseBtn">暂停</button>
+                <div class="progress-container">
+                    <input type="range" id="progressBar" min="0" max="100" value="0">
+                    <span id="frameInfo">0/0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧控制面板 -->
+        <div class="control-panel">
+            <button id="importBtn" class="full-width-btn">导GIF文件</button>
+            
+            <!-- 文字设置区域 -->
+            <div class="settings-section">
+                <h3>文字设置</h3>
+                <div class="input-group">
+                    <label>输入文字:</label>
+                    <input type="text" id="textInput">
+                    <button id="clearTextBtn">清除文字</button>
+                </div>
+                
+                <div class="input-group">
+                    <label>文字大小缩放:</label>
+                    <input type="range" id="textScaleSlider" min="10" max="300" value="100">
+                    <span id="textScaleValue">100%</span>
+                </div>
+
+                <div class="input-group">
+                    <label>文字大小:</label>
+                    <input type="number" id="fontSize" value="20" min="1">
+                </div>
+
+                <div class="input-group">
+                    <label>文字颜色:</label>
+                    <input type="color" id="textColor" value="#FFFFFF">
+                </div>
+
+                <div class="input-group">
+                    <label>描边颜色:</label>
+                    <input type="color" id="strokeColor" value="#000000">
+                    <label>宽度:</label>
+                    <input type="number" id="strokeWidth" value="0" min="0" max="5">
+                </div>
+
+                <div class="input-group">
+                    <label>字体:</label>
+                    <select id="fontSelect"></select>
+                </div>
+
+                <div class="input-group">
+                    <label>显示时间:</label>
+                    <div class="frame-control">
+                        <label>起始帧:</label>
+                        <input type="number" id="textStartFrame" value="0" min="0">
+                        <label>结束帧:</label>
+                        <input type="number" id="textEndFrame" value="999999" min="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 覆盖图片设置区域 -->
+            <div class="settings-section">
+                <h3>覆盖图片设置</h3>
+                <div class="input-group">
+                    <button id="selectOverlayBtn">选择覆盖图片</button>
+                    <button id="clearOverlayBtn">清除图片</button>
+                </div>
+
+                <div class="input-group">
+                    <label>图片大小缩放:</label>
+                    <input type="range" id="overlayScaleSlider" min="10" max="300" value="100">
+                    <span id="overlayScaleValue">100%</span>
+                </div>
+
+                <div class="input-group">
+                    <label>显示时间:</label>
+                    <div class="frame-control">
+                        <label>起始帧:</label>
+                        <input type="number" id="overlayStartFrame" value="0" min="0">
+                        <label>结束帧:</label>
+                        <input type="number" id="overlayEndFrame" value="999999" min="0">
+                    </div>
+                </div>
+            </div>
+
+            <button id="saveBtn" class="full-width-btn">保存GIF</button>
+
+            <!-- 消息显示区域 -->
+            <div class="message-section">
+                <h3>提示信息</h3>
+                <div id="messageList" class="message-list"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/omggif@1.0.10/omggif.min.js"></script>
+    <script src="LZWEncoder.js"></script>
+    <script src="NeuQuant.js"></script>
+    <script src="GIFEncoder.js"></script>
+    <script src="script.js"></script>
+    <style>
+        .progress-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .progress-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .progress-bar {
+            width: 300px;
+            height: 20px;
+            background: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #4CAF50;
+            width: 0%;
+            transition: width 0.3s;
+        }
+    </style>
+    <div class="progress-overlay">
+        <div class="progress-box">
+            <h3>正在保存GIF...</h3>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="progress-text">0%</div>
+        </div>
+    </div>
+</body>
+</html> 
