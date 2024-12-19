@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 0 * * *'  # 每天UTC 0:00运行
   workflow_dispatch:      # 支持手动触发
+    inputs:
+      api_key:
+        description: 'YouTube API Key'
+        required: true
+        type: string
 
 jobs:
   update-trending:
@@ -24,7 +29,7 @@ jobs:
     
     - name: Run trending script
       env:
-        YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        YOUTUBE_API_KEY: ${{ github.event_name == 'workflow_dispatch' && inputs.api_key || secrets.YOUTUBE_API_KEY }}
       run: python main.py
     
     - name: Commit and push if changed
@@ -33,4 +38,4 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git add us.html hk.html tw.html
         git commit -m "Update trending videos" || exit 0
-        git push 
+        git push
