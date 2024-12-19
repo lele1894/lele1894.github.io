@@ -1,15 +1,15 @@
 name: Update YouTube Trending
 
 on:
-  schedule:
-    - cron: '55 7 * * *'  # 每天UTC 07:55运行
   workflow_dispatch:      # 支持手动触发
     inputs:
       api_key:
         description: 'YouTube API Key'
         required: true
         type: string
-
+  schedule:
+    - cron: "10 8 * * *"
+    
 jobs:
   update-trending:
     runs-on: ubuntu-latest
