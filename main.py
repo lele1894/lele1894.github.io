@@ -77,7 +77,7 @@ def process_video(video, region):
         return None
 
 def get_trending_videos(api_key, region_code, region_name):
-    """获取指定地区的热门视频"""
+    """获取指定地区的���门视频"""
     youtube = build('youtube', 'v3', developerKey=api_key)
     
     try:
@@ -122,7 +122,8 @@ def generate_html(videos, template_path, output_path):
         html_content = template.render(
             videos=videos,
             current_time=current_time,
-            regions=videos[0]['地区'] if videos else ''
+            regions=videos[0]['地区'] if videos else '',
+            update_time=current_time
         )
         
         with open(output_path, 'w', encoding='utf-8') as f:
