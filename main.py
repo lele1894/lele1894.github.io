@@ -77,7 +77,7 @@ def process_video(video, region):
         return None
 
 def get_trending_videos(api_key, region_code, region_name):
-    """获取指定地区的门视频"""
+    """获取指定地区的���视频"""
     youtube = build('youtube', 'v3', developerKey=api_key)
     
     try:
@@ -140,7 +140,7 @@ def update_index_html(current_time):
             
         # 更新YouTube热门链接的title属性
         content = content.replace(
-            'title="每日自动更新"', 
+            'title="更新时间: 自动更新"',
             f'title="更新时间: {current_time}"'
         )
             
