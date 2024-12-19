@@ -799,3 +799,47 @@ img {
 .dropbtn {
 	cursor: pointer;
 }
+
+/* 为YouTube热门添加特殊样式 */
+.dropdown-content a[href$='.html'] {
+    position: relative;
+}
+
+.dropdown-content a[href$='.html']:after {
+    content: '🔥';
+    position: absolute;
+    right: 10px;
+}
+
+/* 添加更新时间提示 */
+.dropdown-content a[href$='.html']:hover:before {
+    content: attr(title);
+    position: absolute;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+}
+
+/* 添加加载提示样式 */
+.loading-hint {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 9999;
+    display: none;
+}
+
+.loading .loading-hint {
+    display: block;
+}
