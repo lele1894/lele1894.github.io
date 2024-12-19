@@ -177,7 +177,7 @@
         <a href="{{ video['URL'] }}" class="video-link" target="_blank">
             <article class="video-card">
                 <div class="thumbnail-container">
-                    <img src="{{ video['thumbnail'] }}" alt="{{ video['中文标题'] }}" loading="lazy">
+                    <img src="{{ video['thumbnail'][0] }}" alt="{{ video['中文标题'] }}" loading="lazy" onerror="this.onerror=null; let urls={{ video['thumbnail']|tojson }}; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">{{ video['时长'] }}</div>
                 </div>
                 <div class="video-info">
