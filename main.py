@@ -62,6 +62,16 @@ def process_video(video, region):
         video_title = video['snippet']['title']
         translated_title = translate_text(video_title)
         
+        # 获取视频封面图,按分辨率从高到低尝试
+        video_id = video['id']
+        thumbnail_urls = [
+            f"https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg",  # 1080p
+            f"https://i.ytimg.com/vi/{video_id}/sddefault.jpg",      # 640p
+            f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg",      # 480p
+            f"https://i.ytimg.com/vi/{video_id}/mqdefault.jpg",      # 320p
+            f"https://i.ytimg.com/vi/{video_id}/default.jpg"         # 120p
+        ]
+        
         return {
             '原标题': video_title,
             '中文标题': translated_title,
@@ -70,14 +80,14 @@ def process_video(video, region):
             '时长': get_video_duration(video['contentDetails']['duration']),
             '播放量': int(video['statistics']['viewCount']),
             '地区': region,
-            'thumbnail': f"https://i.ytimg.com/vi/{video['id']}/maxresdefault.jpg"
+            'thumbnail': thumbnail_urls  # 传递所有可能的缩略图URL
         }
     except Exception as e:
         print(f"处理视频时出错: {str(e)}")
         return None
 
 def get_trending_videos(api_key, region_code, region_name):
-    """获取指定地区的���视频"""
+    """获取指定地区的视频"""
     youtube = build('youtube', 'v3', developerKey=api_key)
     
     try:
@@ -154,7 +164,7 @@ def update_index_html(current_time):
 def main():
     api_key = os.environ.get('YOUTUBE_API_KEY')
     if not api_key:
-        raise ValueError("未设置YOUTUBE_API_KEY环境变量")
+        raise ValueError("未设置YOUTUBE_API_KEY环境��量")
     
     # 获取当前时间
     current_time = datetime.now(pytz.timezone('Asia/Shanghai')).strftime('%Y年%m月%d日 %H:%M')
