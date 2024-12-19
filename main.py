@@ -77,7 +77,7 @@ def process_video(video, region):
         return None
 
 def get_trending_videos(api_key, region_code, region_name):
-    """获取指定地区的���门视频"""
+    """获取指定地区的门视频"""
     youtube = build('youtube', 'v3', developerKey=api_key)
     
     try:
@@ -132,16 +132,41 @@ def generate_html(videos, template_path, output_path):
     except Exception as e:
         print(f"生成HTML报告时出错: {str(e)}")
 
+def update_index_html(current_time):
+    """更新index.html中的时间标签"""
+    try:
+        with open('index.html', 'r', encoding='utf-8') as f:
+            content = f.read()
+            
+        # 更新YouTube热门链接的title属性
+        content = content.replace(
+            'title="每日自动更新"', 
+            f'title="更新时间: {current_time}"'
+        )
+            
+        with open('index.html', 'w', encoding='utf-8') as f:
+            f.write(content)
+            
+        print("已更新index.html的时间标签")
+    except Exception as e:
+        print(f"更新index.html时出错: {str(e)}")
+
 def main():
     api_key = os.environ.get('YOUTUBE_API_KEY')
     if not api_key:
         raise ValueError("未设置YOUTUBE_API_KEY环境变量")
+    
+    # 获取当前时间
+    current_time = datetime.now(pytz.timezone('Asia/Shanghai')).strftime('%Y年%m月%d日 %H:%M')
     
     regions = [
         {'code': 'US', 'name': '美国', 'file': 'us.html'},
         {'code': 'HK', 'name': '中国香港', 'file': 'hk.html'},
         {'code': 'TW', 'name': '中国台湾', 'file': 'tw.html'}
     ]
+    
+    # 更新index.html
+    update_index_html(current_time)
     
     for region in regions:
         print(f"正在获取{region['name']}地区的热门视频...")
