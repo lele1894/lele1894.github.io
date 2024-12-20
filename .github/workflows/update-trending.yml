@@ -8,13 +8,14 @@ on:
         required: true
         type: string
   schedule:
-    - cron: '10 1 * * *'  # 每4小时运行一次，避免 API 配额限制
+    - cron: '0 */4 * * *'  # 每4小时运行一次：0:00, 4:00, 8:00, 12:00, 16:00, 20:00
 
 jobs:
   update-trending:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # 添加写入权限
+      contents: write
+      actions: write  # 添加 actions 权限
 
     steps:
       - uses: actions/checkout@v3  # 更新到 v3
@@ -37,9 +38,17 @@ jobs:
           echo "Current UTC time: $(date -u)"
           echo "Current local time: $(date)"
 
+      - name: Debug Workflow
+        run: |
+          echo "Workflow triggered by: ${{ github.event_name }}"
+          echo "Current UTC time: $(date -u)"
+          echo "Current Asia/Shanghai time: $(TZ='Asia/Shanghai' date)"
+          echo "GitHub context: ${{ toJSON(github) }}"
+
       - name: Run trending script
         env:
           YOUTUBE_API_KEY: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.api_key || secrets.YOUTUBE_API_KEY }}
+          TZ: 'Asia/Shanghai'  # 设置时区
         run: |
           python main.py
 
