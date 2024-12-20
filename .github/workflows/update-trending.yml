@@ -8,7 +8,7 @@ on:
         required: true
         type: string
   schedule:
-    - cron: "10 8 * * *" # 定时触发，每天 UTC 时间 08:10 运行
+    - cron: "30 8 * * *" # 定时触发，每天 UTC 时间 08:10 运行
 
 jobs:
   update-trending:
