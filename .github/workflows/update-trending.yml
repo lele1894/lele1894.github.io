@@ -2,7 +2,7 @@ name: Update YouTube Trending
 
 on:
   schedule:
-    - cron: '0 * * * *'  # 每小时运行一次，在每小时的整点运行
+    - cron: '* * * * *'  # 每分钟运行一次
 
 jobs:
   update-trending:
