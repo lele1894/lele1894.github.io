@@ -32,6 +32,8 @@ jobs:
           echo "Event name: ${{ github.event_name }}"
           echo "API key (secrets): ${{ secrets.YOUTUBE_API_KEY }}"
           echo "API key (input): ${{ github.event.inputs.api_key }}"
+          echo "Current UTC time: $(date -u)"
+          echo "Current local time: $(date)"
 
       - name: Run trending script
         env:
