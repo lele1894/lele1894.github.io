@@ -7,7 +7,7 @@ on:
         description: '手动触发更新'
         required: false
   schedule:
-    - cron: "*/10 * * * *"  # 每10分钟运行一次
+    - cron: "40 13 * * *"  # 每10分钟运行一次
 
 jobs:
   update-youtube:
