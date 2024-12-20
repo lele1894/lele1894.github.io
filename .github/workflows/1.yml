@@ -1,4 +1,0 @@
-name: Debug Environment Variables
-  run: |
-    echo "Event name: ${{ github.event_name }}"
-    echo "API key: ${{ secrets.YOUTUBE_API_KEY }}"
