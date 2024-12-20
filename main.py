@@ -4,7 +4,7 @@ from datetime import datetime
 import json
 import os
 from jinja2 import Template
-import pytz
+from zoneinfo import ZoneInfo
 import time
 import random
 import warnings
@@ -127,7 +127,7 @@ def generate_html(videos, template_path, output_path):
             template_content = f.read()
             
         template = Template(template_content)
-        current_time = datetime.now(pytz.timezone('Asia/Shanghai')).strftime('%Y年%m月%d日 %H:%M')
+        current_time = datetime.now(ZoneInfo("Asia/Shanghai")).strftime('%Y年%m月%d日 %H:%M')
         
         html_content = template.render(
             videos=videos,
@@ -148,11 +148,10 @@ def update_index_html(current_time):
         with open('index.html', 'r', encoding='utf-8') as f:
             content = f.read()
             
-        # 更新YouTube热门链接的title属性
-        content = content.replace(
-            'title="更新时间: 自动更新"',
-            f'title="更新时间: {current_time}"'
-        )
+        # 查找所有包含时间的链接
+        import re
+        pattern = r'title="更新时间: .*?"'
+        content = re.sub(pattern, f'title="更新时间: {current_time}"', content)
             
         with open('index.html', 'w', encoding='utf-8') as f:
             f.write(content)
@@ -164,10 +163,10 @@ def update_index_html(current_time):
 def main():
     api_key = os.environ.get('YOUTUBE_API_KEY')
     if not api_key:
-        raise ValueError("未设置YOUTUBE_API_KEY环境��量")
+        raise ValueError("未设置YOUTUBE_API_KEY环境变量")
     
-    # 获取当前时间
-    current_time = datetime.now(pytz.timezone('Asia/Shanghai')).strftime('%Y年%m月%d日 %H:%M')
+    # 修改时间获取方式
+    current_time = datetime.now(ZoneInfo("Asia/Shanghai")).strftime('%Y年%m月%d日 %H:%M')
     
     regions = [
         {'code': 'US', 'name': '美国', 'file': 'us.html'},
@@ -175,7 +174,7 @@ def main():
         {'code': 'TW', 'name': '中国台湾', 'file': 'tw.html'}
     ]
     
-    # 更新index.html
+    # 先更新 index.html
     update_index_html(current_time)
     
     for region in regions:
