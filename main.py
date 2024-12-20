@@ -62,14 +62,34 @@ def process_video(video, region):
         video_title = video['snippet']['title']
         translated_title = translate_text(video_title)
         
+        # 处理上传时间
+        published_at = datetime.fromisoformat(video['snippet']['publishedAt'].replace('Z', '+00:00'))
+        shanghai_tz = ZoneInfo("Asia/Shanghai")
+        published_at = published_at.astimezone(shanghai_tz)
+        
+        # 计算发布时间差
+        now = datetime.now(shanghai_tz)
+        time_diff = now - published_at
+        
+        if time_diff.days > 365:
+            upload_time = f"{time_diff.days // 365}年前"
+        elif time_diff.days > 30:
+            upload_time = f"{time_diff.days // 30}个月前"
+        elif time_diff.days > 0:
+            upload_time = f"{time_diff.days}天前"
+        elif time_diff.seconds // 3600 > 0:
+            upload_time = f"{time_diff.seconds // 3600}小时前"
+        else:
+            upload_time = f"{time_diff.seconds // 60}分钟前"
+        
         # 获取视频封面图,按分辨率从高到低尝试
         video_id = video['id']
         thumbnail_urls = [
-            f"https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg",  # 1080p
-            f"https://i.ytimg.com/vi/{video_id}/sddefault.jpg",      # 640p
-            f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg",      # 480p
-            f"https://i.ytimg.com/vi/{video_id}/mqdefault.jpg",      # 320p
-            f"https://i.ytimg.com/vi/{video_id}/default.jpg"         # 120p
+            f"https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg",
+            f"https://i.ytimg.com/vi/{video_id}/sddefault.jpg",
+            f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg",
+            f"https://i.ytimg.com/vi/{video_id}/mqdefault.jpg",
+            f"https://i.ytimg.com/vi/{video_id}/default.jpg"
         ]
         
         return {
@@ -80,7 +100,8 @@ def process_video(video, region):
             '时长': get_video_duration(video['contentDetails']['duration']),
             '播放量': int(video['statistics']['viewCount']),
             '地区': region,
-            'thumbnail': thumbnail_urls  # 传递所有可能的缩略图URL
+            '上传时间': upload_time,
+            'thumbnail': thumbnail_urls
         }
     except Exception as e:
         print(f"处理视频时出错: {str(e)}")

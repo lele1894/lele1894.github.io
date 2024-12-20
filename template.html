@@ -139,8 +139,14 @@
 
         .stats {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             font-size: 13px;
+            flex-wrap: wrap;
+            color: var(--yt-light-text);
+        }
+
+        .stats span {
+            white-space: nowrap;
         }
 
         .region-tag {
@@ -187,6 +193,8 @@
                         <div class="channel-name">{{ video['创作者'] }}</div>
                         <div class="stats">
                             <span>{{ "{:,}".format(video['播放量']) }} 次观看</span>
+                            <span>•</span>
+                            <span>{{ video['上传时间'] }}</span>
                             <span>•</span>
                             <span>{{ video['地区'] }}</span>
                         </div>
