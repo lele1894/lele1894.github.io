@@ -168,6 +168,74 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .thumbnail-container:hover .play-button {
+            opacity: 1;
+        }
+
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 20px;
+            border-color: transparent transparent transparent white;
+            margin-left: 4px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            background: black;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -30px;
+            right: 0;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .video-iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+        }
     </style>
 </head>
 <body>
@@ -185,6 +253,7 @@
                 <div class="thumbnail-container">
                     <img src="{{ video['thumbnail'][0] }}" alt="{{ video['中文标题'] }}" loading="lazy" onerror="this.onerror=null; let urls={{ video['thumbnail']|tojson }}; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">{{ video['时长'] }}</div>
+                    <div class="play-button" onclick="openModal('{{ video['URL'].split('=')[1] }}')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">{{ video['中文标题'] }}</h3>
@@ -204,5 +273,40 @@
         </a>
         {% endfor %}
     </div>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <iframe id="videoIframe" class="video-iframe" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
+    <script>
+        function openModal(videoId) {
+            event.preventDefault(); // 阻止链接跳转
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('videoIframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('videoIframe');
+            iframe.src = '';
+            modal.style.display = 'none';
+        }
+
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('videoModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 </html>
