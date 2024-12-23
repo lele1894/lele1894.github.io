@@ -312,15 +312,15 @@
             const popup = document.getElementById('videoPopup');
             const overlay = document.getElementById('videoOverlay');
             
-            // 添加加载提示
             const loadingDiv = document.createElement('div');
             loadingDiv.textContent = '加载中...';
             loadingDiv.className = 'loading';
             
             const iframe = document.createElement('iframe');
-            iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
-            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&origin=https://lele1894.tk`;
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
             iframe.allowFullscreen = true;
+            iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
             
             popup.innerHTML = '';
             popup.appendChild(loadingDiv);
