@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube 中国台湾 热门视频 - 2024年12月24日 06:38</title>
+    <title>YouTube 中国台湾 热门视频 - 2024年12月24日 06:45</title>
     <style>
         :root {
             --yt-red: #ff0000;
@@ -184,10 +184,7 @@
             cursor: pointer;
             opacity: 0;
             transition: opacity 0.2s;
-        }
-
-        .thumbnail-container:hover .play-button {
-            opacity: 1;
+            z-index: 10;
         }
 
         .play-button::after {
@@ -195,46 +192,56 @@
             width: 0;
             height: 0;
             border-style: solid;
-            border-width: 10px 0 10px 20px;
+            border-width: 15px 0 15px 26px;
             border-color: transparent transparent transparent white;
-            margin-left: 4px;
+            margin-left: 5px;
         }
 
-        .modal {
+        .thumbnail-container:hover .play-button {
+            opacity: 1;
+        }
+
+        .video-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+            background: #000;
+            padding: 0;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
             display: none;
+            width: 90vw;
+            height: 90vh;
+            max-width: calc(100vh * 16 / 9);
+        }
+
+        .video-popup iframe {
+            border: none;
+            border-radius: 8px;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            position: relative;
-            width: 80%;
-            max-width: 800px;
-            background: black;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: -30px;
-            right: 0;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .video-iframe {
             width: 100%;
-            aspect-ratio: 16/9;
-            border: none;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: none;
+        }
+
+        .loading {
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
@@ -243,7 +250,7 @@
         <div class="logo">
             <span>▶</span> YouTube 中国台湾 热门视频
         </div>
-        <div class="update-time">更新时间：2024年12月24日 06:38</div>
+        <div class="update-time">更新时间：2024年12月24日 06:45</div>
     </header>
 
     <div class="container">
@@ -253,7 +260,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/ncOuU2neIyc/maxresdefault.jpg" alt="当我需要离开 📲 #VictoriaPfeifer 时如何为手机充电" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/ncOuU2neIyc/maxresdefault.jpg", "https://i.ytimg.com/vi/ncOuU2neIyc/sddefault.jpg", "https://i.ytimg.com/vi/ncOuU2neIyc/hqdefault.jpg", "https://i.ytimg.com/vi/ncOuU2neIyc/mqdefault.jpg", "https://i.ytimg.com/vi/ncOuU2neIyc/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:20</div>
-                    <div class="play-button" onclick="openModal('ncOuU2neIyc')"></div>
+                    <div class="play-button" onclick="openVideo('ncOuU2neIyc', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">当我需要离开 📲 #VictoriaPfeifer 时如何为手机充电</h3>
@@ -261,7 +268,7 @@
                     <div class="meta-data">
                         <div class="channel-name">Victoria Pfeifer</div>
                         <div class="stats">
-                            <span>20,998,776 次观看</span>
+                            <span>21,028,959 次观看</span>
                             <span>•</span>
                             <span>4天前</span>
                             <span>•</span>
@@ -277,7 +284,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/XFxinHZkUEA/maxresdefault.jpg" alt="聪明的小丑惹白天使生气了！#clown #angel" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/XFxinHZkUEA/maxresdefault.jpg", "https://i.ytimg.com/vi/XFxinHZkUEA/sddefault.jpg", "https://i.ytimg.com/vi/XFxinHZkUEA/hqdefault.jpg", "https://i.ytimg.com/vi/XFxinHZkUEA/mqdefault.jpg", "https://i.ytimg.com/vi/XFxinHZkUEA/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:22</div>
-                    <div class="play-button" onclick="openModal('XFxinHZkUEA')"></div>
+                    <div class="play-button" onclick="openVideo('XFxinHZkUEA', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">聪明的小丑惹白天使生气了！#clown #angel</h3>
@@ -285,7 +292,7 @@
                     <div class="meta-data">
                         <div class="channel-name">超人夫妇</div>
                         <div class="stats">
-                            <span>18,989,258 次观看</span>
+                            <span>19,042,029 次观看</span>
                             <span>•</span>
                             <span>5天前</span>
                             <span>•</span>
@@ -301,7 +308,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/nlP_rCvYdPQ/maxresdefault.jpg" alt="* 圣诞老人 help [Nam Phương] #namphuong #shorts #funny #comedy #action" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/nlP_rCvYdPQ/maxresdefault.jpg", "https://i.ytimg.com/vi/nlP_rCvYdPQ/sddefault.jpg", "https://i.ytimg.com/vi/nlP_rCvYdPQ/hqdefault.jpg", "https://i.ytimg.com/vi/nlP_rCvYdPQ/mqdefault.jpg", "https://i.ytimg.com/vi/nlP_rCvYdPQ/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:59</div>
-                    <div class="play-button" onclick="openModal('nlP_rCvYdPQ')"></div>
+                    <div class="play-button" onclick="openVideo('nlP_rCvYdPQ', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">* 圣诞老人 help [Nam Phương] #namphuong #shorts #funny #comedy #action</h3>
@@ -309,7 +316,7 @@
                     <div class="meta-data">
                         <div class="channel-name">Nam Phương</div>
                         <div class="stats">
-                            <span>4,989,810 次观看</span>
+                            <span>5,025,466 次观看</span>
                             <span>•</span>
                             <span>4天前</span>
                             <span>•</span>
@@ -325,7 +332,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/TAf1X1oEC-w/maxresdefault.jpg" alt="机车骑士的防护神器" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/TAf1X1oEC-w/maxresdefault.jpg", "https://i.ytimg.com/vi/TAf1X1oEC-w/sddefault.jpg", "https://i.ytimg.com/vi/TAf1X1oEC-w/hqdefault.jpg", "https://i.ytimg.com/vi/TAf1X1oEC-w/mqdefault.jpg", "https://i.ytimg.com/vi/TAf1X1oEC-w/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:20</div>
-                    <div class="play-button" onclick="openModal('TAf1X1oEC-w')"></div>
+                    <div class="play-button" onclick="openVideo('TAf1X1oEC-w', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">机车骑士的防护神器</h3>
@@ -333,7 +340,7 @@
                     <div class="meta-data">
                         <div class="channel-name">五件小事</div>
                         <div class="stats">
-                            <span>1,951,460 次观看</span>
+                            <span>1,951,718 次观看</span>
                             <span>•</span>
                             <span>7天前</span>
                             <span>•</span>
@@ -349,7 +356,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/1Hh-BVgz2gY/maxresdefault.jpg" alt="黄明志Ft.王彩桦 忍不住了！ 终于【蛇出来了】 2025蛇年贺岁歌曲" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/1Hh-BVgz2gY/maxresdefault.jpg", "https://i.ytimg.com/vi/1Hh-BVgz2gY/sddefault.jpg", "https://i.ytimg.com/vi/1Hh-BVgz2gY/hqdefault.jpg", "https://i.ytimg.com/vi/1Hh-BVgz2gY/mqdefault.jpg", "https://i.ytimg.com/vi/1Hh-BVgz2gY/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">5:14</div>
-                    <div class="play-button" onclick="openModal('1Hh-BVgz2gY')"></div>
+                    <div class="play-button" onclick="openVideo('1Hh-BVgz2gY', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">黄明志Ft.王彩桦 忍不住了！ 终于【蛇出来了】 2025蛇年贺岁歌曲</h3>
@@ -357,7 +364,7 @@
                     <div class="meta-data">
                         <div class="channel-name">Namewee</div>
                         <div class="stats">
-                            <span>1,466,074 次观看</span>
+                            <span>1,466,259 次观看</span>
                             <span>•</span>
                             <span>3天前</span>
                             <span>•</span>
@@ -373,7 +380,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/QaxiNTRZl_8/maxresdefault.jpg" alt="＂生活可能没有你想象的那么好，也没有你想象的那么糟”#李宗恒  #搞笑#内容过于真实 #剧情 #幸运 #shorts" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/QaxiNTRZl_8/maxresdefault.jpg", "https://i.ytimg.com/vi/QaxiNTRZl_8/sddefault.jpg", "https://i.ytimg.com/vi/QaxiNTRZl_8/hqdefault.jpg", "https://i.ytimg.com/vi/QaxiNTRZl_8/mqdefault.jpg", "https://i.ytimg.com/vi/QaxiNTRZl_8/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">1:48</div>
-                    <div class="play-button" onclick="openModal('QaxiNTRZl_8')"></div>
+                    <div class="play-button" onclick="openVideo('QaxiNTRZl_8', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">＂生活可能没有你想象的那么好，也没有你想象的那么糟”#李宗恒  #搞笑#内容过于真实 #剧情 #幸运 #shorts</h3>
@@ -381,7 +388,7 @@
                     <div class="meta-data">
                         <div class="channel-name">李宗恒</div>
                         <div class="stats">
-                            <span>1,274,505 次观看</span>
+                            <span>1,274,528 次观看</span>
                             <span>•</span>
                             <span>7天前</span>
                             <span>•</span>
@@ -397,7 +404,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/MHrAh4eJzMg/maxresdefault.jpg" alt="🧋第 2 集 | 如果你不知道自己的感性，就出去吧！台南🍜🚶品味，F 极之城" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/MHrAh4eJzMg/maxresdefault.jpg", "https://i.ytimg.com/vi/MHrAh4eJzMg/sddefault.jpg", "https://i.ytimg.com/vi/MHrAh4eJzMg/hqdefault.jpg", "https://i.ytimg.com/vi/MHrAh4eJzMg/mqdefault.jpg", "https://i.ytimg.com/vi/MHrAh4eJzMg/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">47:20</div>
-                    <div class="play-button" onclick="openModal('MHrAh4eJzMg')"></div>
+                    <div class="play-button" onclick="openVideo('MHrAh4eJzMg', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">🧋第 2 集 | 如果你不知道自己的感性，就出去吧！台南🍜🚶品味，F 极之城</h3>
@@ -405,7 +412,7 @@
                     <div class="meta-data">
                         <div class="channel-name">채널십오야</div>
                         <div class="stats">
-                            <span>1,071,294 次观看</span>
+                            <span>1,071,355 次观看</span>
                             <span>•</span>
                             <span>3天前</span>
                             <span>•</span>
@@ -421,7 +428,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/wI--x4sBm2U/maxresdefault.jpg" alt="天冷了，教孩子们点北方人的过冬绝技！ #四小只吖 #日常 #搞笑 #搞笑家庭 #姐弟 #家庭生活" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/wI--x4sBm2U/maxresdefault.jpg", "https://i.ytimg.com/vi/wI--x4sBm2U/sddefault.jpg", "https://i.ytimg.com/vi/wI--x4sBm2U/hqdefault.jpg", "https://i.ytimg.com/vi/wI--x4sBm2U/mqdefault.jpg", "https://i.ytimg.com/vi/wI--x4sBm2U/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:42</div>
-                    <div class="play-button" onclick="openModal('wI--x4sBm2U')"></div>
+                    <div class="play-button" onclick="openVideo('wI--x4sBm2U', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">天冷了，教孩子们点北方人的过冬绝技！ #四小只吖 #日常 #搞笑 #搞笑家庭 #姐弟 #家庭生活</h3>
@@ -429,7 +436,7 @@
                     <div class="meta-data">
                         <div class="channel-name">四小只吖</div>
                         <div class="stats">
-                            <span>1,039,336 次观看</span>
+                            <span>1,039,517 次观看</span>
                             <span>•</span>
                             <span>7天前</span>
                             <span>•</span>
@@ -445,7 +452,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/PioXpkgAXPw/maxresdefault.jpg" alt="八大电视《太太太厉害》|哪里买得到猛男槟榔" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/PioXpkgAXPw/maxresdefault.jpg", "https://i.ytimg.com/vi/PioXpkgAXPw/sddefault.jpg", "https://i.ytimg.com/vi/PioXpkgAXPw/hqdefault.jpg", "https://i.ytimg.com/vi/PioXpkgAXPw/mqdefault.jpg", "https://i.ytimg.com/vi/PioXpkgAXPw/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:55</div>
-                    <div class="play-button" onclick="openModal('PioXpkgAXPw')"></div>
+                    <div class="play-button" onclick="openVideo('PioXpkgAXPw', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">八大电视《太太太厉害》|哪里买得到猛男槟榔</h3>
@@ -453,9 +460,33 @@
                     <div class="meta-data">
                         <div class="channel-name">GTV八大電視</div>
                         <div class="stats">
-                            <span>866,084 次观看</span>
+                            <span>867,427 次观看</span>
                             <span>•</span>
                             <span>5天前</span>
+                            <span>•</span>
+                            <span>中国台湾</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=5qCF__VLYMo" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/5qCF__VLYMo/maxresdefault.jpg" alt="【超人】前导预告，2025年7月大银幕巨献" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/5qCF__VLYMo/maxresdefault.jpg", "https://i.ytimg.com/vi/5qCF__VLYMo/sddefault.jpg", "https://i.ytimg.com/vi/5qCF__VLYMo/hqdefault.jpg", "https://i.ytimg.com/vi/5qCF__VLYMo/mqdefault.jpg", "https://i.ytimg.com/vi/5qCF__VLYMo/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">2:20</div>
+                    <div class="play-button" onclick="openVideo('5qCF__VLYMo', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">【超人】前导预告，2025年7月大银幕巨献</h3>
+                    <div class="original-title">【超人】前導預告，2025年7月大銀幕鉅獻</div>
+                    <div class="meta-data">
+                        <div class="channel-name">華納兄弟台灣</div>
+                        <div class="stats">
+                            <span>827,800 次观看</span>
+                            <span>•</span>
+                            <span>4天前</span>
                             <span>•</span>
                             <span>中国台湾</span>
                         </div>
@@ -469,7 +500,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/gzXEta5Amk4/maxresdefault.jpg" alt="敖犬站在童颜少女旁边，超像爸爸带女儿？【小姐不熙娣】shorts" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/gzXEta5Amk4/maxresdefault.jpg", "https://i.ytimg.com/vi/gzXEta5Amk4/sddefault.jpg", "https://i.ytimg.com/vi/gzXEta5Amk4/hqdefault.jpg", "https://i.ytimg.com/vi/gzXEta5Amk4/mqdefault.jpg", "https://i.ytimg.com/vi/gzXEta5Amk4/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:43</div>
-                    <div class="play-button" onclick="openModal('gzXEta5Amk4')"></div>
+                    <div class="play-button" onclick="openVideo('gzXEta5Amk4', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">敖犬站在童颜少女旁边，超像爸爸带女儿？【小姐不熙娣】shorts</h3>
@@ -477,7 +508,7 @@
                     <div class="meta-data">
                         <div class="channel-name">小姐不熙娣</div>
                         <div class="stats">
-                            <span>810,042 次观看</span>
+                            <span>810,361 次观看</span>
                             <span>•</span>
                             <span>4天前</span>
                             <span>•</span>
@@ -493,7 +524,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/BdkMT2jcwJM/maxresdefault.jpg" alt="《夜市人生》惊传诈赌？ 同花顺对铁支！ EP31 #夜市人生 #澎恰恰" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/BdkMT2jcwJM/maxresdefault.jpg", "https://i.ytimg.com/vi/BdkMT2jcwJM/sddefault.jpg", "https://i.ytimg.com/vi/BdkMT2jcwJM/hqdefault.jpg", "https://i.ytimg.com/vi/BdkMT2jcwJM/mqdefault.jpg", "https://i.ytimg.com/vi/BdkMT2jcwJM/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">1:53</div>
-                    <div class="play-button" onclick="openModal('BdkMT2jcwJM')"></div>
+                    <div class="play-button" onclick="openVideo('BdkMT2jcwJM', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">《夜市人生》惊传诈赌？ 同花顺对铁支！ EP31 #夜市人生 #澎恰恰</h3>
@@ -501,7 +532,7 @@
                     <div class="meta-data">
                         <div class="channel-name">民視戲劇館 Formosa TV Dramas</div>
                         <div class="stats">
-                            <span>769,658 次观看</span>
+                            <span>769,720 次观看</span>
                             <span>•</span>
                             <span>9天前</span>
                             <span>•</span>
@@ -517,7 +548,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/zYEpXYomfAc/maxresdefault.jpg" alt="这广播小姐姐都让我晕了 搞笑 funny 爆笑合集" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/zYEpXYomfAc/maxresdefault.jpg", "https://i.ytimg.com/vi/zYEpXYomfAc/sddefault.jpg", "https://i.ytimg.com/vi/zYEpXYomfAc/hqdefault.jpg", "https://i.ytimg.com/vi/zYEpXYomfAc/mqdefault.jpg", "https://i.ytimg.com/vi/zYEpXYomfAc/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:14</div>
-                    <div class="play-button" onclick="openModal('zYEpXYomfAc')"></div>
+                    <div class="play-button" onclick="openVideo('zYEpXYomfAc', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">这广播小姐姐都让我晕了 搞笑 funny 爆笑合集</h3>
@@ -525,7 +556,7 @@
                     <div class="meta-data">
                         <div class="channel-name">有趣王文鑫</div>
                         <div class="stats">
-                            <span>693,708 次观看</span>
+                            <span>694,545 次观看</span>
                             <span>•</span>
                             <span>6天前</span>
                             <span>•</span>
@@ -541,7 +572,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/EdZvOI23oNw/maxresdefault.jpg" alt="【国会】王义川骂韩国瑜：讲x话！ 不会去找王金平？ |选罢法争议" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/EdZvOI23oNw/maxresdefault.jpg", "https://i.ytimg.com/vi/EdZvOI23oNw/sddefault.jpg", "https://i.ytimg.com/vi/EdZvOI23oNw/hqdefault.jpg", "https://i.ytimg.com/vi/EdZvOI23oNw/mqdefault.jpg", "https://i.ytimg.com/vi/EdZvOI23oNw/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:45</div>
-                    <div class="play-button" onclick="openModal('EdZvOI23oNw')"></div>
+                    <div class="play-button" onclick="openVideo('EdZvOI23oNw', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">【国会】王义川骂韩国瑜：讲x话！ 不会去找王金平？ |选罢法争议</h3>
@@ -549,7 +580,7 @@
                     <div class="meta-data">
                         <div class="channel-name">風傳媒 The Storm Media</div>
                         <div class="stats">
-                            <span>643,946 次观看</span>
+                            <span>644,003 次观看</span>
                             <span>•</span>
                             <span>7天前</span>
                             <span>•</span>
@@ -565,7 +596,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/j7Ss5kLlH7g/maxresdefault.jpg" alt="帅是一种盛觉 所以才有人说傻狗 但没有人说傻猫！ 猫咪：一边玩去 现在没空 扫地机器人：好的 #宠乐园 #轻松一刻 #动物" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/j7Ss5kLlH7g/maxresdefault.jpg", "https://i.ytimg.com/vi/j7Ss5kLlH7g/sddefault.jpg", "https://i.ytimg.com/vi/j7Ss5kLlH7g/hqdefault.jpg", "https://i.ytimg.com/vi/j7Ss5kLlH7g/mqdefault.jpg", "https://i.ytimg.com/vi/j7Ss5kLlH7g/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:10</div>
-                    <div class="play-button" onclick="openModal('j7Ss5kLlH7g')"></div>
+                    <div class="play-button" onclick="openVideo('j7Ss5kLlH7g', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">帅是一种盛觉 所以才有人说傻狗 但没有人说傻猫！ 猫咪：一边玩去 现在没空 扫地机器人：好的 #宠乐园 #轻松一刻 #动物</h3>
@@ -573,7 +604,7 @@
                     <div class="meta-data">
                         <div class="channel-name">宠乐园</div>
                         <div class="stats">
-                            <span>570,330 次观看</span>
+                            <span>570,508 次观看</span>
                             <span>•</span>
                             <span>7天前</span>
                             <span>•</span>
@@ -589,7 +620,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/zx7hRKK84gU/maxresdefault.jpg" alt="🔴 【LIVE直播】統神蹦闆《拳上》誰會贏？ 賽前親曝擂台決戰策略|2024.12.21|Taiwan News Live|台湾のニュース生放送| 대만 뉴스 방송 @中時新聞網娛樂" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/zx7hRKK84gU/maxresdefault.jpg", "https://i.ytimg.com/vi/zx7hRKK84gU/sddefault.jpg", "https://i.ytimg.com/vi/zx7hRKK84gU/hqdefault.jpg", "https://i.ytimg.com/vi/zx7hRKK84gU/mqdefault.jpg", "https://i.ytimg.com/vi/zx7hRKK84gU/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">7:22:56</div>
-                    <div class="play-button" onclick="openModal('zx7hRKK84gU')"></div>
+                    <div class="play-button" onclick="openVideo('zx7hRKK84gU', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">🔴 【LIVE直播】統神蹦闆《拳上》誰會贏？ 賽前親曝擂台決戰策略|2024.12.21|Taiwan News Live|台湾のニュース生放送| 대만 뉴스 방송 @中時新聞網娛樂</h3>
@@ -613,7 +644,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/OpnozzeDmF4/maxresdefault.jpg" alt="AIC 2024 八月 2024DAY4-2024/12/22《Garena 傳說對決》" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/OpnozzeDmF4/maxresdefault.jpg", "https://i.ytimg.com/vi/OpnozzeDmF4/sddefault.jpg", "https://i.ytimg.com/vi/OpnozzeDmF4/hqdefault.jpg", "https://i.ytimg.com/vi/OpnozzeDmF4/mqdefault.jpg", "https://i.ytimg.com/vi/OpnozzeDmF4/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">9:19:41</div>
-                    <div class="play-button" onclick="openModal('OpnozzeDmF4')"></div>
+                    <div class="play-button" onclick="openVideo('OpnozzeDmF4', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">AIC 2024 八月 2024DAY4-2024/12/22《Garena 傳說對決》</h3>
@@ -621,7 +652,7 @@
                     <div class="meta-data">
                         <div class="channel-name">Garena 傳說對決</div>
                         <div class="stats">
-                            <span>525,647 次观看</span>
+                            <span>525,663 次观看</span>
                             <span>•</span>
                             <span>1天前</span>
                             <span>•</span>
@@ -637,7 +668,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/9tL4w2J1uaY/maxresdefault.jpg" alt="魔王来了... 金门坦克一掌挥出黄捷弹飞 #陳玉珍 #黃捷 #立院衝突" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/9tL4w2J1uaY/maxresdefault.jpg", "https://i.ytimg.com/vi/9tL4w2J1uaY/sddefault.jpg", "https://i.ytimg.com/vi/9tL4w2J1uaY/hqdefault.jpg", "https://i.ytimg.com/vi/9tL4w2J1uaY/mqdefault.jpg", "https://i.ytimg.com/vi/9tL4w2J1uaY/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:52</div>
-                    <div class="play-button" onclick="openModal('9tL4w2J1uaY')"></div>
+                    <div class="play-button" onclick="openVideo('9tL4w2J1uaY', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">魔王来了... 金门坦克一掌挥出黄捷弹飞 #陳玉珍 #黃捷 #立院衝突</h3>
@@ -645,7 +676,7 @@
                     <div class="meta-data">
                         <div class="channel-name">台視新聞 TTV NEWS</div>
                         <div class="stats">
-                            <span>504,135 次观看</span>
+                            <span>504,323 次观看</span>
                             <span>•</span>
                             <span>3天前</span>
                             <span>•</span>
@@ -661,7 +692,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/NLqMxR4SrdM/maxresdefault.jpg" alt="🇹🇼🇭🇰 台湾人开车吓死香港人" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/NLqMxR4SrdM/maxresdefault.jpg", "https://i.ytimg.com/vi/NLqMxR4SrdM/sddefault.jpg", "https://i.ytimg.com/vi/NLqMxR4SrdM/hqdefault.jpg", "https://i.ytimg.com/vi/NLqMxR4SrdM/mqdefault.jpg", "https://i.ytimg.com/vi/NLqMxR4SrdM/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:40</div>
-                    <div class="play-button" onclick="openModal('NLqMxR4SrdM')"></div>
+                    <div class="play-button" onclick="openVideo('NLqMxR4SrdM', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">🇹🇼🇭🇰 台湾人开车吓死香港人</h3>
@@ -669,7 +700,7 @@
                     <div class="meta-data">
                         <div class="channel-name">開根號 FTL</div>
                         <div class="stats">
-                            <span>492,510 次观看</span>
+                            <span>492,772 次观看</span>
                             <span>•</span>
                             <span>5天前</span>
                             <span>•</span>
@@ -685,7 +716,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/yL-sGlFhD7I/maxresdefault.jpg" alt="洋葱人 |又雷又貴！一份200肉全烤焦！奢華夜市篇（下） |逢甲夜市 @BIGSNAKEBALL @superpepper. @JBao" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/yL-sGlFhD7I/maxresdefault.jpg", "https://i.ytimg.com/vi/yL-sGlFhD7I/sddefault.jpg", "https://i.ytimg.com/vi/yL-sGlFhD7I/hqdefault.jpg", "https://i.ytimg.com/vi/yL-sGlFhD7I/mqdefault.jpg", "https://i.ytimg.com/vi/yL-sGlFhD7I/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">13:26</div>
-                    <div class="play-button" onclick="openModal('yL-sGlFhD7I')"></div>
+                    <div class="play-button" onclick="openVideo('yL-sGlFhD7I', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">洋葱人 |又雷又貴！一份200肉全烤焦！奢華夜市篇（下） |逢甲夜市 @BIGSNAKEBALL @superpepper. @JBao</h3>
@@ -693,7 +724,7 @@
                     <div class="meta-data">
                         <div class="channel-name">Onion Man</div>
                         <div class="stats">
-                            <span>457,679 次观看</span>
+                            <span>457,762 次观看</span>
                             <span>•</span>
                             <span>1天前</span>
                             <span>•</span>
@@ -709,7 +740,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/ZdthNF2NO2s/maxresdefault.jpg" alt="AIC 2024 八強賽DAY2-2024/12/20《Garena 傳說對決》" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/ZdthNF2NO2s/maxresdefault.jpg", "https://i.ytimg.com/vi/ZdthNF2NO2s/sddefault.jpg", "https://i.ytimg.com/vi/ZdthNF2NO2s/hqdefault.jpg", "https://i.ytimg.com/vi/ZdthNF2NO2s/mqdefault.jpg", "https://i.ytimg.com/vi/ZdthNF2NO2s/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">10:09:47</div>
-                    <div class="play-button" onclick="openModal('ZdthNF2NO2s')"></div>
+                    <div class="play-button" onclick="openVideo('ZdthNF2NO2s', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">AIC 2024 八強賽DAY2-2024/12/20《Garena 傳說對決》</h3>
@@ -733,7 +764,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/7iCRRKD3wC8/maxresdefault.jpg" alt="公开对话纪录，厘清事情经过" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/7iCRRKD3wC8/maxresdefault.jpg", "https://i.ytimg.com/vi/7iCRRKD3wC8/sddefault.jpg", "https://i.ytimg.com/vi/7iCRRKD3wC8/hqdefault.jpg", "https://i.ytimg.com/vi/7iCRRKD3wC8/mqdefault.jpg", "https://i.ytimg.com/vi/7iCRRKD3wC8/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">17:23</div>
-                    <div class="play-button" onclick="openModal('7iCRRKD3wC8')"></div>
+                    <div class="play-button" onclick="openVideo('7iCRRKD3wC8', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">公开对话纪录，厘清事情经过</h3>
@@ -741,7 +772,7 @@
                     <div class="meta-data">
                         <div class="channel-name">異色檔案</div>
                         <div class="stats">
-                            <span>438,694 次观看</span>
+                            <span>439,162 次观看</span>
                             <span>•</span>
                             <span>13小时前</span>
                             <span>•</span>
@@ -757,7 +788,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/EyX7v3YJD4g/maxresdefault.jpg" alt="统神《拳上》输蹦阖不服判决 台上爆气开呛：我全程没退！" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/EyX7v3YJD4g/maxresdefault.jpg", "https://i.ytimg.com/vi/EyX7v3YJD4g/sddefault.jpg", "https://i.ytimg.com/vi/EyX7v3YJD4g/hqdefault.jpg", "https://i.ytimg.com/vi/EyX7v3YJD4g/mqdefault.jpg", "https://i.ytimg.com/vi/EyX7v3YJD4g/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">4:11</div>
-                    <div class="play-button" onclick="openModal('EyX7v3YJD4g')"></div>
+                    <div class="play-button" onclick="openVideo('EyX7v3YJD4g', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">统神《拳上》输蹦阖不服判决 台上爆气开呛：我全程没退！</h3>
@@ -765,7 +796,7 @@
                     <div class="meta-data">
                         <div class="channel-name">ETtoday新聞雲</div>
                         <div class="stats">
-                            <span>427,771 次观看</span>
+                            <span>427,811 次观看</span>
                             <span>•</span>
                             <span>2天前</span>
                             <span>•</span>
@@ -781,7 +812,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/q-X8jG8GDIs/maxresdefault.jpg" alt="将家里的墙贴上贴纸，结果女友直接摔倒在地，又解气又心疼！ 【依然夏天】" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/q-X8jG8GDIs/maxresdefault.jpg", "https://i.ytimg.com/vi/q-X8jG8GDIs/sddefault.jpg", "https://i.ytimg.com/vi/q-X8jG8GDIs/hqdefault.jpg", "https://i.ytimg.com/vi/q-X8jG8GDIs/mqdefault.jpg", "https://i.ytimg.com/vi/q-X8jG8GDIs/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">2:55</div>
-                    <div class="play-button" onclick="openModal('q-X8jG8GDIs')"></div>
+                    <div class="play-button" onclick="openVideo('q-X8jG8GDIs', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">将家里的墙贴上贴纸，结果女友直接摔倒在地，又解气又心疼！ 【依然夏天】</h3>
@@ -789,7 +820,7 @@
                     <div class="meta-data">
                         <div class="channel-name">两只马儿—恶搞姐妹</div>
                         <div class="stats">
-                            <span>391,624 次观看</span>
+                            <span>391,704 次观看</span>
                             <span>•</span>
                             <span>7天前</span>
                             <span>•</span>
@@ -805,7 +836,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/ylU20wuSnXw/maxresdefault.jpg" alt="玉米脆片的由来超恐怖 food healthyfood breakfast" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/ylU20wuSnXw/maxresdefault.jpg", "https://i.ytimg.com/vi/ylU20wuSnXw/sddefault.jpg", "https://i.ytimg.com/vi/ylU20wuSnXw/hqdefault.jpg", "https://i.ytimg.com/vi/ylU20wuSnXw/mqdefault.jpg", "https://i.ytimg.com/vi/ylU20wuSnXw/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:39</div>
-                    <div class="play-button" onclick="openModal('ylU20wuSnXw')"></div>
+                    <div class="play-button" onclick="openVideo('ylU20wuSnXw', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">玉米脆片的由来超恐怖 food healthyfood breakfast</h3>
@@ -813,7 +844,7 @@
                     <div class="meta-data">
                         <div class="channel-name">百靈果News</div>
                         <div class="stats">
-                            <span>390,147 次观看</span>
+                            <span>390,340 次观看</span>
                             <span>•</span>
                             <span>3天前</span>
                             <span>•</span>
@@ -829,7 +860,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/ceyOaFN8H2o/maxresdefault.jpg" alt="【1223】卡提诺狂新闻 #446 「一拳不退」统神vs蹦阖🔥顶尖对决之世纪大决战 🥊💥🥊" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/ceyOaFN8H2o/maxresdefault.jpg", "https://i.ytimg.com/vi/ceyOaFN8H2o/sddefault.jpg", "https://i.ytimg.com/vi/ceyOaFN8H2o/hqdefault.jpg", "https://i.ytimg.com/vi/ceyOaFN8H2o/mqdefault.jpg", "https://i.ytimg.com/vi/ceyOaFN8H2o/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">12:29</div>
-                    <div class="play-button" onclick="openModal('ceyOaFN8H2o')"></div>
+                    <div class="play-button" onclick="openVideo('ceyOaFN8H2o', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">【1223】卡提诺狂新闻 #446 「一拳不退」统神vs蹦阖🔥顶尖对决之世纪大决战 🥊💥🥊</h3>
@@ -837,7 +868,7 @@
                     <div class="meta-data">
                         <div class="channel-name">卡提諾狂新聞</div>
                         <div class="stats">
-                            <span>388,824 次观看</span>
+                            <span>389,409 次观看</span>
                             <span>•</span>
                             <span>16小时前</span>
                             <span>•</span>
@@ -853,7 +884,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/TNtfQii_l18/maxresdefault.jpg" alt="【Shorts短片】用蔬菜蒸水饺，意想不到的美味！" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/TNtfQii_l18/maxresdefault.jpg", "https://i.ytimg.com/vi/TNtfQii_l18/sddefault.jpg", "https://i.ytimg.com/vi/TNtfQii_l18/hqdefault.jpg", "https://i.ytimg.com/vi/TNtfQii_l18/mqdefault.jpg", "https://i.ytimg.com/vi/TNtfQii_l18/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:39</div>
-                    <div class="play-button" onclick="openModal('TNtfQii_l18')"></div>
+                    <div class="play-button" onclick="openVideo('TNtfQii_l18', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">【Shorts短片】用蔬菜蒸水饺，意想不到的美味！</h3>
@@ -861,7 +892,7 @@
                     <div class="meta-data">
                         <div class="channel-name">楊桃美食網</div>
                         <div class="stats">
-                            <span>386,937 次观看</span>
+                            <span>387,463 次观看</span>
                             <span>•</span>
                             <span>5天前</span>
                             <span>•</span>
@@ -877,7 +908,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/XC5RgIwUI9g/maxresdefault.jpg" alt="这次，换你来公道！ 我开的火锅店《锅瘾子》一间充满记忆点的火锅店" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/XC5RgIwUI9g/maxresdefault.jpg", "https://i.ytimg.com/vi/XC5RgIwUI9g/sddefault.jpg", "https://i.ytimg.com/vi/XC5RgIwUI9g/hqdefault.jpg", "https://i.ytimg.com/vi/XC5RgIwUI9g/mqdefault.jpg", "https://i.ytimg.com/vi/XC5RgIwUI9g/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">20:58</div>
-                    <div class="play-button" onclick="openModal('XC5RgIwUI9g')"></div>
+                    <div class="play-button" onclick="openVideo('XC5RgIwUI9g', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">这次，换你来公道！ 我开的火锅店《锅瘾子》一间充满记忆点的火锅店</h3>
@@ -885,7 +916,7 @@
                     <div class="meta-data">
                         <div class="channel-name">Toyz</div>
                         <div class="stats">
-                            <span>383,158 次观看</span>
+                            <span>383,644 次观看</span>
                             <span>•</span>
                             <span>12小时前</span>
                             <span>•</span>
@@ -899,12 +930,12 @@
         <a href="https://www.youtube.com/watch?v=C8xta3ZFwC4" class="video-link" target="_blank">
             <article class="video-card">
                 <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/C8xta3ZFwC4/maxresdefault.jpg" alt="【中天直播 LIVE】蹦闆.统神世纪对决 双方赛前再烙狠话 20241221 @中天新闻CtiNews" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/C8xta3ZFwC4/maxresdefault.jpg", "https://i.ytimg.com/vi/C8xta3ZFwC4/sddefault.jpg", "https://i.ytimg.com/vi/C8xta3ZFwC4/hqdefault.jpg", "https://i.ytimg.com/vi/C8xta3ZFwC4/mqdefault.jpg", "https://i.ytimg.com/vi/C8xta3ZFwC4/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <img src="https://i.ytimg.com/vi/C8xta3ZFwC4/maxresdefault.jpg" alt="【中天直播 LIVE】蹦闆.統神世紀對決 雙方賽前再烙狠話 20241221 @中天新聞CtiNews" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/C8xta3ZFwC4/maxresdefault.jpg", "https://i.ytimg.com/vi/C8xta3ZFwC4/sddefault.jpg", "https://i.ytimg.com/vi/C8xta3ZFwC4/hqdefault.jpg", "https://i.ytimg.com/vi/C8xta3ZFwC4/mqdefault.jpg", "https://i.ytimg.com/vi/C8xta3ZFwC4/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">3:14:44</div>
-                    <div class="play-button" onclick="openModal('C8xta3ZFwC4')"></div>
+                    <div class="play-button" onclick="openVideo('C8xta3ZFwC4', event)"></div>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">【中天直播 LIVE】蹦闆.统神世纪对决 双方赛前再烙狠话 20241221 @中天新闻CtiNews</h3>
+                    <h3 class="video-title">【中天直播 LIVE】蹦闆.統神世紀對決 雙方賽前再烙狠話 20241221 @中天新聞CtiNews</h3>
                     <div class="original-title">【中天直播 #LIVE】蹦闆.統神世紀對決 雙方賽前再烙狠話 20241221 @中天新聞CtiNews</div>
                     <div class="meta-data">
                         <div class="channel-name">中天電視</div>
@@ -925,7 +956,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/Wb_O269-NP8/maxresdefault.jpg" alt="AIC 2024 八月 2024DAY3-2024/12/21《Garena 傳說對決》" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/Wb_O269-NP8/maxresdefault.jpg", "https://i.ytimg.com/vi/Wb_O269-NP8/sddefault.jpg", "https://i.ytimg.com/vi/Wb_O269-NP8/hqdefault.jpg", "https://i.ytimg.com/vi/Wb_O269-NP8/mqdefault.jpg", "https://i.ytimg.com/vi/Wb_O269-NP8/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">8:36:11</div>
-                    <div class="play-button" onclick="openModal('Wb_O269-NP8')"></div>
+                    <div class="play-button" onclick="openVideo('Wb_O269-NP8', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">AIC 2024 八月 2024DAY3-2024/12/21《Garena 傳說對決》</h3>
@@ -949,7 +980,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/yOJ9ZBR1uQk/maxresdefault.jpg" alt="【#拳上2024】孙生前辈来探班 003真情喊话 统神减重30公斤 灵儿重返荣耀？ |拳面启动 最终回 （下）" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/yOJ9ZBR1uQk/maxresdefault.jpg", "https://i.ytimg.com/vi/yOJ9ZBR1uQk/sddefault.jpg", "https://i.ytimg.com/vi/yOJ9ZBR1uQk/hqdefault.jpg", "https://i.ytimg.com/vi/yOJ9ZBR1uQk/mqdefault.jpg", "https://i.ytimg.com/vi/yOJ9ZBR1uQk/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">11:16</div>
-                    <div class="play-button" onclick="openModal('yOJ9ZBR1uQk')"></div>
+                    <div class="play-button" onclick="openVideo('yOJ9ZBR1uQk', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">【#拳上2024】孙生前辈来探班 003真情喊话 统神减重30公斤 灵儿重返荣耀？ |拳面启动 最终回 （下）</h3>
@@ -973,7 +1004,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/Mw30xyrcbcI/maxresdefault.jpg" alt="新疆人的名字翻译过来居然是这样的 #綜藝 #脱口秀 #shorts #脫口秀和TA的朋友們 #脫口秀大會 #搞笑 #douyin" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/Mw30xyrcbcI/maxresdefault.jpg", "https://i.ytimg.com/vi/Mw30xyrcbcI/sddefault.jpg", "https://i.ytimg.com/vi/Mw30xyrcbcI/hqdefault.jpg", "https://i.ytimg.com/vi/Mw30xyrcbcI/mqdefault.jpg", "https://i.ytimg.com/vi/Mw30xyrcbcI/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">1:05</div>
-                    <div class="play-button" onclick="openModal('Mw30xyrcbcI')"></div>
+                    <div class="play-button" onclick="openVideo('Mw30xyrcbcI', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">新疆人的名字翻译过来居然是这样的 #綜藝 #脱口秀 #shorts #脫口秀和TA的朋友們 #脫口秀大會 #搞笑 #douyin</h3>
@@ -981,7 +1012,7 @@
                     <div class="meta-data">
                         <div class="channel-name">WeTV 綜藝經典</div>
                         <div class="stats">
-                            <span>311,083 次观看</span>
+                            <span>311,259 次观看</span>
                             <span>•</span>
                             <span>9天前</span>
                             <span>•</span>
@@ -997,7 +1028,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/X6l4s2BZNEU/maxresdefault.jpg" alt="我姐姐从学校接她的弟弟，但被逼哭了！#cute #funny #comedy" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/X6l4s2BZNEU/maxresdefault.jpg", "https://i.ytimg.com/vi/X6l4s2BZNEU/sddefault.jpg", "https://i.ytimg.com/vi/X6l4s2BZNEU/hqdefault.jpg", "https://i.ytimg.com/vi/X6l4s2BZNEU/mqdefault.jpg", "https://i.ytimg.com/vi/X6l4s2BZNEU/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:12</div>
-                    <div class="play-button" onclick="openModal('X6l4s2BZNEU')"></div>
+                    <div class="play-button" onclick="openVideo('X6l4s2BZNEU', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">我姐姐从学校接她的弟弟，但被逼哭了！#cute #funny #comedy</h3>
@@ -1005,7 +1036,7 @@
                     <div class="meta-data">
                         <div class="channel-name">开心baby</div>
                         <div class="stats">
-                            <span>276,897 次观看</span>
+                            <span>277,481 次观看</span>
                             <span>•</span>
                             <span>5天前</span>
                             <span>•</span>
@@ -1021,7 +1052,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/smtpGC0YZtA/maxresdefault.jpg" alt="【开箱】Taco的新家装潢好了！玩具人的梦想宅，装潢价格全公开！【蔡阿嘎Life】" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/smtpGC0YZtA/maxresdefault.jpg", "https://i.ytimg.com/vi/smtpGC0YZtA/sddefault.jpg", "https://i.ytimg.com/vi/smtpGC0YZtA/hqdefault.jpg", "https://i.ytimg.com/vi/smtpGC0YZtA/mqdefault.jpg", "https://i.ytimg.com/vi/smtpGC0YZtA/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">22:13</div>
-                    <div class="play-button" onclick="openModal('smtpGC0YZtA')"></div>
+                    <div class="play-button" onclick="openVideo('smtpGC0YZtA', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">【开箱】Taco的新家装潢好了！玩具人的梦想宅，装潢价格全公开！【蔡阿嘎Life】</h3>
@@ -1029,33 +1060,9 @@
                     <div class="meta-data">
                         <div class="channel-name">蔡阿嘎Life</div>
                         <div class="stats">
-                            <span>255,901 次观看</span>
+                            <span>256,216 次观看</span>
                             <span>•</span>
                             <span>12小时前</span>
-                            <span>•</span>
-                            <span>中国台湾</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=YMpIQMLdZtY" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/YMpIQMLdZtY/maxresdefault.jpg" alt="'24.12.23【观点│亮点交锋】EP129 中国制造2025发威 美欧陷入两难" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/YMpIQMLdZtY/maxresdefault.jpg", "https://i.ytimg.com/vi/YMpIQMLdZtY/sddefault.jpg", "https://i.ytimg.com/vi/YMpIQMLdZtY/hqdefault.jpg", "https://i.ytimg.com/vi/YMpIQMLdZtY/mqdefault.jpg", "https://i.ytimg.com/vi/YMpIQMLdZtY/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">1:29:50</div>
-                    <div class="play-button" onclick="openModal('YMpIQMLdZtY')"></div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">'24.12.23【观点│亮点交锋】EP129 中国制造2025发威 美欧陷入两难</h3>
-                    <div class="original-title">'24.12.23【觀點│亮點交鋒】EP129 中國製造2025發威  美歐陷入兩難</div>
-                    <div class="meta-data">
-                        <div class="channel-name">觀點</div>
-                        <div class="stats">
-                            <span>252,148 次观看</span>
-                            <span>•</span>
-                            <span>17小时前</span>
                             <span>•</span>
                             <span>中国台湾</span>
                         </div>
@@ -1069,7 +1076,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/2Sj9FhXgOVY/maxresdefault.jpg" alt="越级打怪！迎战最困难的六大马「纽约马拉松」 / HowFun" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/2Sj9FhXgOVY/maxresdefault.jpg", "https://i.ytimg.com/vi/2Sj9FhXgOVY/sddefault.jpg", "https://i.ytimg.com/vi/2Sj9FhXgOVY/hqdefault.jpg", "https://i.ytimg.com/vi/2Sj9FhXgOVY/mqdefault.jpg", "https://i.ytimg.com/vi/2Sj9FhXgOVY/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">48:36</div>
-                    <div class="play-button" onclick="openModal('2Sj9FhXgOVY')"></div>
+                    <div class="play-button" onclick="openVideo('2Sj9FhXgOVY', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">越级打怪！迎战最困难的六大马「纽约马拉松」 / HowFun</h3>
@@ -1077,7 +1084,7 @@
                     <div class="meta-data">
                         <div class="channel-name">HowFun</div>
                         <div class="stats">
-                            <span>232,841 次观看</span>
+                            <span>232,866 次观看</span>
                             <span>•</span>
                             <span>3天前</span>
                             <span>•</span>
@@ -1093,7 +1100,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/RnphJnTR0Jo/maxresdefault.jpg" alt="【霸佔座位】黑貓：幹嘛把老子搬來搬去的|#寵物雲 #shorts" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/RnphJnTR0Jo/maxresdefault.jpg", "https://i.ytimg.com/vi/RnphJnTR0Jo/sddefault.jpg", "https://i.ytimg.com/vi/RnphJnTR0Jo/hqdefault.jpg", "https://i.ytimg.com/vi/RnphJnTR0Jo/mqdefault.jpg", "https://i.ytimg.com/vi/RnphJnTR0Jo/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:25</div>
-                    <div class="play-button" onclick="openModal('RnphJnTR0Jo')"></div>
+                    <div class="play-button" onclick="openVideo('RnphJnTR0Jo', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">【霸佔座位】黑貓：幹嘛把老子搬來搬去的|#寵物雲 #shorts</h3>
@@ -1101,7 +1108,7 @@
                     <div class="meta-data">
                         <div class="channel-name">ETtoday寵物雲</div>
                         <div class="stats">
-                            <span>230,980 次观看</span>
+                            <span>231,181 次观看</span>
                             <span>•</span>
                             <span>6天前</span>
                             <span>•</span>
@@ -1117,7 +1124,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/OUNPlUy1ZKU/maxresdefault.jpg" alt="馆我能拿多少。 砖头篇 因为你无法找到砖头粉丝页去抵制 #shorts" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/OUNPlUy1ZKU/maxresdefault.jpg", "https://i.ytimg.com/vi/OUNPlUy1ZKU/sddefault.jpg", "https://i.ytimg.com/vi/OUNPlUy1ZKU/hqdefault.jpg", "https://i.ytimg.com/vi/OUNPlUy1ZKU/mqdefault.jpg", "https://i.ytimg.com/vi/OUNPlUy1ZKU/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:28</div>
-                    <div class="play-button" onclick="openModal('OUNPlUy1ZKU')"></div>
+                    <div class="play-button" onclick="openVideo('OUNPlUy1ZKU', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">馆我能拿多少。 砖头篇 因为你无法找到砖头粉丝页去抵制 #shorts</h3>
@@ -1125,7 +1132,7 @@
                     <div class="meta-data">
                         <div class="channel-name">館長惡名昭彰</div>
                         <div class="stats">
-                            <span>186,686 次观看</span>
+                            <span>186,734 次观看</span>
                             <span>•</span>
                             <span>2天前</span>
                             <span>•</span>
@@ -1141,7 +1148,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/X-iK5K3vW7c/maxresdefault.jpg" alt="在美丽的地方用绳索蹦极：Asmr 蹦极#shorts" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/X-iK5K3vW7c/maxresdefault.jpg", "https://i.ytimg.com/vi/X-iK5K3vW7c/sddefault.jpg", "https://i.ytimg.com/vi/X-iK5K3vW7c/hqdefault.jpg", "https://i.ytimg.com/vi/X-iK5K3vW7c/mqdefault.jpg", "https://i.ytimg.com/vi/X-iK5K3vW7c/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:20</div>
-                    <div class="play-button" onclick="openModal('X-iK5K3vW7c')"></div>
+                    <div class="play-button" onclick="openVideo('X-iK5K3vW7c', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">在美丽的地方用绳索蹦极：Asmr 蹦极#shorts</h3>
@@ -1149,7 +1156,7 @@
                     <div class="meta-data">
                         <div class="channel-name">Bungee Jumping Park Official</div>
                         <div class="stats">
-                            <span>168,093 次观看</span>
+                            <span>168,483 次观看</span>
                             <span>•</span>
                             <span>5天前</span>
                             <span>•</span>
@@ -1165,7 +1172,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/v0XnaGfyyQw/maxresdefault.jpg" alt="2025中国经济的五大挑战！ |#陳松興 #矢板明夫 #汪浩|@華視三國演議|20241222" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/v0XnaGfyyQw/maxresdefault.jpg", "https://i.ytimg.com/vi/v0XnaGfyyQw/sddefault.jpg", "https://i.ytimg.com/vi/v0XnaGfyyQw/hqdefault.jpg", "https://i.ytimg.com/vi/v0XnaGfyyQw/mqdefault.jpg", "https://i.ytimg.com/vi/v0XnaGfyyQw/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">52:26</div>
-                    <div class="play-button" onclick="openModal('v0XnaGfyyQw')"></div>
+                    <div class="play-button" onclick="openVideo('v0XnaGfyyQw', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">2025中国经济的五大挑战！ |#陳松興 #矢板明夫 #汪浩|@華視三國演議|20241222</h3>
@@ -1173,7 +1180,7 @@
                     <div class="meta-data">
                         <div class="channel-name">華視三國演議</div>
                         <div class="stats">
-                            <span>164,528 次观看</span>
+                            <span>164,614 次观看</span>
                             <span>•</span>
                             <span>1天前</span>
                             <span>•</span>
@@ -1189,7 +1196,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/_wYz72v8BSU/maxresdefault.jpg" alt="拜托！ 没人告诉我都要这样用？ #内容过于真实 #大学生 #化妆 #冷知识 #宿舍#变美#测评#避坑#记录#种草" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/_wYz72v8BSU/maxresdefault.jpg", "https://i.ytimg.com/vi/_wYz72v8BSU/sddefault.jpg", "https://i.ytimg.com/vi/_wYz72v8BSU/hqdefault.jpg", "https://i.ytimg.com/vi/_wYz72v8BSU/mqdefault.jpg", "https://i.ytimg.com/vi/_wYz72v8BSU/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:58</div>
-                    <div class="play-button" onclick="openModal('_wYz72v8BSU')"></div>
+                    <div class="play-button" onclick="openVideo('_wYz72v8BSU', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">拜托！ 没人告诉我都要这样用？ #内容过于真实 #大学生 #化妆 #冷知识 #宿舍#变美#测评#避坑#记录#种草</h3>
@@ -1197,7 +1204,7 @@
                     <div class="meta-data">
                         <div class="channel-name">安琪很甜</div>
                         <div class="stats">
-                            <span>164,022 次观看</span>
+                            <span>164,069 次观看</span>
                             <span>•</span>
                             <span>4天前</span>
                             <span>•</span>
@@ -1213,7 +1220,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/ZE6CrSB9BJs/maxresdefault.jpg" alt="芋頭接招吧，面膜能讓你憂傷也能讓你愁！#shorts#芋頭快跑" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/ZE6CrSB9BJs/maxresdefault.jpg", "https://i.ytimg.com/vi/ZE6CrSB9BJs/sddefault.jpg", "https://i.ytimg.com/vi/ZE6CrSB9BJs/hqdefault.jpg", "https://i.ytimg.com/vi/ZE6CrSB9BJs/mqdefault.jpg", "https://i.ytimg.com/vi/ZE6CrSB9BJs/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">1:11</div>
-                    <div class="play-button" onclick="openModal('ZE6CrSB9BJs')"></div>
+                    <div class="play-button" onclick="openVideo('ZE6CrSB9BJs', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">芋頭接招吧，面膜能讓你憂傷也能讓你愁！#shorts#芋頭快跑</h3>
@@ -1221,7 +1228,7 @@
                     <div class="meta-data">
                         <div class="channel-name">芋头快跑</div>
                         <div class="stats">
-                            <span>155,309 次观看</span>
+                            <span>155,311 次观看</span>
                             <span>•</span>
                             <span>4天前</span>
                             <span>•</span>
@@ -1237,7 +1244,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/D8iYBvM2WEs/maxresdefault.jpg" alt="和未来婆婆处成闺蜜能有多幸福？ #家庭情感 #意想不到的结局" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/D8iYBvM2WEs/maxresdefault.jpg", "https://i.ytimg.com/vi/D8iYBvM2WEs/sddefault.jpg", "https://i.ytimg.com/vi/D8iYBvM2WEs/hqdefault.jpg", "https://i.ytimg.com/vi/D8iYBvM2WEs/mqdefault.jpg", "https://i.ytimg.com/vi/D8iYBvM2WEs/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">2:53</div>
-                    <div class="play-button" onclick="openModal('D8iYBvM2WEs')"></div>
+                    <div class="play-button" onclick="openVideo('D8iYBvM2WEs', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">和未来婆婆处成闺蜜能有多幸福？ #家庭情感 #意想不到的结局</h3>
@@ -1245,7 +1252,7 @@
                     <div class="meta-data">
                         <div class="channel-name">烟火人间事</div>
                         <div class="stats">
-                            <span>143,688 次观看</span>
+                            <span>143,698 次观看</span>
                             <span>•</span>
                             <span>7天前</span>
                             <span>•</span>
@@ -1261,7 +1268,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/UT8KdEiqBA0/maxresdefault.jpg" alt="这样就做成了牛奶冰淇淋？" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/UT8KdEiqBA0/maxresdefault.jpg", "https://i.ytimg.com/vi/UT8KdEiqBA0/sddefault.jpg", "https://i.ytimg.com/vi/UT8KdEiqBA0/hqdefault.jpg", "https://i.ytimg.com/vi/UT8KdEiqBA0/mqdefault.jpg", "https://i.ytimg.com/vi/UT8KdEiqBA0/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:57</div>
-                    <div class="play-button" onclick="openModal('UT8KdEiqBA0')"></div>
+                    <div class="play-button" onclick="openVideo('UT8KdEiqBA0', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">这样就做成了牛奶冰淇淋？</h3>
@@ -1269,7 +1276,7 @@
                     <div class="meta-data">
                         <div class="channel-name">婷仔的美食日记</div>
                         <div class="stats">
-                            <span>143,146 次观看</span>
+                            <span>143,167 次观看</span>
                             <span>•</span>
                             <span>2天前</span>
                             <span>•</span>
@@ -1285,7 +1292,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/aV3h9WSva4w/maxresdefault.jpg" alt="獨/蹦闆統神《拳上》後台爆衝突 003急報警一刀未剪畫面全曝光 @chinatimesent" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/aV3h9WSva4w/maxresdefault.jpg", "https://i.ytimg.com/vi/aV3h9WSva4w/sddefault.jpg", "https://i.ytimg.com/vi/aV3h9WSva4w/hqdefault.jpg", "https://i.ytimg.com/vi/aV3h9WSva4w/mqdefault.jpg", "https://i.ytimg.com/vi/aV3h9WSva4w/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">11:03</div>
-                    <div class="play-button" onclick="openModal('aV3h9WSva4w')"></div>
+                    <div class="play-button" onclick="openVideo('aV3h9WSva4w', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">獨/蹦闆統神《拳上》後台爆衝突 003急報警一刀未剪畫面全曝光 @chinatimesent</h3>
@@ -1309,7 +1316,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/U63TEwK18FY/maxresdefault.jpg" alt="三立为记者涉入立院攻防郑重道歉！ 许贵雅亲揭惩处后果 谈记者职涯坦言“真的很严重...” 王时齐直言：女记者因私而害公|许贵雅 主持|【新台湾加油 精彩】20241220|三立新闻台" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/U63TEwK18FY/maxresdefault.jpg", "https://i.ytimg.com/vi/U63TEwK18FY/sddefault.jpg", "https://i.ytimg.com/vi/U63TEwK18FY/hqdefault.jpg", "https://i.ytimg.com/vi/U63TEwK18FY/mqdefault.jpg", "https://i.ytimg.com/vi/U63TEwK18FY/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">10:55</div>
-                    <div class="play-button" onclick="openModal('U63TEwK18FY')"></div>
+                    <div class="play-button" onclick="openVideo('U63TEwK18FY', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">三立为记者涉入立院攻防郑重道歉！ 许贵雅亲揭惩处后果 谈记者职涯坦言“真的很严重...” 王时齐直言：女记者因私而害公|许贵雅 主持|【新台湾加油 精彩】20241220|三立新闻台</h3>
@@ -1317,7 +1324,7 @@
                     <div class="meta-data">
                         <div class="channel-name">新台灣加油</div>
                         <div class="stats">
-                            <span>129,648 次观看</span>
+                            <span>129,657 次观看</span>
                             <span>•</span>
                             <span>2天前</span>
                             <span>•</span>
@@ -1333,7 +1340,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/Vwc0Oxdvzik/maxresdefault.jpg" alt="曾是华尔街金融巨子的沈铭，被美国封杀千亿资产回归平凡准备与女友嫣儿结婚。 此时嫣儿却被财阀萧天策看中，萧天策柳如烟两人联手刁难沈铭逼迫其退婚，甚至在迎亲路上索要高额彩礼！ 《资产解封后未婚妻后悔莫及》" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/Vwc0Oxdvzik/maxresdefault.jpg", "https://i.ytimg.com/vi/Vwc0Oxdvzik/sddefault.jpg", "https://i.ytimg.com/vi/Vwc0Oxdvzik/hqdefault.jpg", "https://i.ytimg.com/vi/Vwc0Oxdvzik/mqdefault.jpg", "https://i.ytimg.com/vi/Vwc0Oxdvzik/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">1:52:04</div>
-                    <div class="play-button" onclick="openModal('Vwc0Oxdvzik')"></div>
+                    <div class="play-button" onclick="openVideo('Vwc0Oxdvzik', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">曾是华尔街金融巨子的沈铭，被美国封杀千亿资产回归平凡准备与女友嫣儿结婚。 此时嫣儿却被财阀萧天策看中，萧天策柳如烟两人联手刁难沈铭逼迫其退婚，甚至在迎亲路上索要高额彩礼！ 《资产解封后未婚妻后悔莫及》</h3>
@@ -1341,7 +1348,7 @@
                     <div class="meta-data">
                         <div class="channel-name">酷喵看爽剧</div>
                         <div class="stats">
-                            <span>118,195 次观看</span>
+                            <span>118,286 次观看</span>
                             <span>•</span>
                             <span>2天前</span>
                             <span>•</span>
@@ -1357,7 +1364,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/2Pr4pNW2jxY/maxresdefault.jpg" alt="罗智强：苗博雅就是侧翼！ |哈啰！ 你给问吗？ ｜EP52" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/2Pr4pNW2jxY/maxresdefault.jpg", "https://i.ytimg.com/vi/2Pr4pNW2jxY/sddefault.jpg", "https://i.ytimg.com/vi/2Pr4pNW2jxY/hqdefault.jpg", "https://i.ytimg.com/vi/2Pr4pNW2jxY/mqdefault.jpg", "https://i.ytimg.com/vi/2Pr4pNW2jxY/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:54</div>
-                    <div class="play-button" onclick="openModal('2Pr4pNW2jxY')"></div>
+                    <div class="play-button" onclick="openVideo('2Pr4pNW2jxY', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">罗智强：苗博雅就是侧翼！ |哈啰！ 你给问吗？ ｜EP52</h3>
@@ -1365,7 +1372,7 @@
                     <div class="meta-data">
                         <div class="channel-name">公視+</div>
                         <div class="stats">
-                            <span>99,080 次观看</span>
+                            <span>99,134 次观看</span>
                             <span>•</span>
                             <span>6天前</span>
                             <span>•</span>
@@ -1381,7 +1388,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/I3y4Iaga8rw/maxresdefault.jpg" alt="台湾老公寓一坪高达81万？shorts" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/I3y4Iaga8rw/maxresdefault.jpg", "https://i.ytimg.com/vi/I3y4Iaga8rw/sddefault.jpg", "https://i.ytimg.com/vi/I3y4Iaga8rw/hqdefault.jpg", "https://i.ytimg.com/vi/I3y4Iaga8rw/mqdefault.jpg", "https://i.ytimg.com/vi/I3y4Iaga8rw/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:44</div>
-                    <div class="play-button" onclick="openModal('I3y4Iaga8rw')"></div>
+                    <div class="play-button" onclick="openVideo('I3y4Iaga8rw', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">台湾老公寓一坪高达81万？shorts</h3>
@@ -1389,7 +1396,7 @@
                     <div class="meta-data">
                         <div class="channel-name">館長成吉思汗</div>
                         <div class="stats">
-                            <span>85,277 次观看</span>
+                            <span>85,344 次观看</span>
                             <span>•</span>
                             <span>2天前</span>
                             <span>•</span>
@@ -1405,7 +1412,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/6OLZdWDB7_g/maxresdefault.jpg" alt="八大电视《太太太厉害》|什么都不用说 先跪下就对了" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/6OLZdWDB7_g/maxresdefault.jpg", "https://i.ytimg.com/vi/6OLZdWDB7_g/sddefault.jpg", "https://i.ytimg.com/vi/6OLZdWDB7_g/hqdefault.jpg", "https://i.ytimg.com/vi/6OLZdWDB7_g/mqdefault.jpg", "https://i.ytimg.com/vi/6OLZdWDB7_g/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:54</div>
-                    <div class="play-button" onclick="openModal('6OLZdWDB7_g')"></div>
+                    <div class="play-button" onclick="openVideo('6OLZdWDB7_g', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">八大电视《太太太厉害》|什么都不用说 先跪下就对了</h3>
@@ -1413,7 +1420,7 @@
                     <div class="meta-data">
                         <div class="channel-name">GTV八大電視</div>
                         <div class="stats">
-                            <span>83,078 次观看</span>
+                            <span>83,159 次观看</span>
                             <span>•</span>
                             <span>8天前</span>
                             <span>•</span>
@@ -1429,7 +1436,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/-rNdmXHrwvA/maxresdefault.jpg" alt="💵 贱葆月薪居然有... 万？" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/-rNdmXHrwvA/maxresdefault.jpg", "https://i.ytimg.com/vi/-rNdmXHrwvA/sddefault.jpg", "https://i.ytimg.com/vi/-rNdmXHrwvA/hqdefault.jpg", "https://i.ytimg.com/vi/-rNdmXHrwvA/mqdefault.jpg", "https://i.ytimg.com/vi/-rNdmXHrwvA/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:30</div>
-                    <div class="play-button" onclick="openModal('-rNdmXHrwvA')"></div>
+                    <div class="play-button" onclick="openVideo('-rNdmXHrwvA', event)"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">💵 贱葆月薪居然有... 万？</h3>
@@ -1437,7 +1444,7 @@
                     <div class="meta-data">
                         <div class="channel-name">Ku's dream酷的夢-</div>
                         <div class="stats">
-                            <span>50,216 次观看</span>
+                            <span>50,297 次观看</span>
                             <span>•</span>
                             <span>1天前</span>
                             <span>•</span>
@@ -1450,39 +1457,85 @@
         
     </div>
 
-    <div id="videoModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <iframe id="videoIframe" class="video-iframe" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-            </iframe>
-        </div>
-    </div>
+    <div class="video-popup" id="videoPopup"></div>
+    <div class="video-overlay" id="videoOverlay"></div>
 
     <script>
-        function openModal(videoId) {
-            event.preventDefault(); // 阻止链接跳转
-            const modal = document.getElementById('videoModal');
-            const iframe = document.getElementById('videoIframe');
-            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-            modal.style.display = 'flex';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('videoModal');
-            const iframe = document.getElementById('videoIframe');
-            iframe.src = '';
-            modal.style.display = 'none';
-        }
-
-        // 点击模态框外部关闭
-        window.onclick = function(event) {
-            const modal = document.getElementById('videoModal');
-            if (event.target == modal) {
-                closeModal();
+        function adjustPopupSize() {
+            const popup = document.getElementById('videoPopup');
+            const viewportHeight = window.innerHeight;
+            const viewportWidth = window.innerWidth;
+            
+            const maxHeight = viewportHeight * 0.9;
+            const widthByHeight = maxHeight * 16 / 9;
+            
+            const maxWidth = viewportWidth * 0.9;
+            const heightByWidth = maxWidth * 9 / 16;
+            
+            if (widthByHeight > maxWidth) {
+                popup.style.width = maxWidth + 'px';
+                popup.style.height = heightByWidth + 'px';
+            } else {
+                popup.style.width = widthByHeight + 'px';
+                popup.style.height = maxHeight + 'px';
             }
         }
+
+        function openVideo(videoId, event) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            const popup = document.getElementById('videoPopup');
+            const overlay = document.getElementById('videoOverlay');
+            
+            // 添加加载提示
+            const loadingDiv = document.createElement('div');
+            loadingDiv.textContent = '加载中...';
+            loadingDiv.className = 'loading';
+            
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            iframe.allowFullscreen = true;
+            
+            popup.innerHTML = '';
+            popup.appendChild(loadingDiv);
+            popup.appendChild(iframe);
+            
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+            
+            adjustPopupSize();
+            
+            iframe.onload = () => {
+                loadingDiv.remove();
+            };
+        }
+
+        function closeVideo() {
+            const popup = document.getElementById('videoPopup');
+            const overlay = document.getElementById('videoOverlay');
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+            popup.innerHTML = '';
+        }
+
+        // 监听窗口大小变化
+        window.addEventListener('resize', () => {
+            if (document.getElementById('videoPopup').style.display === 'block') {
+                adjustPopupSize();
+            }
+        });
+
+        // 点击遮罩层关闭视频
+        document.getElementById('videoOverlay').addEventListener('click', closeVideo);
+
+        // 按 ESC 键关闭视频
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('videoPopup').style.display === 'block') {
+                closeVideo();
+            }
+        });
     </script>
 </body>
 </html>
