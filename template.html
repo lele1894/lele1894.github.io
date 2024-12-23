@@ -317,12 +317,13 @@
             loadingDiv.className = 'loading';
             
             const iframe = document.createElement('iframe');
-            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&origin=https://lele1894.tk`;
-            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-            iframe.allowFullscreen = true;
-            iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1`;
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+            iframe.setAttribute('allowfullscreen', '');
+            iframe.setAttribute('title', 'YouTube video player');
+            iframe.setAttribute('sandbox', 'allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation');
             
-            popup.innerHTML = '';
+            popup.textContent = '';
             popup.appendChild(loadingDiv);
             popup.appendChild(iframe);
             
@@ -330,6 +331,10 @@
             overlay.style.display = 'block';
             
             adjustPopupSize();
+            
+            iframe.onerror = () => {
+                loadingDiv.textContent = '加载失败，请直接访问 YouTube 观看';
+            };
             
             iframe.onload = () => {
                 loadingDiv.remove();
@@ -339,9 +344,9 @@
         function closeVideo() {
             const popup = document.getElementById('videoPopup');
             const overlay = document.getElementById('videoOverlay');
+            popup.textContent = '';
             popup.style.display = 'none';
             overlay.style.display = 'none';
-            popup.innerHTML = '';
         }
 
         // 监听窗口大小变化
