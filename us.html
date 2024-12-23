@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube 美国 热门视频 - 2024年12月23日 09:17</title>
+    <title>YouTube 美国 热门视频 - 2024年12月24日 06:38</title>
     <style>
         :root {
             --yt-red: #ff0000;
@@ -168,6 +168,74 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .thumbnail-container:hover .play-button {
+            opacity: 1;
+        }
+
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 20px;
+            border-color: transparent transparent transparent white;
+            margin-left: 4px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            background: black;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -30px;
+            right: 0;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .video-iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+        }
     </style>
 </head>
 <body>
@@ -175,7 +243,7 @@
         <div class="logo">
             <span>▶</span> YouTube 美国 热门视频
         </div>
-        <div class="update-time">更新时间：2024年12月23日 09:17</div>
+        <div class="update-time">更新时间：2024年12月24日 06:38</div>
     </header>
 
     <div class="container">
@@ -185,6 +253,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/gs8qfL9PNac/maxresdefault.jpg" alt="2,000 人争夺 5,000,000 美元" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/gs8qfL9PNac/maxresdefault.jpg", "https://i.ytimg.com/vi/gs8qfL9PNac/sddefault.jpg", "https://i.ytimg.com/vi/gs8qfL9PNac/hqdefault.jpg", "https://i.ytimg.com/vi/gs8qfL9PNac/mqdefault.jpg", "https://i.ytimg.com/vi/gs8qfL9PNac/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">24:45</div>
+                    <div class="play-button" onclick="openModal('gs8qfL9PNac')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">2,000 人争夺 5,000,000 美元</h3>
@@ -192,9 +261,9 @@
                     <div class="meta-data">
                         <div class="channel-name">MrBeast</div>
                         <div class="stats">
-                            <span>84,714,697 次观看</span>
+                            <span>92,647,703 次观看</span>
                             <span>•</span>
-                            <span>3天前</span>
+                            <span>4天前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -208,6 +277,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/uhUht6vAsMY/maxresdefault.jpg" alt="超人 |官方预告片" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/uhUht6vAsMY/maxresdefault.jpg", "https://i.ytimg.com/vi/uhUht6vAsMY/sddefault.jpg", "https://i.ytimg.com/vi/uhUht6vAsMY/hqdefault.jpg", "https://i.ytimg.com/vi/uhUht6vAsMY/mqdefault.jpg", "https://i.ytimg.com/vi/uhUht6vAsMY/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">2:20</div>
+                    <div class="play-button" onclick="openModal('uhUht6vAsMY')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">超人 |官方预告片</h3>
@@ -215,9 +285,9 @@
                     <div class="meta-data">
                         <div class="channel-name">DC</div>
                         <div class="stats">
-                            <span>36,324,181 次观看</span>
+                            <span>39,513,416 次观看</span>
                             <span>•</span>
-                            <span>3天前</span>
+                            <span>4天前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -226,21 +296,22 @@
             </article>
         </a>
         
-        <a href="https://www.youtube.com/watch?v=Zdu4oUgpXC8" class="video-link" target="_blank">
+        <a href="https://www.youtube.com/watch?v=u4smAxDtbGc" class="video-link" target="_blank">
             <article class="video-card">
                 <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/Zdu4oUgpXC8/maxresdefault.jpg" alt="Cazzu - LA CUEVA （官方视频）" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/Zdu4oUgpXC8/maxresdefault.jpg", "https://i.ytimg.com/vi/Zdu4oUgpXC8/sddefault.jpg", "https://i.ytimg.com/vi/Zdu4oUgpXC8/hqdefault.jpg", "https://i.ytimg.com/vi/Zdu4oUgpXC8/mqdefault.jpg", "https://i.ytimg.com/vi/Zdu4oUgpXC8/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">3:04</div>
+                    <img src="https://i.ytimg.com/vi/u4smAxDtbGc/maxresdefault.jpg" alt="野兽游戏第 1 集（前 10 分钟）" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/u4smAxDtbGc/maxresdefault.jpg", "https://i.ytimg.com/vi/u4smAxDtbGc/sddefault.jpg", "https://i.ytimg.com/vi/u4smAxDtbGc/hqdefault.jpg", "https://i.ytimg.com/vi/u4smAxDtbGc/mqdefault.jpg", "https://i.ytimg.com/vi/u4smAxDtbGc/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">10:23</div>
+                    <div class="play-button" onclick="openModal('u4smAxDtbGc')"></div>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">Cazzu - LA CUEVA （官方视频）</h3>
-                    <div class="original-title">Cazzu - LA CUEVA (Official Video)</div>
+                    <h3 class="video-title">野兽游戏第 1 集（前 10 分钟）</h3>
+                    <div class="original-title">Beast Games Episode 1 (First 10 Minutes)</div>
                     <div class="meta-data">
-                        <div class="channel-name">CAZZU Canal Oficial</div>
+                        <div class="channel-name">MrBeast 2</div>
                         <div class="stats">
-                            <span>8,826,598 次观看</span>
+                            <span>14,813,314 次观看</span>
                             <span>•</span>
-                            <span>3天前</span>
+                            <span>1天前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -254,6 +325,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/GisSNuVpbkM/maxresdefault.jpg" alt="HELLUVA BOSS - SINSMAS // 第 2 季：第 12 集 - 结局" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/GisSNuVpbkM/maxresdefault.jpg", "https://i.ytimg.com/vi/GisSNuVpbkM/sddefault.jpg", "https://i.ytimg.com/vi/GisSNuVpbkM/hqdefault.jpg", "https://i.ytimg.com/vi/GisSNuVpbkM/mqdefault.jpg", "https://i.ytimg.com/vi/GisSNuVpbkM/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">29:05</div>
+                    <div class="play-button" onclick="openModal('GisSNuVpbkM')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">HELLUVA BOSS - SINSMAS // 第 2 季：第 12 集 - 结局</h3>
@@ -261,53 +333,7 @@
                     <div class="meta-data">
                         <div class="channel-name">Vivziepop</div>
                         <div class="stats">
-                            <span>7,359,880 次观看</span>
-                            <span>•</span>
-                            <span>1天前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=SB5OigIXnx4" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/SB5OigIXnx4/maxresdefault.jpg" alt="巴塞罗那 1 - 2 马德里竞技 I 集锦 西甲 EA 体育" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/SB5OigIXnx4/maxresdefault.jpg", "https://i.ytimg.com/vi/SB5OigIXnx4/sddefault.jpg", "https://i.ytimg.com/vi/SB5OigIXnx4/hqdefault.jpg", "https://i.ytimg.com/vi/SB5OigIXnx4/mqdefault.jpg", "https://i.ytimg.com/vi/SB5OigIXnx4/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">3:12</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">巴塞罗那 1 - 2 马德里竞技 I 集锦 西甲 EA 体育</h3>
-                    <div class="original-title">FC BARCELONA 1 - 2 ATLÉTICO DE MADRID I RESUMEN LALIGA EA SPORTS</div>
-                    <div class="meta-data">
-                        <div class="channel-name">LALIGA EA SPORTS</div>
-                        <div class="stats">
-                            <span>5,187,133 次观看</span>
-                            <span>•</span>
-                            <span>1天前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=BEoGvTlJMyY" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/BEoGvTlJMyY/maxresdefault.jpg" alt="萨布丽娜·卡彭特：Tiny Desk 音乐会" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/BEoGvTlJMyY/maxresdefault.jpg", "https://i.ytimg.com/vi/BEoGvTlJMyY/sddefault.jpg", "https://i.ytimg.com/vi/BEoGvTlJMyY/hqdefault.jpg", "https://i.ytimg.com/vi/BEoGvTlJMyY/mqdefault.jpg", "https://i.ytimg.com/vi/BEoGvTlJMyY/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">26:37</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">萨布丽娜·卡彭特：Tiny Desk 音乐会</h3>
-                    <div class="original-title">Sabrina Carpenter: Tiny Desk Concert</div>
-                    <div class="meta-data">
-                        <div class="channel-name">NPR Music</div>
-                        <div class="stats">
-                            <span>4,315,054 次观看</span>
+                            <span>8,483,389 次观看</span>
                             <span>•</span>
                             <span>2天前</span>
                             <span>•</span>
@@ -323,6 +349,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/mDnQnoNhez0/maxresdefault.jpg" alt="我乘坐头等舱环游世界" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/mDnQnoNhez0/maxresdefault.jpg", "https://i.ytimg.com/vi/mDnQnoNhez0/sddefault.jpg", "https://i.ytimg.com/vi/mDnQnoNhez0/hqdefault.jpg", "https://i.ytimg.com/vi/mDnQnoNhez0/mqdefault.jpg", "https://i.ytimg.com/vi/mDnQnoNhez0/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">22:37</div>
+                    <div class="play-button" onclick="openModal('mDnQnoNhez0')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">我乘坐头等舱环游世界</h3>
@@ -330,9 +357,9 @@
                     <div class="meta-data">
                         <div class="channel-name">Ryan Trahan</div>
                         <div class="stats">
-                            <span>4,197,262 次观看</span>
+                            <span>5,277,772 次观看</span>
                             <span>•</span>
-                            <span>1天前</span>
+                            <span>2天前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -341,19 +368,20 @@
             </article>
         </a>
         
-        <a href="https://www.youtube.com/watch?v=HQ7J1kVYPmw" class="video-link" target="_blank">
+        <a href="https://www.youtube.com/watch?v=8tDOeQqnrYQ" class="video-link" target="_blank">
             <article class="video-card">
                 <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/HQ7J1kVYPmw/maxresdefault.jpg" alt="100 位 YouTube 主播用礼物给我的女儿一个惊喜 ft/ MrBeast" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/HQ7J1kVYPmw/maxresdefault.jpg", "https://i.ytimg.com/vi/HQ7J1kVYPmw/sddefault.jpg", "https://i.ytimg.com/vi/HQ7J1kVYPmw/hqdefault.jpg", "https://i.ytimg.com/vi/HQ7J1kVYPmw/mqdefault.jpg", "https://i.ytimg.com/vi/HQ7J1kVYPmw/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">27:01</div>
+                    <img src="https://i.ytimg.com/vi/8tDOeQqnrYQ/maxresdefault.jpg" alt="Youtube 历史上最大的骗局" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/8tDOeQqnrYQ/maxresdefault.jpg", "https://i.ytimg.com/vi/8tDOeQqnrYQ/sddefault.jpg", "https://i.ytimg.com/vi/8tDOeQqnrYQ/hqdefault.jpg", "https://i.ytimg.com/vi/8tDOeQqnrYQ/mqdefault.jpg", "https://i.ytimg.com/vi/8tDOeQqnrYQ/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">23:06</div>
+                    <div class="play-button" onclick="openModal('8tDOeQqnrYQ')"></div>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">100 位 YouTube 主播用礼物给我的女儿一个惊喜 ft/ MrBeast</h3>
-                    <div class="original-title">100 YouTubers Surprise My Daughter With Gifts ft/ MrBeast</div>
+                    <h3 class="video-title">Youtube 历史上最大的骗局</h3>
+                    <div class="original-title">Biggest Scam in Youtube History</div>
                     <div class="meta-data">
-                        <div class="channel-name">Jordan Matter</div>
+                        <div class="channel-name">penguinz0</div>
                         <div class="stats">
-                            <span>4,062,560 次观看</span>
+                            <span>5,273,387 次观看</span>
                             <span>•</span>
                             <span>1天前</span>
                             <span>•</span>
@@ -369,6 +397,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/d1n552v1ng0/maxresdefault.jpg" alt="《电锯人 – 电影：Reze Arc》官方预告片 2/劇場版『チェンソーマン レゼ篇』特報" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/d1n552v1ng0/maxresdefault.jpg", "https://i.ytimg.com/vi/d1n552v1ng0/sddefault.jpg", "https://i.ytimg.com/vi/d1n552v1ng0/hqdefault.jpg", "https://i.ytimg.com/vi/d1n552v1ng0/mqdefault.jpg", "https://i.ytimg.com/vi/d1n552v1ng0/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">1:31</div>
+                    <div class="play-button" onclick="openModal('d1n552v1ng0')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">《电锯人 – 电影：Reze Arc》官方预告片 2/劇場版『チェンソーマン レゼ篇』特報</h3>
@@ -376,32 +405,9 @@
                     <div class="meta-data">
                         <div class="channel-name">MAPPA CHANNEL</div>
                         <div class="stats">
-                            <span>3,938,125 次观看</span>
+                            <span>5,002,663 次观看</span>
                             <span>•</span>
-                            <span>21小时前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=nEtmmcKYVtU" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/nEtmmcKYVtU/maxresdefault.jpg" alt="SIDEMEN AMONG US 格林奇扮演，但它是有史以来最愚蠢的大厅" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/nEtmmcKYVtU/maxresdefault.jpg", "https://i.ytimg.com/vi/nEtmmcKYVtU/sddefault.jpg", "https://i.ytimg.com/vi/nEtmmcKYVtU/hqdefault.jpg", "https://i.ytimg.com/vi/nEtmmcKYVtU/mqdefault.jpg", "https://i.ytimg.com/vi/nEtmmcKYVtU/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">55:53</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">SIDEMEN AMONG US 格林奇扮演，但它是有史以来最愚蠢的大厅</h3>
-                    <div class="original-title">SIDEMEN AMONG US GRINCH ROLE BUT ITS THE DUMBEST LOBBY OF ALL TIME</div>
-                    <div class="meta-data">
-                        <div class="channel-name">MoreSidemen</div>
-                        <div class="stats">
-                            <span>3,643,981 次观看</span>
-                            <span>•</span>
-                            <span>2天前</span>
+                            <span>1天前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -410,21 +416,46 @@
             </article>
         </a>
         
-        <a href="https://www.youtube.com/watch?v=1Wdzodfx87s" class="video-link" target="_blank">
+        <a href="https://www.youtube.com/watch?v=BEoGvTlJMyY" class="video-link" target="_blank">
             <article class="video-card">
                 <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/1Wdzodfx87s/maxresdefault.jpg" alt="SZA - Drive （官方视频）" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/1Wdzodfx87s/maxresdefault.jpg", "https://i.ytimg.com/vi/1Wdzodfx87s/sddefault.jpg", "https://i.ytimg.com/vi/1Wdzodfx87s/hqdefault.jpg", "https://i.ytimg.com/vi/1Wdzodfx87s/mqdefault.jpg", "https://i.ytimg.com/vi/1Wdzodfx87s/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">4:44</div>
+                    <img src="https://i.ytimg.com/vi/BEoGvTlJMyY/maxresdefault.jpg" alt="萨布丽娜·卡彭特：Tiny Desk 音乐会" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/BEoGvTlJMyY/maxresdefault.jpg", "https://i.ytimg.com/vi/BEoGvTlJMyY/sddefault.jpg", "https://i.ytimg.com/vi/BEoGvTlJMyY/hqdefault.jpg", "https://i.ytimg.com/vi/BEoGvTlJMyY/mqdefault.jpg", "https://i.ytimg.com/vi/BEoGvTlJMyY/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">26:37</div>
+                    <div class="play-button" onclick="openModal('BEoGvTlJMyY')"></div>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">SZA - Drive （官方视频）</h3>
-                    <div class="original-title">SZA - Drive (Official Video)</div>
+                    <h3 class="video-title">萨布丽娜·卡彭特：Tiny Desk 音乐会</h3>
+                    <div class="original-title">Sabrina Carpenter: Tiny Desk Concert</div>
                     <div class="meta-data">
-                        <div class="channel-name">SZAVEVO</div>
+                        <div class="channel-name">NPR Music</div>
                         <div class="stats">
-                            <span>3,541,744 次观看</span>
+                            <span>4,905,401 次观看</span>
                             <span>•</span>
-                            <span>2天前</span>
+                            <span>3天前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=7_UngmeDw74" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/7_UngmeDw74/maxresdefault.jpg" alt="打开他的 DREAM 圣诞礼物" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/7_UngmeDw74/maxresdefault.jpg", "https://i.ytimg.com/vi/7_UngmeDw74/sddefault.jpg", "https://i.ytimg.com/vi/7_UngmeDw74/hqdefault.jpg", "https://i.ytimg.com/vi/7_UngmeDw74/mqdefault.jpg", "https://i.ytimg.com/vi/7_UngmeDw74/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">31:06</div>
+                    <div class="play-button" onclick="openModal('7_UngmeDw74')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">打开他的 DREAM 圣诞礼物</h3>
+                    <div class="original-title">Opening his DREAM Christmas Present</div>
+                    <div class="meta-data">
+                        <div class="channel-name">The Royalty Family</div>
+                        <div class="stats">
+                            <span>4,256,636 次观看</span>
+                            <span>•</span>
+                            <span>1天前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -438,6 +469,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/3hPGzcpovoo/maxresdefault.jpg" alt="ALL TIME CLASSIC 经典腕表 |利雅得赛季：Oleksandr Usyk vs. Tyson Fury 2 战斗亮点" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/3hPGzcpovoo/maxresdefault.jpg", "https://i.ytimg.com/vi/3hPGzcpovoo/sddefault.jpg", "https://i.ytimg.com/vi/3hPGzcpovoo/hqdefault.jpg", "https://i.ytimg.com/vi/3hPGzcpovoo/mqdefault.jpg", "https://i.ytimg.com/vi/3hPGzcpovoo/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">3:24</div>
+                    <div class="play-button" onclick="openModal('3hPGzcpovoo')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">ALL TIME CLASSIC 经典腕表 |利雅得赛季：Oleksandr Usyk vs. Tyson Fury 2 战斗亮点</h3>
@@ -445,32 +477,9 @@
                     <div class="meta-data">
                         <div class="channel-name">DAZN Boxing</div>
                         <div class="stats">
-                            <span>3,359,988 次观看</span>
+                            <span>3,841,205 次观看</span>
                             <span>•</span>
                             <span>1天前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=Jq-2wTINZ2k" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/Jq-2wTINZ2k/maxresdefault.jpg" alt="第一次见到我们的宝贝女儿！" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/Jq-2wTINZ2k/maxresdefault.jpg", "https://i.ytimg.com/vi/Jq-2wTINZ2k/sddefault.jpg", "https://i.ytimg.com/vi/Jq-2wTINZ2k/hqdefault.jpg", "https://i.ytimg.com/vi/Jq-2wTINZ2k/mqdefault.jpg", "https://i.ytimg.com/vi/Jq-2wTINZ2k/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">47:27</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">第一次见到我们的宝贝女儿！</h3>
-                    <div class="original-title">Meeting Our BABY GIRL for the FIRST TIME!</div>
-                    <div class="meta-data">
-                        <div class="channel-name">JUSTKASS</div>
-                        <div class="stats">
-                            <span>2,832,487 次观看</span>
-                            <span>•</span>
-                            <span>2天前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -484,6 +493,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/DEu8qH2_8IU/maxresdefault.jpg" alt="医生 |Poppy Playtime 第 4 章电影预告片" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/DEu8qH2_8IU/maxresdefault.jpg", "https://i.ytimg.com/vi/DEu8qH2_8IU/sddefault.jpg", "https://i.ytimg.com/vi/DEu8qH2_8IU/hqdefault.jpg", "https://i.ytimg.com/vi/DEu8qH2_8IU/mqdefault.jpg", "https://i.ytimg.com/vi/DEu8qH2_8IU/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">1:56</div>
+                    <div class="play-button" onclick="openModal('DEu8qH2_8IU')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">医生 |Poppy Playtime 第 4 章电影预告片</h3>
@@ -491,9 +501,9 @@
                     <div class="meta-data">
                         <div class="channel-name">Mob Entertainment</div>
                         <div class="stats">
-                            <span>2,459,653 次观看</span>
+                            <span>2,920,711 次观看</span>
                             <span>•</span>
-                            <span>1天前</span>
+                            <span>2天前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -507,6 +517,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/byJ7pxxhaDY/maxresdefault.jpg" alt="单人练级第 2 季 -从阴影中崛起- |官方预告片" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/byJ7pxxhaDY/maxresdefault.jpg", "https://i.ytimg.com/vi/byJ7pxxhaDY/sddefault.jpg", "https://i.ytimg.com/vi/byJ7pxxhaDY/hqdefault.jpg", "https://i.ytimg.com/vi/byJ7pxxhaDY/mqdefault.jpg", "https://i.ytimg.com/vi/byJ7pxxhaDY/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">2:36</div>
+                    <div class="play-button" onclick="openModal('byJ7pxxhaDY')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">单人练级第 2 季 -从阴影中崛起- |官方预告片</h3>
@@ -514,30 +525,7 @@
                     <div class="meta-data">
                         <div class="channel-name">Crunchyroll</div>
                         <div class="stats">
-                            <span>2,296,838 次观看</span>
-                            <span>•</span>
-                            <span>1天前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=DgZ_UV-xAZw" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/DgZ_UV-xAZw/maxresdefault.jpg" alt="最强战场 KJ 更新预告片（官方）" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/DgZ_UV-xAZw/maxresdefault.jpg", "https://i.ytimg.com/vi/DgZ_UV-xAZw/sddefault.jpg", "https://i.ytimg.com/vi/DgZ_UV-xAZw/hqdefault.jpg", "https://i.ytimg.com/vi/DgZ_UV-xAZw/mqdefault.jpg", "https://i.ytimg.com/vi/DgZ_UV-xAZw/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">0:40</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">最强战场 KJ 更新预告片（官方）</h3>
-                    <div class="original-title">The Strongest Battlegrounds KJ Update Teaser (OFFICIAL)</div>
-                    <div class="meta-data">
-                        <div class="channel-name">theholygrail75</div>
-                        <div class="stats">
-                            <span>2,272,105 次观看</span>
+                            <span>2,876,049 次观看</span>
                             <span>•</span>
                             <span>2天前</span>
                             <span>•</span>
@@ -553,6 +541,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/BjoLQvj7lAE/maxresdefault.jpg" alt="我玩了 Pokemon，但有 50+ 新类型" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/BjoLQvj7lAE/maxresdefault.jpg", "https://i.ytimg.com/vi/BjoLQvj7lAE/sddefault.jpg", "https://i.ytimg.com/vi/BjoLQvj7lAE/hqdefault.jpg", "https://i.ytimg.com/vi/BjoLQvj7lAE/mqdefault.jpg", "https://i.ytimg.com/vi/BjoLQvj7lAE/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">31:39</div>
+                    <div class="play-button" onclick="openModal('BjoLQvj7lAE')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">我玩了 Pokemon，但有 50+ 新类型</h3>
@@ -560,30 +549,7 @@
                     <div class="meta-data">
                         <div class="channel-name">JaidenAnimations</div>
                         <div class="stats">
-                            <span>2,062,502 次观看</span>
-                            <span>•</span>
-                            <span>1天前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=Y_bmR_UgzSM" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/Y_bmR_UgzSM/maxresdefault.jpg" alt="格雷有一个秘密的仰慕者......（卡通动画）" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/Y_bmR_UgzSM/maxresdefault.jpg", "https://i.ytimg.com/vi/Y_bmR_UgzSM/sddefault.jpg", "https://i.ytimg.com/vi/Y_bmR_UgzSM/hqdefault.jpg", "https://i.ytimg.com/vi/Y_bmR_UgzSM/mqdefault.jpg", "https://i.ytimg.com/vi/Y_bmR_UgzSM/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">8:47</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">格雷有一个秘密的仰慕者......（卡通动画）</h3>
-                    <div class="original-title">GRAY Has a SECRET ADMIRER... (Cartoon Animation)</div>
-                    <div class="meta-data">
-                        <div class="channel-name">GameToons +</div>
-                        <div class="stats">
-                            <span>1,731,202 次观看</span>
+                            <span>2,784,156 次观看</span>
                             <span>•</span>
                             <span>2天前</span>
                             <span>•</span>
@@ -594,67 +560,46 @@
             </article>
         </a>
         
-        <a href="https://www.youtube.com/watch?v=ROn5XQbSVwY" class="video-link" target="_blank">
+        <a href="https://www.youtube.com/watch?v=nOG-CaENIEY" class="video-link" target="_blank">
             <article class="video-card">
                 <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/ROn5XQbSVwY/maxresdefault.jpg" alt="“对于 35,000 美元，我期望它是完美的”" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/ROn5XQbSVwY/maxresdefault.jpg", "https://i.ytimg.com/vi/ROn5XQbSVwY/sddefault.jpg", "https://i.ytimg.com/vi/ROn5XQbSVwY/hqdefault.jpg", "https://i.ytimg.com/vi/ROn5XQbSVwY/mqdefault.jpg", "https://i.ytimg.com/vi/ROn5XQbSVwY/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">42:13</div>
+                    <img src="https://i.ytimg.com/vi/nOG-CaENIEY/maxresdefault.jpg" alt="需要多少门将才能阻止罗纳尔多？" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/nOG-CaENIEY/maxresdefault.jpg", "https://i.ytimg.com/vi/nOG-CaENIEY/sddefault.jpg", "https://i.ytimg.com/vi/nOG-CaENIEY/hqdefault.jpg", "https://i.ytimg.com/vi/nOG-CaENIEY/mqdefault.jpg", "https://i.ytimg.com/vi/nOG-CaENIEY/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">7:16</div>
+                    <div class="play-button" onclick="openModal('nOG-CaENIEY')"></div>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">“对于 35,000 美元，我期望它是完美的”</h3>
-                    <div class="original-title">"For $35,000 I'd Expect it to be Perfect"</div>
+                    <h3 class="video-title">需要多少门将才能阻止罗纳尔多？</h3>
+                    <div class="original-title">How Many goalkeepers Does It Take to Stop Ronaldo?</div>
                     <div class="meta-data">
-                        <div class="channel-name">Blacktail Studio</div>
+                        <div class="channel-name">UR · Cristiano</div>
                         <div class="stats">
-                            <span>1,710,534 次观看</span>
-                            <span>•</span>
-                            <span>2天前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=PzkltpFwAlw" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/PzkltpFwAlw/maxresdefault.jpg" alt="Oleksandr Usyk vs. Tyson Fury 2 亮点 |ESPN 擂台边" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/PzkltpFwAlw/maxresdefault.jpg", "https://i.ytimg.com/vi/PzkltpFwAlw/sddefault.jpg", "https://i.ytimg.com/vi/PzkltpFwAlw/hqdefault.jpg", "https://i.ytimg.com/vi/PzkltpFwAlw/mqdefault.jpg", "https://i.ytimg.com/vi/PzkltpFwAlw/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">3:04</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Oleksandr Usyk vs. Tyson Fury 2 亮点 |ESPN 擂台边</h3>
-                    <div class="original-title">Oleksandr Usyk vs. Tyson Fury 2 HIGHLIGHTS | ESPN Ringside</div>
-                    <div class="meta-data">
-                        <div class="channel-name">ESPN</div>
-                        <div class="stats">
-                            <span>1,672,913 次观看</span>
-                            <span>•</span>
-                            <span>23小时前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=7_UngmeDw74" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/7_UngmeDw74/maxresdefault.jpg" alt="打开他的 DREAM 圣诞礼物" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/7_UngmeDw74/maxresdefault.jpg", "https://i.ytimg.com/vi/7_UngmeDw74/sddefault.jpg", "https://i.ytimg.com/vi/7_UngmeDw74/hqdefault.jpg", "https://i.ytimg.com/vi/7_UngmeDw74/mqdefault.jpg", "https://i.ytimg.com/vi/7_UngmeDw74/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">31:06</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">打开他的 DREAM 圣诞礼物</h3>
-                    <div class="original-title">Opening his DREAM Christmas Present</div>
-                    <div class="meta-data">
-                        <div class="channel-name">The Royalty Family</div>
-                        <div class="stats">
-                            <span>1,663,081 次观看</span>
+                            <span>2,627,636 次观看</span>
                             <span>•</span>
                             <span>8小时前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=v6jhjjVy5Ls" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/v6jhjjVy5Ls/maxresdefault.jpg" alt="反恐精英 2 的黑暗面" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/v6jhjjVy5Ls/maxresdefault.jpg", "https://i.ytimg.com/vi/v6jhjjVy5Ls/sddefault.jpg", "https://i.ytimg.com/vi/v6jhjjVy5Ls/hqdefault.jpg", "https://i.ytimg.com/vi/v6jhjjVy5Ls/mqdefault.jpg", "https://i.ytimg.com/vi/v6jhjjVy5Ls/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">39:19</div>
+                    <div class="play-button" onclick="openModal('v6jhjjVy5Ls')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">反恐精英 2 的黑暗面</h3>
+                    <div class="original-title">The Dark Side of Counter-Strike 2</div>
+                    <div class="meta-data">
+                        <div class="channel-name">Coffeezilla</div>
+                        <div class="stats">
+                            <span>2,384,098 次观看</span>
+                            <span>•</span>
+                            <span>22小时前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -668,6 +613,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/KnaES8YItiA/maxresdefault.jpg" alt="Martin Short Five-Timers Club 冷开赛 - SNL" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/KnaES8YItiA/maxresdefault.jpg", "https://i.ytimg.com/vi/KnaES8YItiA/sddefault.jpg", "https://i.ytimg.com/vi/KnaES8YItiA/hqdefault.jpg", "https://i.ytimg.com/vi/KnaES8YItiA/mqdefault.jpg", "https://i.ytimg.com/vi/KnaES8YItiA/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">9:28</div>
+                    <div class="play-button" onclick="openModal('KnaES8YItiA')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">Martin Short Five-Timers Club 冷开赛 - SNL</h3>
@@ -675,9 +621,9 @@
                     <div class="meta-data">
                         <div class="channel-name">Saturday Night Live</div>
                         <div class="stats">
-                            <span>1,545,544 次观看</span>
+                            <span>2,327,946 次观看</span>
                             <span>•</span>
-                            <span>19小时前</span>
+                            <span>1天前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -691,6 +637,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/ztmH0MWbK6o/maxresdefault.jpg" alt="我在 Hardcore Minecraft 的飞机失事中度过了 100 天......这是发生的事情" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/ztmH0MWbK6o/maxresdefault.jpg", "https://i.ytimg.com/vi/ztmH0MWbK6o/sddefault.jpg", "https://i.ytimg.com/vi/ztmH0MWbK6o/hqdefault.jpg", "https://i.ytimg.com/vi/ztmH0MWbK6o/mqdefault.jpg", "https://i.ytimg.com/vi/ztmH0MWbK6o/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">3:31:52</div>
+                    <div class="play-button" onclick="openModal('ztmH0MWbK6o')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">我在 Hardcore Minecraft 的飞机失事中度过了 100 天......这是发生的事情</h3>
@@ -698,32 +645,9 @@
                     <div class="meta-data">
                         <div class="channel-name">Forge Labs</div>
                         <div class="stats">
-                            <span>1,464,904 次观看</span>
+                            <span>1,970,862 次观看</span>
                             <span>•</span>
-                            <span>1天前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=0G7HX16YTLU" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/0G7HX16YTLU/maxresdefault.jpg" alt="丹达丹 第 2 季 |官方预告片" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/0G7HX16YTLU/maxresdefault.jpg", "https://i.ytimg.com/vi/0G7HX16YTLU/sddefault.jpg", "https://i.ytimg.com/vi/0G7HX16YTLU/hqdefault.jpg", "https://i.ytimg.com/vi/0G7HX16YTLU/mqdefault.jpg", "https://i.ytimg.com/vi/0G7HX16YTLU/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">1:22</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">丹达丹 第 2 季 |官方预告片</h3>
-                    <div class="original-title">DAN DA DAN Season 2 | OFFICIAL TRAILER</div>
-                    <div class="meta-data">
-                        <div class="channel-name">Crunchyroll</div>
-                        <div class="stats">
-                            <span>1,208,169 次观看</span>
-                            <span>•</span>
-                            <span>1天前</span>
+                            <span>2天前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -732,19 +656,20 @@
             </article>
         </a>
         
-        <a href="https://www.youtube.com/watch?v=y3zoPdr0Q-M" class="video-link" target="_blank">
+        <a href="https://www.youtube.com/watch?v=Kw26buPma38" class="video-link" target="_blank">
             <article class="video-card">
                 <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/y3zoPdr0Q-M/maxresdefault.jpg" alt="100 层橡胶与胶水！" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/y3zoPdr0Q-M/maxresdefault.jpg", "https://i.ytimg.com/vi/y3zoPdr0Q-M/sddefault.jpg", "https://i.ytimg.com/vi/y3zoPdr0Q-M/hqdefault.jpg", "https://i.ytimg.com/vi/y3zoPdr0Q-M/mqdefault.jpg", "https://i.ytimg.com/vi/y3zoPdr0Q-M/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">19:56</div>
+                    <img src="https://i.ytimg.com/vi/Kw26buPma38/maxresdefault.jpg" alt="告诉 MY 16 SiBLiNGS 我宝宝的名字！*她的名字揭晓*" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/Kw26buPma38/maxresdefault.jpg", "https://i.ytimg.com/vi/Kw26buPma38/sddefault.jpg", "https://i.ytimg.com/vi/Kw26buPma38/hqdefault.jpg", "https://i.ytimg.com/vi/Kw26buPma38/mqdefault.jpg", "https://i.ytimg.com/vi/Kw26buPma38/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">35:20</div>
+                    <div class="play-button" onclick="openModal('Kw26buPma38')"></div>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">100 层橡胶与胶水！</h3>
-                    <div class="original-title">100 Layers of RUBBER vs GLUE!</div>
+                    <h3 class="video-title">告诉 MY 16 SiBLiNGS 我宝宝的名字！*她的名字揭晓*</h3>
+                    <div class="original-title">TELLiNG MY 16 SiBLiNGS MY BABY'S NAME! *Her Name Reveal*</div>
                     <div class="meta-data">
-                        <div class="channel-name">Preston</div>
+                        <div class="channel-name">JUSTKASS</div>
                         <div class="stats">
-                            <span>1,098,976 次观看</span>
+                            <span>1,537,015 次观看</span>
                             <span>•</span>
                             <span>1天前</span>
                             <span>•</span>
@@ -760,6 +685,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/eFMfgqpwFm4/maxresdefault.jpg" alt="The Amazing Digital Circus 音乐视频 🎵 - “Happy Place” [版本 A]" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/eFMfgqpwFm4/maxresdefault.jpg", "https://i.ytimg.com/vi/eFMfgqpwFm4/sddefault.jpg", "https://i.ytimg.com/vi/eFMfgqpwFm4/hqdefault.jpg", "https://i.ytimg.com/vi/eFMfgqpwFm4/mqdefault.jpg", "https://i.ytimg.com/vi/eFMfgqpwFm4/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">3:01</div>
+                    <div class="play-button" onclick="openModal('eFMfgqpwFm4')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">The Amazing Digital Circus 音乐视频 🎵 - “Happy Place” [版本 A]</h3>
@@ -767,7 +693,31 @@
                     <div class="meta-data">
                         <div class="channel-name">ZAMination</div>
                         <div class="stats">
-                            <span>1,072,747 次观看</span>
+                            <span>1,482,696 次观看</span>
+                            <span>•</span>
+                            <span>2天前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=Vq0OCJ_M5iQ" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/Vq0OCJ_M5iQ/maxresdefault.jpg" alt="我建造了我梦想中的 100,000 美元的家庭车库" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/Vq0OCJ_M5iQ/maxresdefault.jpg", "https://i.ytimg.com/vi/Vq0OCJ_M5iQ/sddefault.jpg", "https://i.ytimg.com/vi/Vq0OCJ_M5iQ/hqdefault.jpg", "https://i.ytimg.com/vi/Vq0OCJ_M5iQ/mqdefault.jpg", "https://i.ytimg.com/vi/Vq0OCJ_M5iQ/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">28:59</div>
+                    <div class="play-button" onclick="openModal('Vq0OCJ_M5iQ')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">我建造了我梦想中的 100,000 美元的家庭车库</h3>
+                    <div class="original-title">I BUILT MY DREAM $100,000 HOME GARAGE</div>
+                    <div class="meta-data">
+                        <div class="channel-name">Mat Armstrong MK2</div>
+                        <div class="stats">
+                            <span>1,285,440 次观看</span>
                             <span>•</span>
                             <span>1天前</span>
                             <span>•</span>
@@ -783,6 +733,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/2l2YYyGZEAA/maxresdefault.jpg" alt="让我们谈谈 Annabelle 发生了什么" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/2l2YYyGZEAA/maxresdefault.jpg", "https://i.ytimg.com/vi/2l2YYyGZEAA/sddefault.jpg", "https://i.ytimg.com/vi/2l2YYyGZEAA/hqdefault.jpg", "https://i.ytimg.com/vi/2l2YYyGZEAA/mqdefault.jpg", "https://i.ytimg.com/vi/2l2YYyGZEAA/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">23:10</div>
+                    <div class="play-button" onclick="openModal('2l2YYyGZEAA')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">让我们谈谈 Annabelle 发生了什么</h3>
@@ -790,7 +741,31 @@
                     <div class="meta-data">
                         <div class="channel-name">Sam and Colby Reacts</div>
                         <div class="stats">
-                            <span>1,018,358 次观看</span>
+                            <span>1,255,341 次观看</span>
+                            <span>•</span>
+                            <span>2天前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=_T7IrZlnwMA" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/_T7IrZlnwMA/maxresdefault.jpg" alt="费城老鹰队 vs. 华盛顿指挥官队 |2024 第 16 周比赛集锦" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/_T7IrZlnwMA/maxresdefault.jpg", "https://i.ytimg.com/vi/_T7IrZlnwMA/sddefault.jpg", "https://i.ytimg.com/vi/_T7IrZlnwMA/hqdefault.jpg", "https://i.ytimg.com/vi/_T7IrZlnwMA/mqdefault.jpg", "https://i.ytimg.com/vi/_T7IrZlnwMA/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">13:29</div>
+                    <div class="play-button" onclick="openModal('_T7IrZlnwMA')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">费城老鹰队 vs. 华盛顿指挥官队 |2024 第 16 周比赛集锦</h3>
+                    <div class="original-title">Philadelphia Eagles vs. Washington Commanders | 2024 Week 16 Game Highlights</div>
+                    <div class="meta-data">
+                        <div class="channel-name">NFL</div>
+                        <div class="stats">
+                            <span>1,153,500 次观看</span>
                             <span>•</span>
                             <span>1天前</span>
                             <span>•</span>
@@ -801,21 +776,22 @@
             </article>
         </a>
         
-        <a href="https://www.youtube.com/watch?v=Kw26buPma38" class="video-link" target="_blank">
+        <a href="https://www.youtube.com/watch?v=7MbgtuwaWWo" class="video-link" target="_blank">
             <article class="video-card">
                 <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/Kw26buPma38/maxresdefault.jpg" alt="告诉 MY 16 SiBLiNGS 我宝宝的名字！*她的名字揭晓*" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/Kw26buPma38/maxresdefault.jpg", "https://i.ytimg.com/vi/Kw26buPma38/sddefault.jpg", "https://i.ytimg.com/vi/Kw26buPma38/hqdefault.jpg", "https://i.ytimg.com/vi/Kw26buPma38/mqdefault.jpg", "https://i.ytimg.com/vi/Kw26buPma38/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">35:20</div>
+                    <img src="https://i.ytimg.com/vi/7MbgtuwaWWo/maxresdefault.jpg" alt="非常糟糕的一年。" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/7MbgtuwaWWo/maxresdefault.jpg", "https://i.ytimg.com/vi/7MbgtuwaWWo/sddefault.jpg", "https://i.ytimg.com/vi/7MbgtuwaWWo/hqdefault.jpg", "https://i.ytimg.com/vi/7MbgtuwaWWo/mqdefault.jpg", "https://i.ytimg.com/vi/7MbgtuwaWWo/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">11:38</div>
+                    <div class="play-button" onclick="openModal('7MbgtuwaWWo')"></div>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">告诉 MY 16 SiBLiNGS 我宝宝的名字！*她的名字揭晓*</h3>
-                    <div class="original-title">TELLiNG MY 16 SiBLiNGS MY BABY'S NAME! *Her Name Reveal*</div>
+                    <h3 class="video-title">非常糟糕的一年。</h3>
+                    <div class="original-title">a very bad year.</div>
                     <div class="meta-data">
-                        <div class="channel-name">JUSTKASS</div>
+                        <div class="channel-name">TommyInnit</div>
                         <div class="stats">
-                            <span>1,011,425 次观看</span>
+                            <span>1,118,892 次观看</span>
                             <span>•</span>
-                            <span>11小时前</span>
+                            <span>23小时前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -824,21 +800,22 @@
             </article>
         </a>
         
-        <a href="https://www.youtube.com/watch?v=9cHHK_ypNZw" class="video-link" target="_blank">
+        <a href="https://www.youtube.com/watch?v=EoJrtxezg7s" class="video-link" target="_blank">
             <article class="video-card">
                 <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/9cHHK_ypNZw/maxresdefault.jpg" alt="Aaron Taylor-Johnson 加入 Brittany Broski 的皇家法院" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/9cHHK_ypNZw/maxresdefault.jpg", "https://i.ytimg.com/vi/9cHHK_ypNZw/sddefault.jpg", "https://i.ytimg.com/vi/9cHHK_ypNZw/hqdefault.jpg", "https://i.ytimg.com/vi/9cHHK_ypNZw/mqdefault.jpg", "https://i.ytimg.com/vi/9cHHK_ypNZw/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">15:32</div>
+                    <img src="https://i.ytimg.com/vi/EoJrtxezg7s/maxresdefault.jpg" alt="当 Blade 发现他的电影第四次被取消时，他是什么感觉" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/EoJrtxezg7s/maxresdefault.jpg", "https://i.ytimg.com/vi/EoJrtxezg7s/sddefault.jpg", "https://i.ytimg.com/vi/EoJrtxezg7s/hqdefault.jpg", "https://i.ytimg.com/vi/EoJrtxezg7s/mqdefault.jpg", "https://i.ytimg.com/vi/EoJrtxezg7s/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">11:18</div>
+                    <div class="play-button" onclick="openModal('EoJrtxezg7s')"></div>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">Aaron Taylor-Johnson 加入 Brittany Broski 的皇家法院</h3>
-                    <div class="original-title">Aaron Taylor-Johnson Joins Brittany Broski's Royal Court</div>
+                    <h3 class="video-title">当 Blade 发现他的电影第四次被取消时，他是什么感觉</h3>
+                    <div class="original-title">How Blade was when he found out his movie got cancelled for the fourth time</div>
                     <div class="meta-data">
-                        <div class="channel-name">Royal Court</div>
+                        <div class="channel-name">RDCworld1</div>
                         <div class="stats">
-                            <span>949,892 次观看</span>
+                            <span>1,033,083 次观看</span>
                             <span>•</span>
-                            <span>2天前</span>
+                            <span>1天前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -847,21 +824,22 @@
             </article>
         </a>
         
-        <a href="https://www.youtube.com/watch?v=my7RQ9aOplg" class="video-link" target="_blank">
+        <a href="https://www.youtube.com/watch?v=aGtkhL8gDYE" class="video-link" target="_blank">
             <article class="video-card">
                 <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/my7RQ9aOplg/maxresdefault.jpg" alt="保龄球 VS 世界上最有弹性的蹦床" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/my7RQ9aOplg/maxresdefault.jpg", "https://i.ytimg.com/vi/my7RQ9aOplg/sddefault.jpg", "https://i.ytimg.com/vi/my7RQ9aOplg/hqdefault.jpg", "https://i.ytimg.com/vi/my7RQ9aOplg/mqdefault.jpg", "https://i.ytimg.com/vi/my7RQ9aOplg/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">31:35</div>
+                    <img src="https://i.ytimg.com/vi/aGtkhL8gDYE/maxresdefault.jpg" alt="《日落》动画短片 |原神 #GenshinImpact #StandWithMavuika #Sunset" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/aGtkhL8gDYE/maxresdefault.jpg", "https://i.ytimg.com/vi/aGtkhL8gDYE/sddefault.jpg", "https://i.ytimg.com/vi/aGtkhL8gDYE/hqdefault.jpg", "https://i.ytimg.com/vi/aGtkhL8gDYE/mqdefault.jpg", "https://i.ytimg.com/vi/aGtkhL8gDYE/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">10:45</div>
+                    <div class="play-button" onclick="openModal('aGtkhL8gDYE')"></div>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">保龄球 VS 世界上最有弹性的蹦床</h3>
-                    <div class="original-title">Bowling Ball VS World's Bounciest Trampoline</div>
+                    <h3 class="video-title">《日落》动画短片 |原神 #GenshinImpact #StandWithMavuika #Sunset</h3>
+                    <div class="original-title">"Sunset" Animated Short | Genshin Impact #GenshinImpact #StandWithMavuika #Sunset</div>
                     <div class="meta-data">
-                        <div class="channel-name">How Ridiculous</div>
+                        <div class="channel-name">Genshin Impact</div>
                         <div class="stats">
-                            <span>928,743 次观看</span>
+                            <span>1,007,267 次观看</span>
                             <span>•</span>
-                            <span>2天前</span>
+                            <span>18小时前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -870,90 +848,22 @@
             </article>
         </a>
         
-        <a href="https://www.youtube.com/watch?v=zqOGDO-kSpE" class="video-link" target="_blank">
+        <a href="https://www.youtube.com/watch?v=8VjEa5e2OhY" class="video-link" target="_blank">
             <article class="video-card">
                 <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/zqOGDO-kSpE/maxresdefault.jpg" alt="Glorb - The Bottom 3 （官方音乐视频）" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/zqOGDO-kSpE/maxresdefault.jpg", "https://i.ytimg.com/vi/zqOGDO-kSpE/sddefault.jpg", "https://i.ytimg.com/vi/zqOGDO-kSpE/hqdefault.jpg", "https://i.ytimg.com/vi/zqOGDO-kSpE/mqdefault.jpg", "https://i.ytimg.com/vi/zqOGDO-kSpE/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">4:38</div>
+                    <img src="https://i.ytimg.com/vi/8VjEa5e2OhY/maxresdefault.jpg" alt="查理·伍兹 （Charlie Woods） 在 PNC 锦标赛上首次一杆进洞 |2024" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/8VjEa5e2OhY/maxresdefault.jpg", "https://i.ytimg.com/vi/8VjEa5e2OhY/sddefault.jpg", "https://i.ytimg.com/vi/8VjEa5e2OhY/hqdefault.jpg", "https://i.ytimg.com/vi/8VjEa5e2OhY/mqdefault.jpg", "https://i.ytimg.com/vi/8VjEa5e2OhY/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">4:24</div>
+                    <div class="play-button" onclick="openModal('8VjEa5e2OhY')"></div>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">Glorb - The Bottom 3 （官方音乐视频）</h3>
-                    <div class="original-title">Glorb - The Bottom 3 (Official Music Video)</div>
+                    <h3 class="video-title">查理·伍兹 （Charlie Woods） 在 PNC 锦标赛上首次一杆进洞 |2024</h3>
+                    <div class="original-title">Charlie Woods makes first-ever HOLE-IN-ONE at PNC Championship | 2024</div>
                     <div class="meta-data">
-                        <div class="channel-name">Glorb</div>
+                        <div class="channel-name">PGA TOUR</div>
                         <div class="stats">
-                            <span>894,431 次观看</span>
+                            <span>991,998 次观看</span>
                             <span>•</span>
-                            <span>2天前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=AZe0aGLtGG4" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/AZe0aGLtGG4/maxresdefault.jpg" alt="35,000 美元 vs 75,000 美元福特野马 - HiLow FINALE！" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/AZe0aGLtGG4/maxresdefault.jpg", "https://i.ytimg.com/vi/AZe0aGLtGG4/sddefault.jpg", "https://i.ytimg.com/vi/AZe0aGLtGG4/hqdefault.jpg", "https://i.ytimg.com/vi/AZe0aGLtGG4/mqdefault.jpg", "https://i.ytimg.com/vi/AZe0aGLtGG4/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">34:21</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">35,000 美元 vs 75,000 美元福特野马 - HiLow FINALE！</h3>
-                    <div class="original-title">$35,000 vs $75,000 Ford Mustangs - HiLow FINALE!</div>
-                    <div class="meta-data">
-                        <div class="channel-name">Donut</div>
-                        <div class="stats">
-                            <span>847,940 次观看</span>
-                            <span>•</span>
-                            <span>2天前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=-NI6lxgHaN8" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/-NI6lxgHaN8/maxresdefault.jpg" alt="好吧，我来谈谈无人机......" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/-NI6lxgHaN8/maxresdefault.jpg", "https://i.ytimg.com/vi/-NI6lxgHaN8/sddefault.jpg", "https://i.ytimg.com/vi/-NI6lxgHaN8/hqdefault.jpg", "https://i.ytimg.com/vi/-NI6lxgHaN8/mqdefault.jpg", "https://i.ytimg.com/vi/-NI6lxgHaN8/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">17:19</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">好吧，我来谈谈无人机......</h3>
-                    <div class="original-title">Fine, I'll Talk About the Drones...</div>
-                    <div class="meta-data">
-                        <div class="channel-name">vlogbrothers</div>
-                        <div class="stats">
-                            <span>836,159 次观看</span>
-                            <span>•</span>
-                            <span>2天前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=fUQ2zb3ZI-w" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/fUQ2zb3ZI-w/maxresdefault.jpg" alt="超人预告片分解：你错过的每一个复活节彩蛋！" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/fUQ2zb3ZI-w/maxresdefault.jpg", "https://i.ytimg.com/vi/fUQ2zb3ZI-w/sddefault.jpg", "https://i.ytimg.com/vi/fUQ2zb3ZI-w/hqdefault.jpg", "https://i.ytimg.com/vi/fUQ2zb3ZI-w/mqdefault.jpg", "https://i.ytimg.com/vi/fUQ2zb3ZI-w/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">34:11</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">超人预告片分解：你错过的每一个复活节彩蛋！</h3>
-                    <div class="original-title">SUPERMAN TRAILER BREAKDOWN: Every Easter Egg You Missed!</div>
-                    <div class="meta-data">
-                        <div class="channel-name">New Rockstars</div>
-                        <div class="stats">
-                            <span>716,195 次观看</span>
-                            <span>•</span>
-                            <span>2天前</span>
+                            <span>1天前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -967,6 +877,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/S2k66EEbmH0/maxresdefault.jpg" alt="我从日本购买 22 辆摩托车是否损失了 $80k" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/S2k66EEbmH0/maxresdefault.jpg", "https://i.ytimg.com/vi/S2k66EEbmH0/sddefault.jpg", "https://i.ytimg.com/vi/S2k66EEbmH0/hqdefault.jpg", "https://i.ytimg.com/vi/S2k66EEbmH0/mqdefault.jpg", "https://i.ytimg.com/vi/S2k66EEbmH0/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">58:08</div>
+                    <div class="play-button" onclick="openModal('S2k66EEbmH0')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">我从日本购买 22 辆摩托车是否损失了 $80k</h3>
@@ -974,9 +885,9 @@
                     <div class="meta-data">
                         <div class="channel-name">Bikes and Beards</div>
                         <div class="stats">
-                            <span>689,879 次观看</span>
+                            <span>815,842 次观看</span>
                             <span>•</span>
-                            <span>1天前</span>
+                            <span>2天前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -990,6 +901,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/SqaeBNYKVqA/maxresdefault.jpg" alt="老虎和查理伍兹打出低于标准杆 13 杆的 59 杆 |第 1 轮 |PNC 锦标赛 |2024" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/SqaeBNYKVqA/maxresdefault.jpg", "https://i.ytimg.com/vi/SqaeBNYKVqA/sddefault.jpg", "https://i.ytimg.com/vi/SqaeBNYKVqA/hqdefault.jpg", "https://i.ytimg.com/vi/SqaeBNYKVqA/mqdefault.jpg", "https://i.ytimg.com/vi/SqaeBNYKVqA/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">8:49</div>
+                    <div class="play-button" onclick="openModal('SqaeBNYKVqA')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">老虎和查理伍兹打出低于标准杆 13 杆的 59 杆 |第 1 轮 |PNC 锦标赛 |2024</h3>
@@ -997,147 +909,9 @@
                     <div class="meta-data">
                         <div class="channel-name">PGA TOUR</div>
                         <div class="stats">
-                            <span>659,142 次观看</span>
+                            <span>802,002 次观看</span>
                             <span>•</span>
                             <span>1天前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=N68nu_1MhEw" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/N68nu_1MhEw/maxresdefault.jpg" alt="Oleksandr Usyk vs. Tyson Fury 2 • 完整的赛后新闻发布会 |DAZN 拳击" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/N68nu_1MhEw/maxresdefault.jpg", "https://i.ytimg.com/vi/N68nu_1MhEw/sddefault.jpg", "https://i.ytimg.com/vi/N68nu_1MhEw/hqdefault.jpg", "https://i.ytimg.com/vi/N68nu_1MhEw/mqdefault.jpg", "https://i.ytimg.com/vi/N68nu_1MhEw/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">29:09</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Oleksandr Usyk vs. Tyson Fury 2 • 完整的赛后新闻发布会 |DAZN 拳击</h3>
-                    <div class="original-title">Oleksandr Usyk vs. Tyson Fury 2 • FULL POST FIGHT PRESS CONFERENCE | DAZN Boxing</div>
-                    <div class="meta-data">
-                        <div class="channel-name">Seconds Out</div>
-                        <div class="stats">
-                            <span>653,949 次观看</span>
-                            <span>•</span>
-                            <span>23小时前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=n7N4nU8l_mE" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/n7N4nU8l_mE/maxresdefault.jpg" alt="为什么我卖掉了我的 GT3 RS" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/n7N4nU8l_mE/maxresdefault.jpg", "https://i.ytimg.com/vi/n7N4nU8l_mE/sddefault.jpg", "https://i.ytimg.com/vi/n7N4nU8l_mE/hqdefault.jpg", "https://i.ytimg.com/vi/n7N4nU8l_mE/mqdefault.jpg", "https://i.ytimg.com/vi/n7N4nU8l_mE/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">29:51</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">为什么我卖掉了我的 GT3 RS</h3>
-                    <div class="original-title">Why I've Sold My GT3 RS</div>
-                    <div class="meta-data">
-                        <div class="channel-name">Mat Watson Cars</div>
-                        <div class="stats">
-                            <span>645,153 次观看</span>
-                            <span>•</span>
-                            <span>16小时前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=g0mekeRbamE" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/g0mekeRbamE/maxresdefault.jpg" alt="美国游击空军 - 克莱尔·陈纳德和飞虎队" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/g0mekeRbamE/maxresdefault.jpg", "https://i.ytimg.com/vi/g0mekeRbamE/sddefault.jpg", "https://i.ytimg.com/vi/g0mekeRbamE/hqdefault.jpg", "https://i.ytimg.com/vi/g0mekeRbamE/mqdefault.jpg", "https://i.ytimg.com/vi/g0mekeRbamE/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">31:39</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">美国游击空军 - 克莱尔·陈纳德和飞虎队</h3>
-                    <div class="original-title">America's Guerilla Airforce - Claire Chennault & The Flying Tigers</div>
-                    <div class="meta-data">
-                        <div class="channel-name">The Fat Electrician</div>
-                        <div class="stats">
-                            <span>631,507 次观看</span>
-                            <span>•</span>
-                            <span>2天前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=VgYzZlr7mQY" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/VgYzZlr7mQY/maxresdefault.jpg" alt="The Strongest Battlegrounds 中的免费 KJ 更新展示" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/VgYzZlr7mQY/maxresdefault.jpg", "https://i.ytimg.com/vi/VgYzZlr7mQY/sddefault.jpg", "https://i.ytimg.com/vi/VgYzZlr7mQY/hqdefault.jpg", "https://i.ytimg.com/vi/VgYzZlr7mQY/mqdefault.jpg", "https://i.ytimg.com/vi/VgYzZlr7mQY/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">10:27</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">The Strongest Battlegrounds 中的免费 KJ 更新展示</h3>
-                    <div class="original-title">THE FREE KJ UPDATE SHOWCASE in The Strongest Battlegrounds</div>
-                    <div class="meta-data">
-                        <div class="channel-name">STUD</div>
-                        <div class="stats">
-                            <span>630,994 次观看</span>
-                            <span>•</span>
-                            <span>22小时前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=MHOUOP_VVrg" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/MHOUOP_VVrg/maxresdefault.jpg" alt="泰森·弗瑞 • 二番战赛后新闻发布会 vs. 奥列克桑德尔·乌西克 |DAZN 拳击" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/MHOUOP_VVrg/maxresdefault.jpg", "https://i.ytimg.com/vi/MHOUOP_VVrg/sddefault.jpg", "https://i.ytimg.com/vi/MHOUOP_VVrg/hqdefault.jpg", "https://i.ytimg.com/vi/MHOUOP_VVrg/mqdefault.jpg", "https://i.ytimg.com/vi/MHOUOP_VVrg/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">11:19</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">泰森·弗瑞 • 二番战赛后新闻发布会 vs. 奥列克桑德尔·乌西克 |DAZN 拳击</h3>
-                    <div class="original-title">Tyson Fury • REMATCH POST FIGHT PRESS CONFERENCE vs. Oleksandr Usyk | DAZN Boxing</div>
-                    <div class="meta-data">
-                        <div class="channel-name">Seconds Out</div>
-                        <div class="stats">
-                            <span>496,007 次观看</span>
-                            <span>•</span>
-                            <span>1天前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=XAEN0TI8b8g" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/XAEN0TI8b8g/maxresdefault.jpg" alt="耻辱！曼联 0-3 伯恩茅斯 戈德布里奇 比赛反应" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/XAEN0TI8b8g/maxresdefault.jpg", "https://i.ytimg.com/vi/XAEN0TI8b8g/sddefault.jpg", "https://i.ytimg.com/vi/XAEN0TI8b8g/hqdefault.jpg", "https://i.ytimg.com/vi/XAEN0TI8b8g/mqdefault.jpg", "https://i.ytimg.com/vi/XAEN0TI8b8g/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">23:12</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">耻辱！曼联 0-3 伯恩茅斯 戈德布里奇 比赛反应</h3>
-                    <div class="original-title">DISGRACE! MAN UTD 0-3 BOURNEMOUTH GOLDBRIDGE MATCH REACTION</div>
-                    <div class="meta-data">
-                        <div class="channel-name">The United Stand</div>
-                        <div class="stats">
-                            <span>397,859 次观看</span>
-                            <span>•</span>
-                            <span>8小时前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -1151,6 +925,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/-8jtP_OB5JE/maxresdefault.jpg" alt="精灵巴迪在爸爸受伤后在肖恩的生日派对上回归" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/-8jtP_OB5JE/maxresdefault.jpg", "https://i.ytimg.com/vi/-8jtP_OB5JE/sddefault.jpg", "https://i.ytimg.com/vi/-8jtP_OB5JE/hqdefault.jpg", "https://i.ytimg.com/vi/-8jtP_OB5JE/mqdefault.jpg", "https://i.ytimg.com/vi/-8jtP_OB5JE/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">12:07</div>
+                    <div class="play-button" onclick="openModal('-8jtP_OB5JE')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">精灵巴迪在爸爸受伤后在肖恩的生日派对上回归</h3>
@@ -1158,7 +933,31 @@
                     <div class="meta-data">
                         <div class="channel-name">FV FAMILY</div>
                         <div class="stats">
-                            <span>384,639 次观看</span>
+                            <span>730,015 次观看</span>
+                            <span>•</span>
+                            <span>2天前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=JfZxOuc9Qwk" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/JfZxOuc9Qwk/maxresdefault.jpg" alt="世界上最大的电子管电视怎么了？" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/JfZxOuc9Qwk/maxresdefault.jpg", "https://i.ytimg.com/vi/JfZxOuc9Qwk/sddefault.jpg", "https://i.ytimg.com/vi/JfZxOuc9Qwk/hqdefault.jpg", "https://i.ytimg.com/vi/JfZxOuc9Qwk/mqdefault.jpg", "https://i.ytimg.com/vi/JfZxOuc9Qwk/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">35:46</div>
+                    <div class="play-button" onclick="openModal('JfZxOuc9Qwk')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">世界上最大的电子管电视怎么了？</h3>
+                    <div class="original-title">What Happened to the World's Largest Tube TV?</div>
+                    <div class="meta-data">
+                        <div class="channel-name">Shank Mods</div>
+                        <div class="stats">
+                            <span>675,452 次观看</span>
                             <span>•</span>
                             <span>1天前</span>
                             <span>•</span>
@@ -1169,21 +968,46 @@
             </article>
         </a>
         
-        <a href="https://www.youtube.com/watch?v=UbVeI5lJIIs" class="video-link" target="_blank">
+        <a href="https://www.youtube.com/watch?v=jNbXojSjtdw" class="video-link" target="_blank">
             <article class="video-card">
                 <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/UbVeI5lJIIs/maxresdefault.jpg" alt="我建造了最快的越野 6x6！（超级充电）" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/UbVeI5lJIIs/maxresdefault.jpg", "https://i.ytimg.com/vi/UbVeI5lJIIs/sddefault.jpg", "https://i.ytimg.com/vi/UbVeI5lJIIs/hqdefault.jpg", "https://i.ytimg.com/vi/UbVeI5lJIIs/mqdefault.jpg", "https://i.ytimg.com/vi/UbVeI5lJIIs/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">42:11</div>
+                    <img src="https://i.ytimg.com/vi/jNbXojSjtdw/maxresdefault.jpg" alt="我在他们面前残酷地评价 youtuber 产品！" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/jNbXojSjtdw/maxresdefault.jpg", "https://i.ytimg.com/vi/jNbXojSjtdw/sddefault.jpg", "https://i.ytimg.com/vi/jNbXojSjtdw/hqdefault.jpg", "https://i.ytimg.com/vi/jNbXojSjtdw/mqdefault.jpg", "https://i.ytimg.com/vi/jNbXojSjtdw/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">17:06</div>
+                    <div class="play-button" onclick="openModal('jNbXojSjtdw')"></div>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">我建造了最快的越野 6x6！（超级充电）</h3>
-                    <div class="original-title">I Built The Fastest Off-Road 6x6! (SUPER CHARGED)</div>
+                    <h3 class="video-title">我在他们面前残酷地评价 youtuber 产品！</h3>
+                    <div class="original-title">I Brutally Rated Youtuber Products in Front Of Them!</div>
                     <div class="meta-data">
-                        <div class="channel-name">Matt's Off Road Recovery</div>
+                        <div class="channel-name">Alexa Rivera</div>
                         <div class="stats">
-                            <span>382,726 次观看</span>
+                            <span>604,721 次观看</span>
                             <span>•</span>
-                            <span>13小时前</span>
+                            <span>1天前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=dwVo-6SuAVw" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/dwVo-6SuAVw/maxresdefault.jpg" alt="我订购了我的追随者发送给我的所有内容（随机版）" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/dwVo-6SuAVw/maxresdefault.jpg", "https://i.ytimg.com/vi/dwVo-6SuAVw/sddefault.jpg", "https://i.ytimg.com/vi/dwVo-6SuAVw/hqdefault.jpg", "https://i.ytimg.com/vi/dwVo-6SuAVw/mqdefault.jpg", "https://i.ytimg.com/vi/dwVo-6SuAVw/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">33:22</div>
+                    <div class="play-button" onclick="openModal('dwVo-6SuAVw')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">我订购了我的追随者发送给我的所有内容（随机版）</h3>
+                    <div class="original-title">I ordered everything my followers sent me (random edition)</div>
+                    <div class="meta-data">
+                        <div class="channel-name">Naomi Jon</div>
+                        <div class="stats">
+                            <span>580,813 次观看</span>
+                            <span>•</span>
+                            <span>1天前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -1197,6 +1021,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/X20XwMptaWE/maxresdefault.jpg" alt="我们以不到丰田卡罗拉的价格购买了两辆 V12 Legends" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/X20XwMptaWE/maxresdefault.jpg", "https://i.ytimg.com/vi/X20XwMptaWE/sddefault.jpg", "https://i.ytimg.com/vi/X20XwMptaWE/hqdefault.jpg", "https://i.ytimg.com/vi/X20XwMptaWE/mqdefault.jpg", "https://i.ytimg.com/vi/X20XwMptaWE/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">39:39</div>
+                    <div class="play-button" onclick="openModal('X20XwMptaWE')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">我们以不到丰田卡罗拉的价格购买了两辆 V12 Legends</h3>
@@ -1204,30 +1029,7 @@
                     <div class="meta-data">
                         <div class="channel-name">Throttle House</div>
                         <div class="stats">
-                            <span>310,511 次观看</span>
-                            <span>•</span>
-                            <span>12小时前</span>
-                            <span>•</span>
-                            <span>美国</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </a>
-        
-        <a href="https://www.youtube.com/watch?v=DtBg8rrBukc" class="video-link" target="_blank">
-            <article class="video-card">
-                <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/DtBg8rrBukc/maxresdefault.jpg" alt="发现我怀孕了！" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/DtBg8rrBukc/maxresdefault.jpg", "https://i.ytimg.com/vi/DtBg8rrBukc/sddefault.jpg", "https://i.ytimg.com/vi/DtBg8rrBukc/hqdefault.jpg", "https://i.ytimg.com/vi/DtBg8rrBukc/mqdefault.jpg", "https://i.ytimg.com/vi/DtBg8rrBukc/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">13:41</div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">发现我怀孕了！</h3>
-                    <div class="original-title">Finding Out I'm Pregnant!</div>
-                    <div class="meta-data">
-                        <div class="channel-name">Charles & Alyssa Forever</div>
-                        <div class="stats">
-                            <span>294,647 次观看</span>
+                            <span>577,021 次观看</span>
                             <span>•</span>
                             <span>1天前</span>
                             <span>•</span>
@@ -1238,19 +1040,44 @@
             </article>
         </a>
         
-        <a href="https://www.youtube.com/watch?v=ZindbAJcwYw" class="video-link" target="_blank">
+        <a href="https://www.youtube.com/watch?v=jAD-4Opxlss" class="video-link" target="_blank">
             <article class="video-card">
                 <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/ZindbAJcwYw/maxresdefault.jpg" alt="如何在 The Strongest Battlegrounds 更新中使用所有新的 Saitama 动作" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/ZindbAJcwYw/maxresdefault.jpg", "https://i.ytimg.com/vi/ZindbAJcwYw/sddefault.jpg", "https://i.ytimg.com/vi/ZindbAJcwYw/hqdefault.jpg", "https://i.ytimg.com/vi/ZindbAJcwYw/mqdefault.jpg", "https://i.ytimg.com/vi/ZindbAJcwYw/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">0:57</div>
+                    <img src="https://i.ytimg.com/vi/jAD-4Opxlss/maxresdefault.jpg" alt="AKINFENWA 在现实生活中有多好？" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/jAD-4Opxlss/maxresdefault.jpg", "https://i.ytimg.com/vi/jAD-4Opxlss/sddefault.jpg", "https://i.ytimg.com/vi/jAD-4Opxlss/hqdefault.jpg", "https://i.ytimg.com/vi/jAD-4Opxlss/mqdefault.jpg", "https://i.ytimg.com/vi/jAD-4Opxlss/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">26:50</div>
+                    <div class="play-button" onclick="openModal('jAD-4Opxlss')"></div>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">如何在 The Strongest Battlegrounds 更新中使用所有新的 Saitama 动作</h3>
-                    <div class="original-title">How To Use ALL New Saitama Moves in The Strongest Battlegrounds Update</div>
+                    <h3 class="video-title">AKINFENWA 在现实生活中有多好？</h3>
+                    <div class="original-title">HOW GOOD IS AKINFENWA IN REAL LIFE?</div>
                     <div class="meta-data">
-                        <div class="channel-name">OG Shinobi</div>
+                        <div class="channel-name">5IVE GUYS FC</div>
                         <div class="stats">
-                            <span>248,693 次观看</span>
+                            <span>537,464 次观看</span>
+                            <span>•</span>
+                            <span>1天前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=kZi7oMAmJOU" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/kZi7oMAmJOU/maxresdefault.jpg" alt="老虎和查理伍兹打出低于标准杆 15 杆的 57 杆 |第 2 轮 |PNC 锦标赛 |2024" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/kZi7oMAmJOU/maxresdefault.jpg", "https://i.ytimg.com/vi/kZi7oMAmJOU/sddefault.jpg", "https://i.ytimg.com/vi/kZi7oMAmJOU/hqdefault.jpg", "https://i.ytimg.com/vi/kZi7oMAmJOU/mqdefault.jpg", "https://i.ytimg.com/vi/kZi7oMAmJOU/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">11:51</div>
+                    <div class="play-button" onclick="openModal('kZi7oMAmJOU')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">老虎和查理伍兹打出低于标准杆 15 杆的 57 杆 |第 2 轮 |PNC 锦标赛 |2024</h3>
+                    <div class="original-title">Tiger and Charlie Woods shoot 15-under 57 | Round 2 | PNC Championship | 2024</div>
+                    <div class="meta-data">
+                        <div class="channel-name">PGA TOUR</div>
+                        <div class="stats">
+                            <span>533,405 次观看</span>
                             <span>•</span>
                             <span>22小时前</span>
                             <span>•</span>
@@ -1261,21 +1088,22 @@
             </article>
         </a>
         
-        <a href="https://www.youtube.com/watch?v=fh5NG_43wHs" class="video-link" target="_blank">
+        <a href="https://www.youtube.com/watch?v=lhg4zu3yoe0" class="video-link" target="_blank">
             <article class="video-card">
                 <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/fh5NG_43wHs/maxresdefault.jpg" alt="进球盛宴 🔥 皇家马德里 vs. 塞维利亚 |LALIGA 亮点 |ESPN 足球俱乐部" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/fh5NG_43wHs/maxresdefault.jpg", "https://i.ytimg.com/vi/fh5NG_43wHs/sddefault.jpg", "https://i.ytimg.com/vi/fh5NG_43wHs/hqdefault.jpg", "https://i.ytimg.com/vi/fh5NG_43wHs/mqdefault.jpg", "https://i.ytimg.com/vi/fh5NG_43wHs/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">10:01</div>
+                    <img src="https://i.ytimg.com/vi/lhg4zu3yoe0/maxresdefault.jpg" alt="日常物品是如何制作的！" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/lhg4zu3yoe0/maxresdefault.jpg", "https://i.ytimg.com/vi/lhg4zu3yoe0/sddefault.jpg", "https://i.ytimg.com/vi/lhg4zu3yoe0/hqdefault.jpg", "https://i.ytimg.com/vi/lhg4zu3yoe0/mqdefault.jpg", "https://i.ytimg.com/vi/lhg4zu3yoe0/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">18:21</div>
+                    <div class="play-button" onclick="openModal('lhg4zu3yoe0')"></div>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">进球盛宴 🔥 皇家马德里 vs. 塞维利亚 |LALIGA 亮点 |ESPN 足球俱乐部</h3>
-                    <div class="original-title">GOALS GALORE 🔥 Real Madrid vs. Sevilla | LALIGA Highlights | ESPN FC</div>
+                    <h3 class="video-title">日常物品是如何制作的！</h3>
+                    <div class="original-title">How Everyday Things Are Made!</div>
                     <div class="meta-data">
-                        <div class="channel-name">ESPN FC</div>
+                        <div class="channel-name">Stay Wild Reacts</div>
                         <div class="stats">
-                            <span>229,901 次观看</span>
+                            <span>448,432 次观看</span>
                             <span>•</span>
-                            <span>7小时前</span>
+                            <span>1天前</span>
                             <span>•</span>
                             <span>美国</span>
                         </div>
@@ -1284,19 +1112,68 @@
             </article>
         </a>
         
-        <a href="https://www.youtube.com/watch?v=n3G-w-QpjE0" class="video-link" target="_blank">
+        <a href="https://www.youtube.com/watch?v=Vi0UUFazF0M" class="video-link" target="_blank">
             <article class="video-card">
                 <div class="thumbnail-container">
-                    <img src="https://i.ytimg.com/vi/n3G-w-QpjE0/maxresdefault.jpg" alt="排名第 7 的南加州大学特洛伊木马队 vs. 排名第 4 的康涅狄格大学哈士奇队 |佩奇·布克尔斯 vs. 朱朱·沃特金斯 惊悚片 |福克斯 CBB" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/n3G-w-QpjE0/maxresdefault.jpg", "https://i.ytimg.com/vi/n3G-w-QpjE0/sddefault.jpg", "https://i.ytimg.com/vi/n3G-w-QpjE0/hqdefault.jpg", "https://i.ytimg.com/vi/n3G-w-QpjE0/mqdefault.jpg", "https://i.ytimg.com/vi/n3G-w-QpjE0/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
-                    <div class="duration">12:14</div>
+                    <img src="https://i.ytimg.com/vi/Vi0UUFazF0M/maxresdefault.jpg" alt="使用 ADMIN 命令在 Roblox Fisch 上拖钓我的 GF！" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/Vi0UUFazF0M/maxresdefault.jpg", "https://i.ytimg.com/vi/Vi0UUFazF0M/sddefault.jpg", "https://i.ytimg.com/vi/Vi0UUFazF0M/hqdefault.jpg", "https://i.ytimg.com/vi/Vi0UUFazF0M/mqdefault.jpg", "https://i.ytimg.com/vi/Vi0UUFazF0M/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">22:23</div>
+                    <div class="play-button" onclick="openModal('Vi0UUFazF0M')"></div>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">排名第 7 的南加州大学特洛伊木马队 vs. 排名第 4 的康涅狄格大学哈士奇队 |佩奇·布克尔斯 vs. 朱朱·沃特金斯 惊悚片 |福克斯 CBB</h3>
-                    <div class="original-title">No. 7 USC Trojans vs. No. 4 UConn Huskies | Paige Bueckers vs. JuJu Watkins thriller | FOX CBB</div>
+                    <h3 class="video-title">使用 ADMIN 命令在 Roblox Fisch 上拖钓我的 GF！</h3>
+                    <div class="original-title">Using ADMIN COMMANDS To Troll My GF on Roblox Fisch!</div>
                     <div class="meta-data">
-                        <div class="channel-name">FOX Sports</div>
+                        <div class="channel-name">cay & keeks</div>
                         <div class="stats">
-                            <span>135,513 次观看</span>
+                            <span>403,566 次观看</span>
+                            <span>•</span>
+                            <span>1天前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=1S4SyMsBNSc" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/1S4SyMsBNSc/maxresdefault.jpg" alt="女子在布鲁克林 F 列车上被纵火后死亡 |NBC 纽约" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/1S4SyMsBNSc/maxresdefault.jpg", "https://i.ytimg.com/vi/1S4SyMsBNSc/sddefault.jpg", "https://i.ytimg.com/vi/1S4SyMsBNSc/hqdefault.jpg", "https://i.ytimg.com/vi/1S4SyMsBNSc/mqdefault.jpg", "https://i.ytimg.com/vi/1S4SyMsBNSc/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">2:34</div>
+                    <div class="play-button" onclick="openModal('1S4SyMsBNSc')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">女子在布鲁克林 F 列车上被纵火后死亡 |NBC 纽约</h3>
+                    <div class="original-title">Woman dies after being set on fire aboard F train in Brooklyn | NBC New York</div>
+                    <div class="meta-data">
+                        <div class="channel-name">NBC New York</div>
+                        <div class="stats">
+                            <span>370,621 次观看</span>
+                            <span>•</span>
+                            <span>23小时前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=9MILe0K9Qis" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/9MILe0K9Qis/maxresdefault.jpg" alt="纽约警方在女子在地铁纵火后提供最新情况" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/9MILe0K9Qis/maxresdefault.jpg", "https://i.ytimg.com/vi/9MILe0K9Qis/sddefault.jpg", "https://i.ytimg.com/vi/9MILe0K9Qis/hqdefault.jpg", "https://i.ytimg.com/vi/9MILe0K9Qis/mqdefault.jpg", "https://i.ytimg.com/vi/9MILe0K9Qis/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">6:43</div>
+                    <div class="play-button" onclick="openModal('9MILe0K9Qis')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">纽约警方在女子在地铁纵火后提供最新情况</h3>
+                    <div class="original-title">New York police give update after woman set on fire in subway</div>
+                    <div class="meta-data">
+                        <div class="channel-name">KHOU 11</div>
+                        <div class="stats">
+                            <span>298,174 次观看</span>
                             <span>•</span>
                             <span>21小时前</span>
                             <span>•</span>
@@ -1312,6 +1189,7 @@
                 <div class="thumbnail-container">
                     <img src="https://i.ytimg.com/vi/6y6HeSei24E/maxresdefault.jpg" alt="Palworld x 泰拉瑞亚 |“Meowmere” Tease - 2025 年全面合作 |Pocketpair 口袋对" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/6y6HeSei24E/maxresdefault.jpg", "https://i.ytimg.com/vi/6y6HeSei24E/sddefault.jpg", "https://i.ytimg.com/vi/6y6HeSei24E/hqdefault.jpg", "https://i.ytimg.com/vi/6y6HeSei24E/mqdefault.jpg", "https://i.ytimg.com/vi/6y6HeSei24E/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
                     <div class="duration">0:35</div>
+                    <div class="play-button" onclick="openModal('6y6HeSei24E')"></div>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">Palworld x 泰拉瑞亚 |“Meowmere” Tease - 2025 年全面合作 |Pocketpair 口袋对</h3>
@@ -1319,7 +1197,247 @@
                     <div class="meta-data">
                         <div class="channel-name">Pocketpair</div>
                         <div class="stats">
-                            <span>113,300 次观看</span>
+                            <span>247,064 次观看</span>
+                            <span>•</span>
+                            <span>1天前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=4maby6H82oo" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/4maby6H82oo/maxresdefault.jpg" alt="喷气机队的球员们对亚伦·罗杰斯和糟糕的组织感到厌烦 |睡帽" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/4maby6H82oo/maxresdefault.jpg", "https://i.ytimg.com/vi/4maby6H82oo/sddefault.jpg", "https://i.ytimg.com/vi/4maby6H82oo/hqdefault.jpg", "https://i.ytimg.com/vi/4maby6H82oo/mqdefault.jpg", "https://i.ytimg.com/vi/4maby6H82oo/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">14:34</div>
+                    <div class="play-button" onclick="openModal('4maby6H82oo')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">喷气机队的球员们对亚伦·罗杰斯和糟糕的组织感到厌烦 |睡帽</h3>
+                    <div class="original-title">Jets players FED UP with Aaron Rodgers & AWFUL organization | Nightcap</div>
+                    <div class="meta-data">
+                        <div class="channel-name">Nightcap</div>
+                        <div class="stats">
+                            <span>230,586 次观看</span>
+                            <span>•</span>
+                            <span>8小时前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=n3G-w-QpjE0" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/n3G-w-QpjE0/maxresdefault.jpg" alt="排名第 7 的南加州大学特洛伊木马队 vs. 排名第 4 的康涅狄格大学哈士奇队 |佩奇·布克尔斯 vs. 朱朱·沃特金斯 惊悚片 |福克斯 CBB" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/n3G-w-QpjE0/maxresdefault.jpg", "https://i.ytimg.com/vi/n3G-w-QpjE0/sddefault.jpg", "https://i.ytimg.com/vi/n3G-w-QpjE0/hqdefault.jpg", "https://i.ytimg.com/vi/n3G-w-QpjE0/mqdefault.jpg", "https://i.ytimg.com/vi/n3G-w-QpjE0/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">12:14</div>
+                    <div class="play-button" onclick="openModal('n3G-w-QpjE0')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">排名第 7 的南加州大学特洛伊木马队 vs. 排名第 4 的康涅狄格大学哈士奇队 |佩奇·布克尔斯 vs. 朱朱·沃特金斯 惊悚片 |福克斯 CBB</h3>
+                    <div class="original-title">No. 7 USC Trojans vs. No. 4 UConn Huskies | Paige Bueckers vs. JuJu Watkins thriller | FOX CBB</div>
+                    <div class="meta-data">
+                        <div class="channel-name">FOX Sports</div>
+                        <div class="stats">
+                            <span>208,620 次观看</span>
+                            <span>•</span>
+                            <span>1天前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=hQq3b55eLz4" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/hQq3b55eLz4/maxresdefault.jpg" alt="我们在 5 英亩池塘的下一个大项目！" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/hQq3b55eLz4/maxresdefault.jpg", "https://i.ytimg.com/vi/hQq3b55eLz4/sddefault.jpg", "https://i.ytimg.com/vi/hQq3b55eLz4/hqdefault.jpg", "https://i.ytimg.com/vi/hQq3b55eLz4/mqdefault.jpg", "https://i.ytimg.com/vi/hQq3b55eLz4/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">28:47</div>
+                    <div class="play-button" onclick="openModal('hQq3b55eLz4')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">我们在 5 英亩池塘的下一个大项目！</h3>
+                    <div class="original-title">Our Next Big Project at the 5 Acre Pond!</div>
+                    <div class="meta-data">
+                        <div class="channel-name">BamaBass</div>
+                        <div class="stats">
+                            <span>188,121 次观看</span>
+                            <span>•</span>
+                            <span>21小时前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=fXq3-Jjz1_E" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/fXq3-Jjz1_E/maxresdefault.jpg" alt="Win or Get Electrocuted （泰瑟枪操作）" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/fXq3-Jjz1_E/maxresdefault.jpg", "https://i.ytimg.com/vi/fXq3-Jjz1_E/sddefault.jpg", "https://i.ytimg.com/vi/fXq3-Jjz1_E/hqdefault.jpg", "https://i.ytimg.com/vi/fXq3-Jjz1_E/mqdefault.jpg", "https://i.ytimg.com/vi/fXq3-Jjz1_E/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">11:10</div>
+                    <div class="play-button" onclick="openModal('fXq3-Jjz1_E')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">Win or Get Electrocuted （泰瑟枪操作）</h3>
+                    <div class="original-title">Win or Get Electrocuted (Taser Operation)</div>
+                    <div class="meta-data">
+                        <div class="channel-name">Emily The Engineer</div>
+                        <div class="stats">
+                            <span>177,309 次观看</span>
+                            <span>•</span>
+                            <span>1天前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=SsbNbk9m700" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/SsbNbk9m700/maxresdefault.jpg" alt="这个角色值得等待。" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/SsbNbk9m700/maxresdefault.jpg", "https://i.ytimg.com/vi/SsbNbk9m700/sddefault.jpg", "https://i.ytimg.com/vi/SsbNbk9m700/hqdefault.jpg", "https://i.ytimg.com/vi/SsbNbk9m700/mqdefault.jpg", "https://i.ytimg.com/vi/SsbNbk9m700/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">10:02</div>
+                    <div class="play-button" onclick="openModal('SsbNbk9m700')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">这个角色值得等待。</h3>
+                    <div class="original-title">this character was WELL worth the wait.</div>
+                    <div class="meta-data">
+                        <div class="channel-name">wellworks</div>
+                        <div class="stats">
+                            <span>160,001 次观看</span>
+                            <span>•</span>
+                            <span>8小时前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=H4_crrMnxHs" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/H4_crrMnxHs/maxresdefault.jpg" alt="凯文·奥康奈尔 （Kevin O'Connell） 在明尼苏达维京人队战胜西雅图海鹰队后在更衣室发表的讲话" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/H4_crrMnxHs/maxresdefault.jpg", "https://i.ytimg.com/vi/H4_crrMnxHs/sddefault.jpg", "https://i.ytimg.com/vi/H4_crrMnxHs/hqdefault.jpg", "https://i.ytimg.com/vi/H4_crrMnxHs/mqdefault.jpg", "https://i.ytimg.com/vi/H4_crrMnxHs/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">3:21</div>
+                    <div class="play-button" onclick="openModal('H4_crrMnxHs')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">凯文·奥康奈尔 （Kevin O'Connell） 在明尼苏达维京人队战胜西雅图海鹰队后在更衣室发表的讲话</h3>
+                    <div class="original-title">Kevin O’Connell’s Locker Room Speech After Minnesota Vikings Win Over Seattle Seahawks</div>
+                    <div class="meta-data">
+                        <div class="channel-name">Minnesota Vikings</div>
+                        <div class="stats">
+                            <span>155,408 次观看</span>
+                            <span>•</span>
+                            <span>20小时前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=a7ifiCBJvDY" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/a7ifiCBJvDY/maxresdefault.jpg" alt="亮点：2024 PNC 锦标赛，最后一轮 |高尔夫频道" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/a7ifiCBJvDY/maxresdefault.jpg", "https://i.ytimg.com/vi/a7ifiCBJvDY/sddefault.jpg", "https://i.ytimg.com/vi/a7ifiCBJvDY/hqdefault.jpg", "https://i.ytimg.com/vi/a7ifiCBJvDY/mqdefault.jpg", "https://i.ytimg.com/vi/a7ifiCBJvDY/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">14:48</div>
+                    <div class="play-button" onclick="openModal('a7ifiCBJvDY')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">亮点：2024 PNC 锦标赛，最后一轮 |高尔夫频道</h3>
+                    <div class="original-title">Highlights: 2024 PNC Championship, Final Round | Golf Channel</div>
+                    <div class="meta-data">
+                        <div class="channel-name">Golf Channel</div>
+                        <div class="stats">
+                            <span>147,642 次观看</span>
+                            <span>•</span>
+                            <span>23小时前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=ApAA5_QmUpo" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/ApAA5_QmUpo/maxresdefault.jpg" alt="胜利女神：NIKKE |特别的圣诞直播" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/ApAA5_QmUpo/maxresdefault.jpg", "https://i.ytimg.com/vi/ApAA5_QmUpo/sddefault.jpg", "https://i.ytimg.com/vi/ApAA5_QmUpo/hqdefault.jpg", "https://i.ytimg.com/vi/ApAA5_QmUpo/mqdefault.jpg", "https://i.ytimg.com/vi/ApAA5_QmUpo/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">35:18</div>
+                    <div class="play-button" onclick="openModal('ApAA5_QmUpo')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">胜利女神：NIKKE |特别的圣诞直播</h3>
+                    <div class="original-title">GODDESS OF VICTORY: NIKKE | Special Christmas Livestream</div>
+                    <div class="meta-data">
+                        <div class="channel-name">GODDESS OF VICTORY: NIKKE</div>
+                        <div class="stats">
+                            <span>106,811 次观看</span>
+                            <span>•</span>
+                            <span>11小时前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=p23bFRa0O0A" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/p23bFRa0O0A/maxresdefault.jpg" alt="斯特吉尔·辛普森 （Sturgill Simpson） 为 Grateful Dead 表演“涟漪” |2024 年肯尼迪中心荣誉" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/p23bFRa0O0A/maxresdefault.jpg", "https://i.ytimg.com/vi/p23bFRa0O0A/sddefault.jpg", "https://i.ytimg.com/vi/p23bFRa0O0A/hqdefault.jpg", "https://i.ytimg.com/vi/p23bFRa0O0A/mqdefault.jpg", "https://i.ytimg.com/vi/p23bFRa0O0A/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">3:23</div>
+                    <div class="play-button" onclick="openModal('p23bFRa0O0A')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">斯特吉尔·辛普森 （Sturgill Simpson） 为 Grateful Dead 表演“涟漪” |2024 年肯尼迪中心荣誉</h3>
+                    <div class="original-title">Sturgill Simpson performs “Ripple” for the Grateful Dead | 2024 Kennedy Center Honors</div>
+                    <div class="meta-data">
+                        <div class="channel-name">The Kennedy Center</div>
+                        <div class="stats">
+                            <span>87,187 次观看</span>
+                            <span>•</span>
+                            <span>18小时前</span>
+                            <span>•</span>
+                            <span>美国</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=woZuITDMwwk" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/woZuITDMwwk/maxresdefault.jpg" alt="[DOKKAN 战斗]12 月制片人信" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/woZuITDMwwk/maxresdefault.jpg", "https://i.ytimg.com/vi/woZuITDMwwk/sddefault.jpg", "https://i.ytimg.com/vi/woZuITDMwwk/hqdefault.jpg", "https://i.ytimg.com/vi/woZuITDMwwk/mqdefault.jpg", "https://i.ytimg.com/vi/woZuITDMwwk/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">18:09</div>
+                    <div class="play-button" onclick="openModal('woZuITDMwwk')"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">[DOKKAN 战斗]12 月制片人信</h3>
+                    <div class="original-title">[DOKKAN BATTLE] December Producer's Letter</div>
+                    <div class="meta-data">
+                        <div class="channel-name">Bandai Namco Entertainment</div>
+                        <div class="stats">
+                            <span>81,179 次观看</span>
                             <span>•</span>
                             <span>12小时前</span>
                             <span>•</span>
@@ -1331,5 +1449,40 @@
         </a>
         
     </div>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <iframe id="videoIframe" class="video-iframe" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
+    <script>
+        function openModal(videoId) {
+            event.preventDefault(); // 阻止链接跳转
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('videoIframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('videoIframe');
+            iframe.src = '';
+            modal.style.display = 'none';
+        }
+
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('videoModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 </html>
