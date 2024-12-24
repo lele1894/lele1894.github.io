@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube 中国香港 热门视频 - 2024年12月24日 07:19</title>
+    <style>
+        :root {
+            --yt-red: #ff0000;
+            --yt-dark: #0f0f0f;
+            --yt-text: #0f0f0f;
+            --yt-light-text: #606060;
+            --yt-hover: #e5e5e5;
+        }
+
+        body {
+            font-family: 'Roboto', 'Microsoft YaHei', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: var(--yt-text);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--yt-text);
+        }
+
+        .logo span {
+            color: var(--yt-red);
+            margin-right: 4px;
+        }
+
+        .update-time {
+            margin-left: auto;
+            color: var(--yt-light-text);
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 76px auto 20px;
+            padding: 0 16px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .thumbnail-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background-color: #f1f1f1;
+            overflow: hidden;
+        }
+
+        .thumbnail-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .duration {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            padding: 3px 4px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .video-info {
+            padding: 12px;
+        }
+
+        .video-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.4;
+        }
+
+        .original-title {
+            font-size: 13px;
+            color: var(--yt-light-text);
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .meta-data {
+            font-size: 14px;
+            color: var(--yt-light-text);
+        }
+
+        .channel-name {
+            margin-bottom: 4px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 6px;
+            font-size: 13px;
+            flex-wrap: wrap;
+            color: var(--yt-light-text);
+        }
+
+        .stats span {
+            white-space: nowrap;
+        }
+
+        .region-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background-color: #f1f1f1;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .video-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 10;
+        }
+
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 15px 0 15px 26px;
+            border-color: transparent transparent transparent white;
+            margin-left: 5px;
+        }
+
+        .thumbnail-container:hover .play-button {
+            opacity: 1;
+        }
+
+        .video-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+            background: #000;
+            padding: 0;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            display: none;
+            width: 90vw;
+            height: 90vh;
+            max-width: calc(100vh * 16 / 9);
+        }
+
+        .video-popup iframe {
+            border: none;
+            border-radius: 8px;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: none;
+        }
+
+        .loading {
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <span>▶</span> YouTube 中国香港 热门视频
+        </div>
+        <div class="update-time">封面图的播放按钮直接在本页播放，如果不能,就是广告插件拦截，请关闭插件.(还有可能你无法访问)更新时间：2024年12月24日 07:19</div>
+    </header>
+
+    <div class="container">
+        
+        <a href="https://www.youtube.com/watch?v=8ggBYI-F2K0" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/8ggBYI-F2K0/maxresdefault.jpg" alt="胶带有多坚固？" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/8ggBYI-F2K0/maxresdefault.jpg", "https://i.ytimg.com/vi/8ggBYI-F2K0/sddefault.jpg", "https://i.ytimg.com/vi/8ggBYI-F2K0/hqdefault.jpg", "https://i.ytimg.com/vi/8ggBYI-F2K0/mqdefault.jpg", "https://i.ytimg.com/vi/8ggBYI-F2K0/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:24</div>
+                    <div class="play-button" onclick="openVideo('8ggBYI-F2K0', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">胶带有多坚固？</h3>
+                    <div class="original-title">How Strong Is Tape?</div>
+                    <div class="meta-data">
+                        <div class="channel-name">Stokes Twins</div>
+                        <div class="stats">
+                            <span>174,514,151 次观看</span>
+                            <span>•</span>
+                            <span>9天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=eA0lHNZ1KCA" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/eA0lHNZ1KCA/maxresdefault.jpg" alt="ROSÉ - TOXIC TILL THE END （官方音乐录影带）" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/eA0lHNZ1KCA/maxresdefault.jpg", "https://i.ytimg.com/vi/eA0lHNZ1KCA/sddefault.jpg", "https://i.ytimg.com/vi/eA0lHNZ1KCA/hqdefault.jpg", "https://i.ytimg.com/vi/eA0lHNZ1KCA/mqdefault.jpg", "https://i.ytimg.com/vi/eA0lHNZ1KCA/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">3:54</div>
+                    <div class="play-button" onclick="openVideo('eA0lHNZ1KCA', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">ROSÉ - TOXIC TILL THE END （官方音乐录影带）</h3>
+                    <div class="original-title">ROSÉ - toxic till the end (OFFICIAL MUSIC VIDEO)</div>
+                    <div class="meta-data">
+                        <div class="channel-name">ROSÉ</div>
+                        <div class="stats">
+                            <span>52,859,234 次观看</span>
+                            <span>•</span>
+                            <span>17天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=TaPj2FWEgj4" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/TaPj2FWEgj4/maxresdefault.jpg" alt="iShowSpeed 对 iShowSponge 做出反应" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/TaPj2FWEgj4/maxresdefault.jpg", "https://i.ytimg.com/vi/TaPj2FWEgj4/sddefault.jpg", "https://i.ytimg.com/vi/TaPj2FWEgj4/hqdefault.jpg", "https://i.ytimg.com/vi/TaPj2FWEgj4/mqdefault.jpg", "https://i.ytimg.com/vi/TaPj2FWEgj4/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:47</div>
+                    <div class="play-button" onclick="openVideo('TaPj2FWEgj4', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">iShowSpeed 对 iShowSponge 做出反应</h3>
+                    <div class="original-title">iShowSpeed Reacts To iShowSponge</div>
+                    <div class="meta-data">
+                        <div class="channel-name">Live Speedy</div>
+                        <div class="stats">
+                            <span>44,800,406 次观看</span>
+                            <span>•</span>
+                            <span>6天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=uhUht6vAsMY" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/uhUht6vAsMY/maxresdefault.jpg" alt="超人 |官方预告片" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/uhUht6vAsMY/maxresdefault.jpg", "https://i.ytimg.com/vi/uhUht6vAsMY/sddefault.jpg", "https://i.ytimg.com/vi/uhUht6vAsMY/hqdefault.jpg", "https://i.ytimg.com/vi/uhUht6vAsMY/mqdefault.jpg", "https://i.ytimg.com/vi/uhUht6vAsMY/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">2:20</div>
+                    <div class="play-button" onclick="openVideo('uhUht6vAsMY', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">超人 |官方预告片</h3>
+                    <div class="original-title">Superman | Official Teaser Trailer</div>
+                    <div class="meta-data">
+                        <div class="channel-name">DC</div>
+                        <div class="stats">
+                            <span>39,591,337 次观看</span>
+                            <span>•</span>
+                            <span>4天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=dOn3rgeW1Jg" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/dOn3rgeW1Jg/maxresdefault.jpg" alt="战争中使用的 Tootsie 卷？🤨" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/dOn3rgeW1Jg/maxresdefault.jpg", "https://i.ytimg.com/vi/dOn3rgeW1Jg/sddefault.jpg", "https://i.ytimg.com/vi/dOn3rgeW1Jg/hqdefault.jpg", "https://i.ytimg.com/vi/dOn3rgeW1Jg/mqdefault.jpg", "https://i.ytimg.com/vi/dOn3rgeW1Jg/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:36</div>
+                    <div class="play-button" onclick="openVideo('dOn3rgeW1Jg', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">战争中使用的 Tootsie 卷？🤨</h3>
+                    <div class="original-title">Tootsie Rolls Used In War? 🤨</div>
+                    <div class="meta-data">
+                        <div class="channel-name">Zack D. Films</div>
+                        <div class="stats">
+                            <span>32,058,887 次观看</span>
+                            <span>•</span>
+                            <span>6天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=TA7luj711Y0" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/TA7luj711Y0/maxresdefault.jpg" alt="必须确定 🦵" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/TA7luj711Y0/maxresdefault.jpg", "https://i.ytimg.com/vi/TA7luj711Y0/sddefault.jpg", "https://i.ytimg.com/vi/TA7luj711Y0/hqdefault.jpg", "https://i.ytimg.com/vi/TA7luj711Y0/mqdefault.jpg", "https://i.ytimg.com/vi/TA7luj711Y0/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:10</div>
+                    <div class="play-button" onclick="openVideo('TA7luj711Y0', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">必须确定 🦵</h3>
+                    <div class="original-title">Had to be sure 🦵</div>
+                    <div class="meta-data">
+                        <div class="channel-name">ONE Championship</div>
+                        <div class="stats">
+                            <span>31,545,011 次观看</span>
+                            <span>•</span>
+                            <span>9天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=bEdI5YEF1tk" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/bEdI5YEF1tk/maxresdefault.jpg" alt="生存技能：如何在极端条件下 5 分钟内制作 DIY 炉 #survival #camping" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/bEdI5YEF1tk/maxresdefault.jpg", "https://i.ytimg.com/vi/bEdI5YEF1tk/sddefault.jpg", "https://i.ytimg.com/vi/bEdI5YEF1tk/hqdefault.jpg", "https://i.ytimg.com/vi/bEdI5YEF1tk/mqdefault.jpg", "https://i.ytimg.com/vi/bEdI5YEF1tk/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:33</div>
+                    <div class="play-button" onclick="openVideo('bEdI5YEF1tk', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">生存技能：如何在极端条件下 5 分钟内制作 DIY 炉 #survival #camping</h3>
+                    <div class="original-title">Survival Skills: How to Make a DIY Stove in 5 Minutes in Extreme Conditions  #survival #camping</div>
+                    <div class="meta-data">
+                        <div class="channel-name">Sergio Outdoors</div>
+                        <div class="stats">
+                            <span>28,581,836 次观看</span>
+                            <span>•</span>
+                            <span>9天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=D9sUrpiwUAc" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/D9sUrpiwUAc/maxresdefault.jpg" alt="蓬松雪纺行动🩷糖果中队闪光任务✨[银座舒适角落]#shorts #シフォンケーキ #クリスマスケーキ #クリスマス #ケーキ #チョコケーキ #christmas" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/D9sUrpiwUAc/maxresdefault.jpg", "https://i.ytimg.com/vi/D9sUrpiwUAc/sddefault.jpg", "https://i.ytimg.com/vi/D9sUrpiwUAc/hqdefault.jpg", "https://i.ytimg.com/vi/D9sUrpiwUAc/mqdefault.jpg", "https://i.ytimg.com/vi/D9sUrpiwUAc/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:32</div>
+                    <div class="play-button" onclick="openVideo('D9sUrpiwUAc', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">蓬松雪纺行动🩷糖果中队闪光任务✨[银座舒适角落]#shorts #シフォンケーキ #クリスマスケーキ #クリスマス #ケーキ #チョコケーキ #christmas</h3>
+                    <div class="original-title">ふわふわシフォン大作戦🩷スイーツ戦隊のキラキラミッション✨【銀座コージーコーナー】 #shorts #シフォンケーキ #クリスマスケーキ #クリスマス #ケーキ #チョコケーキ #christmas</div>
+                    <div class="meta-data">
+                        <div class="channel-name">テイストメイド ジャパン</div>
+                        <div class="stats">
+                            <span>19,397,490 次观看</span>
+                            <span>•</span>
+                            <span>12天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=T7tqPkC7SoU" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/T7tqPkC7SoU/maxresdefault.jpg" alt="保安落入了美女 #still #parkour #funny#skate 的陷阱" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/T7tqPkC7SoU/maxresdefault.jpg", "https://i.ytimg.com/vi/T7tqPkC7SoU/sddefault.jpg", "https://i.ytimg.com/vi/T7tqPkC7SoU/hqdefault.jpg", "https://i.ytimg.com/vi/T7tqPkC7SoU/mqdefault.jpg", "https://i.ytimg.com/vi/T7tqPkC7SoU/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:24</div>
+                    <div class="play-button" onclick="openVideo('T7tqPkC7SoU', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">保安落入了美女 #still #parkour #funny#skate 的陷阱</h3>
+                    <div class="original-title">The Security Guard Fell Into The Trap Of The Beauty #still #parkour #funny#skate</div>
+                    <div class="meta-data">
+                        <div class="channel-name">Fun Parkour Mr Wang</div>
+                        <div class="stats">
+                            <span>17,662,341 次观看</span>
+                            <span>•</span>
+                            <span>17天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=P8zCaj-xqdQ" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/P8zCaj-xqdQ/maxresdefault.jpg" alt="孙兴慜角球得分！！😵 |托特纳姆热刺 4-3 曼联 |卡拉宝杯亮点" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/P8zCaj-xqdQ/maxresdefault.jpg", "https://i.ytimg.com/vi/P8zCaj-xqdQ/sddefault.jpg", "https://i.ytimg.com/vi/P8zCaj-xqdQ/hqdefault.jpg", "https://i.ytimg.com/vi/P8zCaj-xqdQ/mqdefault.jpg", "https://i.ytimg.com/vi/P8zCaj-xqdQ/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">8:52</div>
+                    <div class="play-button" onclick="openVideo('P8zCaj-xqdQ', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">孙兴慜角球得分！！😵 |托特纳姆热刺 4-3 曼联 |卡拉宝杯亮点</h3>
+                    <div class="original-title">HEUNG-MIN SON SCORES FROM A CORNER!! 😵 | Tottenham Hotspur 4-3 Man Utd | Carabao Cup Highlights</div>
+                    <div class="meta-data">
+                        <div class="channel-name">Tottenham Hotspur</div>
+                        <div class="stats">
+                            <span>10,291,846 次观看</span>
+                            <span>•</span>
+                            <span>3天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=Sekgv3eN-Ok" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/Sekgv3eN-Ok/maxresdefault.jpg" alt="[45]如何防御恶霸 [THAO SELF DEFENSE] #shorts #vothuat #kungfu #martialarts #defense" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/Sekgv3eN-Ok/maxresdefault.jpg", "https://i.ytimg.com/vi/Sekgv3eN-Ok/sddefault.jpg", "https://i.ytimg.com/vi/Sekgv3eN-Ok/hqdefault.jpg", "https://i.ytimg.com/vi/Sekgv3eN-Ok/mqdefault.jpg", "https://i.ytimg.com/vi/Sekgv3eN-Ok/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:18</div>
+                    <div class="play-button" onclick="openVideo('Sekgv3eN-Ok', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">[45]如何防御恶霸 [THAO SELF DEFENSE] #shorts #vothuat #kungfu #martialarts #defense</h3>
+                    <div class="original-title">[45]How to defend against a bully [THAO SELF DEFENSE] #shorts #vothuat #kungfu #martialarts #defense</div>
+                    <div class="meta-data">
+                        <div class="channel-name">THAO SELF DEFENSE</div>
+                        <div class="stats">
+                            <span>9,298,537 次观看</span>
+                            <span>•</span>
+                            <span>9天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=Lo9GTMNPyIA" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/Lo9GTMNPyIA/maxresdefault.jpg" alt="这多尴尬，以后可不能套路媳妇了 #搞笑 #搞笑夫妻日常 #搞笑视频" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/Lo9GTMNPyIA/maxresdefault.jpg", "https://i.ytimg.com/vi/Lo9GTMNPyIA/sddefault.jpg", "https://i.ytimg.com/vi/Lo9GTMNPyIA/hqdefault.jpg", "https://i.ytimg.com/vi/Lo9GTMNPyIA/mqdefault.jpg", "https://i.ytimg.com/vi/Lo9GTMNPyIA/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:30</div>
+                    <div class="play-button" onclick="openVideo('Lo9GTMNPyIA', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">这多尴尬，以后可不能套路媳妇了 #搞笑 #搞笑夫妻日常 #搞笑视频</h3>
+                    <div class="original-title">这多尴尬，以后可不能套路媳妇了 #搞笑 #搞笑夫妻日常 #搞笑视频</div>
+                    <div class="meta-data">
+                        <div class="channel-name">朱大帅and依美姐</div>
+                        <div class="stats">
+                            <span>9,064,541 次观看</span>
+                            <span>•</span>
+                            <span>9天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=cMy0vVSKXw4" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/cMy0vVSKXw4/maxresdefault.jpg" alt="阿马德战胜曼城 😮 💨 |曼城 1-2 曼联" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/cMy0vVSKXw4/maxresdefault.jpg", "https://i.ytimg.com/vi/cMy0vVSKXw4/sddefault.jpg", "https://i.ytimg.com/vi/cMy0vVSKXw4/hqdefault.jpg", "https://i.ytimg.com/vi/cMy0vVSKXw4/mqdefault.jpg", "https://i.ytimg.com/vi/cMy0vVSKXw4/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">2:32</div>
+                    <div class="play-button" onclick="openVideo('cMy0vVSKXw4', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">阿马德战胜曼城 😮 💨 |曼城 1-2 曼联</h3>
+                    <div class="original-title">AMAD SEALS VICTORY AGAINST CITY 😮‍💨 | Man City 1-2 Man Utd</div>
+                    <div class="meta-data">
+                        <div class="channel-name">Manchester United</div>
+                        <div class="stats">
+                            <span>4,825,478 次观看</span>
+                            <span>•</span>
+                            <span>8天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=KqrMau_WKr8" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/KqrMau_WKr8/maxresdefault.jpg" alt="小宸哥历险记-回头是岸 #儿童安全 #防拐 #小宸哥历险记" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/KqrMau_WKr8/maxresdefault.jpg", "https://i.ytimg.com/vi/KqrMau_WKr8/sddefault.jpg", "https://i.ytimg.com/vi/KqrMau_WKr8/hqdefault.jpg", "https://i.ytimg.com/vi/KqrMau_WKr8/mqdefault.jpg", "https://i.ytimg.com/vi/KqrMau_WKr8/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">2:42</div>
+                    <div class="play-button" onclick="openVideo('KqrMau_WKr8', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">小宸哥历险记-回头是岸 #儿童安全 #防拐 #小宸哥历险记</h3>
+                    <div class="original-title">小宸哥历险记-回头是岸 #儿童安全 #防拐 #小宸哥历险记</div>
+                    <div class="meta-data">
+                        <div class="channel-name">小宸哥驾到</div>
+                        <div class="stats">
+                            <span>3,450,304 次观看</span>
+                            <span>•</span>
+                            <span>16天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=BHA7F5dWMvw" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/BHA7F5dWMvw/maxresdefault.jpg" alt="那个田有多长？👀🤯" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/BHA7F5dWMvw/maxresdefault.jpg", "https://i.ytimg.com/vi/BHA7F5dWMvw/sddefault.jpg", "https://i.ytimg.com/vi/BHA7F5dWMvw/hqdefault.jpg", "https://i.ytimg.com/vi/BHA7F5dWMvw/mqdefault.jpg", "https://i.ytimg.com/vi/BHA7F5dWMvw/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:12</div>
+                    <div class="play-button" onclick="openVideo('BHA7F5dWMvw', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">那个田有多长？👀🤯</h3>
+                    <div class="original-title">How long is that field tho ? 👀🤯</div>
+                    <div class="meta-data">
+                        <div class="channel-name">House of Highlights</div>
+                        <div class="stats">
+                            <span>3,223,069 次观看</span>
+                            <span>•</span>
+                            <span>9天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=TDeP0fOfmHQ" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/TDeP0fOfmHQ/maxresdefault.jpg" alt="今天這一期有些危險，說不好容易被封號，請盡快觀看 |老高與小茉 Mr & Mrs Gao" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/TDeP0fOfmHQ/maxresdefault.jpg", "https://i.ytimg.com/vi/TDeP0fOfmHQ/sddefault.jpg", "https://i.ytimg.com/vi/TDeP0fOfmHQ/hqdefault.jpg", "https://i.ytimg.com/vi/TDeP0fOfmHQ/mqdefault.jpg", "https://i.ytimg.com/vi/TDeP0fOfmHQ/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">27:00</div>
+                    <div class="play-button" onclick="openVideo('TDeP0fOfmHQ', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">今天這一期有些危險，說不好容易被封號，請盡快觀看 |老高與小茉 Mr & Mrs Gao</h3>
+                    <div class="original-title">今天這一期有些危險，說不好容易被封號，請盡快觀看 | 老高與小茉 Mr & Mrs Gao</div>
+                    <div class="meta-data">
+                        <div class="channel-name">老高與小茉 Mr & Mrs Gao</div>
+                        <div class="stats">
+                            <span>2,832,539 次观看</span>
+                            <span>•</span>
+                            <span>12天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=zuPtoW8A2Ro" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/zuPtoW8A2Ro/maxresdefault.jpg" alt="视觉障碍者“观看”球赛" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/zuPtoW8A2Ro/maxresdefault.jpg", "https://i.ytimg.com/vi/zuPtoW8A2Ro/sddefault.jpg", "https://i.ytimg.com/vi/zuPtoW8A2Ro/hqdefault.jpg", "https://i.ytimg.com/vi/zuPtoW8A2Ro/mqdefault.jpg", "https://i.ytimg.com/vi/zuPtoW8A2Ro/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:20</div>
+                    <div class="play-button" onclick="openVideo('zuPtoW8A2Ro', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">视觉障碍者“观看”球赛</h3>
+                    <div class="original-title">視覺障礙者"觀看"球賽</div>
+                    <div class="meta-data">
+                        <div class="channel-name">五件小事</div>
+                        <div class="stats">
+                            <span>2,745,325 次观看</span>
+                            <span>•</span>
+                            <span>14天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=TAf1X1oEC-w" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/TAf1X1oEC-w/maxresdefault.jpg" alt="机车骑士的防护神器" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/TAf1X1oEC-w/maxresdefault.jpg", "https://i.ytimg.com/vi/TAf1X1oEC-w/sddefault.jpg", "https://i.ytimg.com/vi/TAf1X1oEC-w/hqdefault.jpg", "https://i.ytimg.com/vi/TAf1X1oEC-w/mqdefault.jpg", "https://i.ytimg.com/vi/TAf1X1oEC-w/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:20</div>
+                    <div class="play-button" onclick="openVideo('TAf1X1oEC-w', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">机车骑士的防护神器</h3>
+                    <div class="original-title">機車騎士的防護神器</div>
+                    <div class="meta-data">
+                        <div class="channel-name">五件小事</div>
+                        <div class="stats">
+                            <span>1,953,167 次观看</span>
+                            <span>•</span>
+                            <span>7天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=sQsPinUlKx0" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/sQsPinUlKx0/maxresdefault.jpg" alt="周杰伦也有这一面 小猪抖出不能说的秘密!?【康熙来了 shorts 】 小s 蔡康永 周杰伦" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/sQsPinUlKx0/maxresdefault.jpg", "https://i.ytimg.com/vi/sQsPinUlKx0/sddefault.jpg", "https://i.ytimg.com/vi/sQsPinUlKx0/hqdefault.jpg", "https://i.ytimg.com/vi/sQsPinUlKx0/mqdefault.jpg", "https://i.ytimg.com/vi/sQsPinUlKx0/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">2:00</div>
+                    <div class="play-button" onclick="openVideo('sQsPinUlKx0', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">周杰伦也有这一面 小猪抖出不能说的秘密!?【康熙来了 shorts 】 小s 蔡康永 周杰伦</h3>
+                    <div class="original-title">周杰倫也有這一面 小豬抖出不能說的秘密!?【康熙來了 #shorts 】 #小s #蔡康永 #周杰倫</div>
+                    <div class="meta-data">
+                        <div class="channel-name">我愛貓大</div>
+                        <div class="stats">
+                            <span>1,472,627 次观看</span>
+                            <span>•</span>
+                            <span>10天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=QaxiNTRZl_8" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/QaxiNTRZl_8/maxresdefault.jpg" alt="＂生活可能没有你想象的那么好，也没有你想象的那么糟”#李宗恒  #搞笑#内容过于真实 #剧情 #幸运 #shorts" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/QaxiNTRZl_8/maxresdefault.jpg", "https://i.ytimg.com/vi/QaxiNTRZl_8/sddefault.jpg", "https://i.ytimg.com/vi/QaxiNTRZl_8/hqdefault.jpg", "https://i.ytimg.com/vi/QaxiNTRZl_8/mqdefault.jpg", "https://i.ytimg.com/vi/QaxiNTRZl_8/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">1:48</div>
+                    <div class="play-button" onclick="openVideo('QaxiNTRZl_8', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">＂生活可能没有你想象的那么好，也没有你想象的那么糟”#李宗恒  #搞笑#内容过于真实 #剧情 #幸运 #shorts</h3>
+                    <div class="original-title">＂生活可能没有你想象的那么好，也没有你想象的那么糟”#李宗恒  #搞笑#内容过于真实 #剧情 #幸运 #shorts</div>
+                    <div class="meta-data">
+                        <div class="channel-name">李宗恒</div>
+                        <div class="stats">
+                            <span>1,274,609 次观看</span>
+                            <span>•</span>
+                            <span>7天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=ABS7egaOjBc" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/ABS7egaOjBc/maxresdefault.jpg" alt="Gigi 炎明熹 - 最动人一次 官方音乐视频" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/ABS7egaOjBc/maxresdefault.jpg", "https://i.ytimg.com/vi/ABS7egaOjBc/sddefault.jpg", "https://i.ytimg.com/vi/ABS7egaOjBc/hqdefault.jpg", "https://i.ytimg.com/vi/ABS7egaOjBc/mqdefault.jpg", "https://i.ytimg.com/vi/ABS7egaOjBc/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">3:43</div>
+                    <div class="play-button" onclick="openVideo('ABS7egaOjBc', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">Gigi 炎明熹 - 最动人一次 官方音乐视频</h3>
+                    <div class="original-title">Gigi 炎明熹 - 最動人一次 Official Music Video</div>
+                    <div class="meta-data">
+                        <div class="channel-name">TVB Music Group</div>
+                        <div class="stats">
+                            <span>1,255,095 次观看</span>
+                            <span>•</span>
+                            <span>14天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=wI--x4sBm2U" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/wI--x4sBm2U/maxresdefault.jpg" alt="天冷了，教孩子们点北方人的过冬绝技！ #四小只吖 #日常 #搞笑 #搞笑家庭 #姐弟 #家庭生活" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/wI--x4sBm2U/maxresdefault.jpg", "https://i.ytimg.com/vi/wI--x4sBm2U/sddefault.jpg", "https://i.ytimg.com/vi/wI--x4sBm2U/hqdefault.jpg", "https://i.ytimg.com/vi/wI--x4sBm2U/mqdefault.jpg", "https://i.ytimg.com/vi/wI--x4sBm2U/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:42</div>
+                    <div class="play-button" onclick="openVideo('wI--x4sBm2U', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">天冷了，教孩子们点北方人的过冬绝技！ #四小只吖 #日常 #搞笑 #搞笑家庭 #姐弟 #家庭生活</h3>
+                    <div class="original-title">天冷了，教孩子们点北方人的过冬绝技！#四小只吖 #日常 #搞笑 #搞笑家庭 #姐弟 #家庭生活</div>
+                    <div class="meta-data">
+                        <div class="channel-name">四小只吖</div>
+                        <div class="stats">
+                            <span>1,039,981 次观看</span>
+                            <span>•</span>
+                            <span>7天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=TlZp8y_lWW0" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/TlZp8y_lWW0/maxresdefault.jpg" alt="这玩意也能叫解压球！？ 在座的各位都有责任！ #搞笑 #玩具 #好玩" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/TlZp8y_lWW0/maxresdefault.jpg", "https://i.ytimg.com/vi/TlZp8y_lWW0/sddefault.jpg", "https://i.ytimg.com/vi/TlZp8y_lWW0/hqdefault.jpg", "https://i.ytimg.com/vi/TlZp8y_lWW0/mqdefault.jpg", "https://i.ytimg.com/vi/TlZp8y_lWW0/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:34</div>
+                    <div class="play-button" onclick="openVideo('TlZp8y_lWW0', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">这玩意也能叫解压球！？ 在座的各位都有责任！ #搞笑 #玩具 #好玩</h3>
+                    <div class="original-title">这玩意也能叫解压球！？在座的各位都有责任！ #搞笑 #玩具 #好玩</div>
+                    <div class="meta-data">
+                        <div class="channel-name">FlourishRanger</div>
+                        <div class="stats">
+                            <span>931,396 次观看</span>
+                            <span>•</span>
+                            <span>13天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=MKKUPlS2oAI" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/MKKUPlS2oAI/maxresdefault.jpg" alt="还得是我丈母娘有招#夏日气象剧" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/MKKUPlS2oAI/maxresdefault.jpg", "https://i.ytimg.com/vi/MKKUPlS2oAI/sddefault.jpg", "https://i.ytimg.com/vi/MKKUPlS2oAI/hqdefault.jpg", "https://i.ytimg.com/vi/MKKUPlS2oAI/mqdefault.jpg", "https://i.ytimg.com/vi/MKKUPlS2oAI/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:46</div>
+                    <div class="play-button" onclick="openVideo('MKKUPlS2oAI', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">还得是我丈母娘有招#夏日气象剧</h3>
+                    <div class="original-title">還得是我丈母娘有招#夏日氣象劇</div>
+                    <div class="meta-data">
+                        <div class="channel-name">颜落专属</div>
+                        <div class="stats">
+                            <span>882,794 次观看</span>
+                            <span>•</span>
+                            <span>11天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=lHMrDegQf9U" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/lHMrDegQf9U/maxresdefault.jpg" alt="【最后圆舞曲】要求服务生随便画一笔 送画作致敬10年餐厅熄灯|画画|创作|RAW|设计" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/lHMrDegQf9U/maxresdefault.jpg", "https://i.ytimg.com/vi/lHMrDegQf9U/sddefault.jpg", "https://i.ytimg.com/vi/lHMrDegQf9U/hqdefault.jpg", "https://i.ytimg.com/vi/lHMrDegQf9U/mqdefault.jpg", "https://i.ytimg.com/vi/lHMrDegQf9U/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:29</div>
+                    <div class="play-button" onclick="openVideo('lHMrDegQf9U', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">【最后圆舞曲】要求服务生随便画一笔 送画作致敬10年餐厅熄灯|画画|创作|RAW|设计</h3>
+                    <div class="original-title">【最後圓舞曲】要求服務生隨便畫一筆 送畫作致敬10年餐廳熄燈｜畫畫｜創作｜RAW｜設計</div>
+                    <div class="meta-data">
+                        <div class="channel-name">udn video</div>
+                        <div class="stats">
+                            <span>820,004 次观看</span>
+                            <span>•</span>
+                            <span>9天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=gzXEta5Amk4" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/gzXEta5Amk4/maxresdefault.jpg" alt="敖犬站在童颜少女旁边，超像爸爸带女儿？【小姐不熙娣】shorts" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/gzXEta5Amk4/maxresdefault.jpg", "https://i.ytimg.com/vi/gzXEta5Amk4/sddefault.jpg", "https://i.ytimg.com/vi/gzXEta5Amk4/hqdefault.jpg", "https://i.ytimg.com/vi/gzXEta5Amk4/mqdefault.jpg", "https://i.ytimg.com/vi/gzXEta5Amk4/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:43</div>
+                    <div class="play-button" onclick="openVideo('gzXEta5Amk4', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">敖犬站在童颜少女旁边，超像爸爸带女儿？【小姐不熙娣】shorts</h3>
+                    <div class="original-title">敖犬站童顏少女旁超像爸爸帶女兒？【#小姐不熙娣】#shorts</div>
+                    <div class="meta-data">
+                        <div class="channel-name">小姐不熙娣</div>
+                        <div class="stats">
+                            <span>812,363 次观看</span>
+                            <span>•</span>
+                            <span>4天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=wLL8XcNxTEo" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/wLL8XcNxTEo/maxresdefault.jpg" alt="男子牵错手，留女朋友一人风中凌乱 shorts" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/wLL8XcNxTEo/maxresdefault.jpg", "https://i.ytimg.com/vi/wLL8XcNxTEo/sddefault.jpg", "https://i.ytimg.com/vi/wLL8XcNxTEo/hqdefault.jpg", "https://i.ytimg.com/vi/wLL8XcNxTEo/mqdefault.jpg", "https://i.ytimg.com/vi/wLL8XcNxTEo/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:15</div>
+                    <div class="play-button" onclick="openVideo('wLL8XcNxTEo', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">男子牵错手，留女朋友一人风中凌乱 shorts</h3>
+                    <div class="original-title">男子牵错手，留女朋友一人风中凌乱 #shorts</div>
+                    <div class="meta-data">
+                        <div class="channel-name">二般的神奇頻道</div>
+                        <div class="stats">
+                            <span>801,118 次观看</span>
+                            <span>•</span>
+                            <span>14天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=uSO_nCGmQ7w" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/uSO_nCGmQ7w/maxresdefault.jpg" alt="深夜幼童一人街边行走司机急得直摁喇叭找家长，带着孩子千万得盯紧咯！ #shorts" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/uSO_nCGmQ7w/maxresdefault.jpg", "https://i.ytimg.com/vi/uSO_nCGmQ7w/sddefault.jpg", "https://i.ytimg.com/vi/uSO_nCGmQ7w/hqdefault.jpg", "https://i.ytimg.com/vi/uSO_nCGmQ7w/mqdefault.jpg", "https://i.ytimg.com/vi/uSO_nCGmQ7w/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:14</div>
+                    <div class="play-button" onclick="openVideo('uSO_nCGmQ7w', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">深夜幼童一人街边行走司机急得直摁喇叭找家长，带着孩子千万得盯紧咯！ #shorts</h3>
+                    <div class="original-title">深夜幼童一人街边行走司机急得直摁喇叭找家长，带着孩子千万得盯紧咯！#shorts</div>
+                    <div class="meta-data">
+                        <div class="channel-name">中国四川广播电视台 China SiChuanTV Official Channel—欢迎订阅!</div>
+                        <div class="stats">
+                            <span>752,617 次观看</span>
+                            <span>•</span>
+                            <span>15天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=zYEpXYomfAc" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/zYEpXYomfAc/maxresdefault.jpg" alt="这广播小姐姐都让我晕了 搞笑 funny 爆笑合集" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/zYEpXYomfAc/maxresdefault.jpg", "https://i.ytimg.com/vi/zYEpXYomfAc/sddefault.jpg", "https://i.ytimg.com/vi/zYEpXYomfAc/hqdefault.jpg", "https://i.ytimg.com/vi/zYEpXYomfAc/mqdefault.jpg", "https://i.ytimg.com/vi/zYEpXYomfAc/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:14</div>
+                    <div class="play-button" onclick="openVideo('zYEpXYomfAc', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">这广播小姐姐都让我晕了 搞笑 funny 爆笑合集</h3>
+                    <div class="original-title">这广播小姐姐都给我绕晕了 #搞笑 #funny #爆笑合集</div>
+                    <div class="meta-data">
+                        <div class="channel-name">有趣王文鑫</div>
+                        <div class="stats">
+                            <span>696,456 次观看</span>
+                            <span>•</span>
+                            <span>6天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=CpCtqyi9g6k" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/CpCtqyi9g6k/maxresdefault.jpg" alt="跟我有什么关系啊？！ #搞笑夫妻 #看一遍笑一遍 #万万没想到 #彭小澎吖" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/CpCtqyi9g6k/maxresdefault.jpg", "https://i.ytimg.com/vi/CpCtqyi9g6k/sddefault.jpg", "https://i.ytimg.com/vi/CpCtqyi9g6k/hqdefault.jpg", "https://i.ytimg.com/vi/CpCtqyi9g6k/mqdefault.jpg", "https://i.ytimg.com/vi/CpCtqyi9g6k/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:35</div>
+                    <div class="play-button" onclick="openVideo('CpCtqyi9g6k', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">跟我有什么关系啊？！ #搞笑夫妻 #看一遍笑一遍 #万万没想到 #彭小澎吖</h3>
+                    <div class="original-title">跟我有什么关系啊？！#搞笑夫妻 #看一遍笑一遍 #万万没想到 #彭小澎吖</div>
+                    <div class="meta-data">
+                        <div class="channel-name">彭小澎吖</div>
+                        <div class="stats">
+                            <span>601,222 次观看</span>
+                            <span>•</span>
+                            <span>11天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=7Kn8SibRLi0" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/7Kn8SibRLi0/maxresdefault.jpg" alt="中年好声音3|#黃博 天籁之音！ 直接五灯全场拍手欢呼！ |黄博《我歌故我在》|歌唱 比赛|音乐节目" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/7Kn8SibRLi0/maxresdefault.jpg", "https://i.ytimg.com/vi/7Kn8SibRLi0/sddefault.jpg", "https://i.ytimg.com/vi/7Kn8SibRLi0/hqdefault.jpg", "https://i.ytimg.com/vi/7Kn8SibRLi0/mqdefault.jpg", "https://i.ytimg.com/vi/7Kn8SibRLi0/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">4:54</div>
+                    <div class="play-button" onclick="openVideo('7Kn8SibRLi0', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">中年好声音3|#黃博 天籁之音！ 直接五灯全场拍手欢呼！ |黄博《我歌故我在》|歌唱 比赛|音乐节目</h3>
+                    <div class="original-title">中年好聲音3｜#黃博 天籟之音！直接五燈全場拍手歡呼！｜黃博《我歌故我在》｜歌唱 比賽｜音樂節目</div>
+                    <div class="meta-data">
+                        <div class="channel-name">TVB  綜藝 </div>
+                        <div class="stats">
+                            <span>585,634 次观看</span>
+                            <span>•</span>
+                            <span>8天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=j7Ss5kLlH7g" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/j7Ss5kLlH7g/maxresdefault.jpg" alt="帅是一种盛觉 所以才有人说傻狗 但没有人说傻猫！ 猫咪：一边玩去 现在没空 扫地机器人：好的 #宠乐园 #轻松一刻 #动物" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/j7Ss5kLlH7g/maxresdefault.jpg", "https://i.ytimg.com/vi/j7Ss5kLlH7g/sddefault.jpg", "https://i.ytimg.com/vi/j7Ss5kLlH7g/hqdefault.jpg", "https://i.ytimg.com/vi/j7Ss5kLlH7g/mqdefault.jpg", "https://i.ytimg.com/vi/j7Ss5kLlH7g/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:10</div>
+                    <div class="play-button" onclick="openVideo('j7Ss5kLlH7g', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">帅是一种盛觉 所以才有人说傻狗 但没有人说傻猫！ 猫咪：一边玩去 现在没空 扫地机器人：好的 #宠乐园 #轻松一刻 #动物</h3>
+                    <div class="original-title">帅是一种盛觉 所以才有人说傻狗 但没有人说傻猫！猫咪：一边玩去 现在没空 扫地机器人：好的 #宠乐园 #轻松一刻 #动物</div>
+                    <div class="meta-data">
+                        <div class="channel-name">宠乐园</div>
+                        <div class="stats">
+                            <span>571,585 次观看</span>
+                            <span>•</span>
+                            <span>7天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=c5nvZiODKqs" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/c5nvZiODKqs/maxresdefault.jpg" alt="不拆：爹老实说，你是不是给俺下迷糊药了！ #哈士奇" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/c5nvZiODKqs/maxresdefault.jpg", "https://i.ytimg.com/vi/c5nvZiODKqs/sddefault.jpg", "https://i.ytimg.com/vi/c5nvZiODKqs/hqdefault.jpg", "https://i.ytimg.com/vi/c5nvZiODKqs/mqdefault.jpg", "https://i.ytimg.com/vi/c5nvZiODKqs/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:23</div>
+                    <div class="play-button" onclick="openVideo('c5nvZiODKqs', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">不拆：爹老实说，你是不是给俺下迷糊药了！ #哈士奇</h3>
+                    <div class="original-title">不拆：爹老實說，你是不是給俺下迷糊藥了！#哈士奇</div>
+                    <div class="meta-data">
+                        <div class="channel-name">嘻哈不拆</div>
+                        <div class="stats">
+                            <span>524,953 次观看</span>
+                            <span>•</span>
+                            <span>8天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=J6Epc_UkDnI" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/J6Epc_UkDnI/maxresdefault.jpg" alt="BLACKPINK私下群组日常！Jisoo温柔大姐、Lisa搞笑担当？" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/J6Epc_UkDnI/maxresdefault.jpg", "https://i.ytimg.com/vi/J6Epc_UkDnI/sddefault.jpg", "https://i.ytimg.com/vi/J6Epc_UkDnI/hqdefault.jpg", "https://i.ytimg.com/vi/J6Epc_UkDnI/mqdefault.jpg", "https://i.ytimg.com/vi/J6Epc_UkDnI/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:31</div>
+                    <div class="play-button" onclick="openVideo('J6Epc_UkDnI', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">BLACKPINK私下群组日常！Jisoo温柔大姐、Lisa搞笑担当？</h3>
+                    <div class="original-title">BLACKPINK私下群組日常！Jisoo溫柔大姐、Lisa搞笑擔當？</div>
+                    <div class="meta-data">
+                        <div class="channel-name">VOGUE Taiwan</div>
+                        <div class="stats">
+                            <span>479,176 次观看</span>
+                            <span>•</span>
+                            <span>11天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=W8AAIDAN5zc" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/W8AAIDAN5zc/maxresdefault.jpg" alt="中国「鵬城第一峰」巨石 😲 竟是人造的空心假石頭？😲|志祺七七 #shorts" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/W8AAIDAN5zc/maxresdefault.jpg", "https://i.ytimg.com/vi/W8AAIDAN5zc/sddefault.jpg", "https://i.ytimg.com/vi/W8AAIDAN5zc/hqdefault.jpg", "https://i.ytimg.com/vi/W8AAIDAN5zc/mqdefault.jpg", "https://i.ytimg.com/vi/W8AAIDAN5zc/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:29</div>
+                    <div class="play-button" onclick="openVideo('W8AAIDAN5zc', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">中国「鵬城第一峰」巨石 😲 竟是人造的空心假石頭？😲|志祺七七 #shorts</h3>
+                    <div class="original-title">中國「鵬城第一峰」巨石😲 竟是人造的空心假石頭？😲｜志祺七七 #shorts</div>
+                    <div class="meta-data">
+                        <div class="channel-name">志祺七七 X 圖文不符</div>
+                        <div class="stats">
+                            <span>432,610 次观看</span>
+                            <span>•</span>
+                            <span>3天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=7Sr11OtVxxk" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/7Sr11OtVxxk/maxresdefault.jpg" alt="爸妈：行，好了别讲了，你两合适，我听了以后迷茫了，不知如何是好 #搞笑" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/7Sr11OtVxxk/maxresdefault.jpg", "https://i.ytimg.com/vi/7Sr11OtVxxk/sddefault.jpg", "https://i.ytimg.com/vi/7Sr11OtVxxk/hqdefault.jpg", "https://i.ytimg.com/vi/7Sr11OtVxxk/mqdefault.jpg", "https://i.ytimg.com/vi/7Sr11OtVxxk/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:11</div>
+                    <div class="play-button" onclick="openVideo('7Sr11OtVxxk', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">爸妈：行，好了别讲了，你两合适，我听了以后迷茫了，不知如何是好 #搞笑</h3>
+                    <div class="original-title">爸妈：行，好了别讲了，你两合适，我听了以后迷茫了，不知如何是好 #搞笑</div>
+                    <div class="meta-data">
+                        <div class="channel-name">芷伊大姐姐</div>
+                        <div class="stats">
+                            <span>408,024 次观看</span>
+                            <span>•</span>
+                            <span>14天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=q-X8jG8GDIs" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/q-X8jG8GDIs/maxresdefault.jpg" alt="将家里的墙贴上贴纸，结果女友直接摔倒在地，又解气又心疼！ 【依然夏天】" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/q-X8jG8GDIs/maxresdefault.jpg", "https://i.ytimg.com/vi/q-X8jG8GDIs/sddefault.jpg", "https://i.ytimg.com/vi/q-X8jG8GDIs/hqdefault.jpg", "https://i.ytimg.com/vi/q-X8jG8GDIs/mqdefault.jpg", "https://i.ytimg.com/vi/q-X8jG8GDIs/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">2:55</div>
+                    <div class="play-button" onclick="openVideo('q-X8jG8GDIs', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">将家里的墙贴上贴纸，结果女友直接摔倒在地，又解气又心疼！ 【依然夏天】</h3>
+                    <div class="original-title">将家里的墙贴上贴纸，结果女友直接摔倒在地，又解气又心疼！【依然夏天】</div>
+                    <div class="meta-data">
+                        <div class="channel-name">两只马儿—恶搞姐妹</div>
+                        <div class="stats">
+                            <span>392,202 次观看</span>
+                            <span>•</span>
+                            <span>7天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=pYAslaDHLfk" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/pYAslaDHLfk/maxresdefault.jpg" alt="刘銮雄完喇！ 甘比闯下弥天大祸，大刘急抛售物业全家逃离香港！ 长子刘鸣炜亦惨遭波及，吕丽君被踢出局逃过一劫！ #劉鑾雄 #港圈日報" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/pYAslaDHLfk/maxresdefault.jpg", "https://i.ytimg.com/vi/pYAslaDHLfk/sddefault.jpg", "https://i.ytimg.com/vi/pYAslaDHLfk/hqdefault.jpg", "https://i.ytimg.com/vi/pYAslaDHLfk/mqdefault.jpg", "https://i.ytimg.com/vi/pYAslaDHLfk/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">11:17</div>
+                    <div class="play-button" onclick="openVideo('pYAslaDHLfk', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">刘銮雄完喇！ 甘比闯下弥天大祸，大刘急抛售物业全家逃离香港！ 长子刘鸣炜亦惨遭波及，吕丽君被踢出局逃过一劫！ #劉鑾雄 #港圈日報</h3>
+                    <div class="original-title">劉鑾雄完喇！甘比闖下彌天大禍，大劉急拋售物業全家逃離香港！長子劉鳴煒亦慘遭波及，呂麗君被踢出局逃過一劫！#劉鑾雄 #港圈日報</div>
+                    <div class="meta-data">
+                        <div class="channel-name">港圈日報</div>
+                        <div class="stats">
+                            <span>316,785 次观看</span>
+                            <span>•</span>
+                            <span>1天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=GKe9PSR99RY" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/GKe9PSR99RY/maxresdefault.jpg" alt="許鞍華執導 羅慧娟遺作 天水圍系列第2部作品 香港家庭倫常悲劇|天水圍的夜與霧 （Night and Fog）|任達華|張靜初|羅慧娟|8號電影院 HK Movie|粵語中字|2009|晶典香港电影" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/GKe9PSR99RY/maxresdefault.jpg", "https://i.ytimg.com/vi/GKe9PSR99RY/sddefault.jpg", "https://i.ytimg.com/vi/GKe9PSR99RY/hqdefault.jpg", "https://i.ytimg.com/vi/GKe9PSR99RY/mqdefault.jpg", "https://i.ytimg.com/vi/GKe9PSR99RY/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">1:54:46</div>
+                    <div class="play-button" onclick="openVideo('GKe9PSR99RY', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">許鞍華執導 羅慧娟遺作 天水圍系列第2部作品 香港家庭倫常悲劇|天水圍的夜與霧 （Night and Fog）|任達華|張靜初|羅慧娟|8號電影院 HK Movie|粵語中字|2009|晶典香港电影</h3>
+                    <div class="original-title">許鞍華執導 羅慧娟遺作 天水圍系列第2部作品 香港家庭倫常悲劇｜天水圍的夜與霧 (Night and Fog)｜任達華｜張靜初｜羅慧娟｜8號電影院 HK Movie｜粵語中字｜2009｜晶典香港電影</div>
+                    <div class="meta-data">
+                        <div class="channel-name">8號電影院 -  HK Movie</div>
+                        <div class="stats">
+                            <span>291,764 次观看</span>
+                            <span>•</span>
+                            <span>3天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=X6l4s2BZNEU" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/X6l4s2BZNEU/maxresdefault.jpg" alt="我姐姐从学校接她的弟弟，但被逼哭了！#cute #funny #comedy" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/X6l4s2BZNEU/maxresdefault.jpg", "https://i.ytimg.com/vi/X6l4s2BZNEU/sddefault.jpg", "https://i.ytimg.com/vi/X6l4s2BZNEU/hqdefault.jpg", "https://i.ytimg.com/vi/X6l4s2BZNEU/mqdefault.jpg", "https://i.ytimg.com/vi/X6l4s2BZNEU/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:12</div>
+                    <div class="play-button" onclick="openVideo('X6l4s2BZNEU', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">我姐姐从学校接她的弟弟，但被逼哭了！#cute #funny #comedy</h3>
+                    <div class="original-title">My Sister Picked Her Brother Up From School But Was Made To Cry! #cute #funny #comedy</div>
+                    <div class="meta-data">
+                        <div class="channel-name">开心baby</div>
+                        <div class="stats">
+                            <span>279,000 次观看</span>
+                            <span>•</span>
+                            <span>5天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=xS6pmRtGs4k" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/xS6pmRtGs4k/maxresdefault.jpg" alt="女子打麻将回来晚了，看到婆婆和老公这个架势不一般，不料下一秒扭转局面！ #这操作也是没谁了#万万没想到#看一遍笑一遍 #我的搞笑家庭" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/xS6pmRtGs4k/maxresdefault.jpg", "https://i.ytimg.com/vi/xS6pmRtGs4k/sddefault.jpg", "https://i.ytimg.com/vi/xS6pmRtGs4k/hqdefault.jpg", "https://i.ytimg.com/vi/xS6pmRtGs4k/mqdefault.jpg", "https://i.ytimg.com/vi/xS6pmRtGs4k/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:14</div>
+                    <div class="play-button" onclick="openVideo('xS6pmRtGs4k', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">女子打麻将回来晚了，看到婆婆和老公这个架势不一般，不料下一秒扭转局面！ #这操作也是没谁了#万万没想到#看一遍笑一遍 #我的搞笑家庭</h3>
+                    <div class="original-title">女子打麻将回来晚了，看到婆婆和老公这个架势不一般，不料下一秒扭转局面！#这操作也是没谁了#万万没想到#看一遍笑一遍 #我的搞笑家庭</div>
+                    <div class="meta-data">
+                        <div class="channel-name">鲜妹儿</div>
+                        <div class="stats">
+                            <span>269,026 次观看</span>
+                            <span>•</span>
+                            <span>25天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=H02rqVxFoP4" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/H02rqVxFoP4/maxresdefault.jpg" alt="看懂#潘玮柏  1500好声音工资表，才明白自动座椅的含金量有多高!#音乐 #歌手 #娱评乐子人期中考 #中国好声音" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/H02rqVxFoP4/maxresdefault.jpg", "https://i.ytimg.com/vi/H02rqVxFoP4/sddefault.jpg", "https://i.ytimg.com/vi/H02rqVxFoP4/hqdefault.jpg", "https://i.ytimg.com/vi/H02rqVxFoP4/mqdefault.jpg", "https://i.ytimg.com/vi/H02rqVxFoP4/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">1:06</div>
+                    <div class="play-button" onclick="openVideo('H02rqVxFoP4', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">看懂#潘玮柏  1500好声音工资表，才明白自动座椅的含金量有多高!#音乐 #歌手 #娱评乐子人期中考 #中国好声音</h3>
+                    <div class="original-title">看懂#潘玮柏  1500好声音工资表，才明白自动座椅的含金量有多高!#音乐 #歌手 #娱评乐子人期中考 #中国好声音</div>
+                    <div class="meta-data">
+                        <div class="channel-name">影娱审判官</div>
+                        <div class="stats">
+                            <span>237,549 次观看</span>
+                            <span>•</span>
+                            <span>7天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=1rpToNT3jjc" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/1rpToNT3jjc/maxresdefault.jpg" alt="老板竟然给员工看这种东西搞笑 搞笑影片 短视频" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/1rpToNT3jjc/maxresdefault.jpg", "https://i.ytimg.com/vi/1rpToNT3jjc/sddefault.jpg", "https://i.ytimg.com/vi/1rpToNT3jjc/hqdefault.jpg", "https://i.ytimg.com/vi/1rpToNT3jjc/mqdefault.jpg", "https://i.ytimg.com/vi/1rpToNT3jjc/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:28</div>
+                    <div class="play-button" onclick="openVideo('1rpToNT3jjc', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">老板竟然给员工看这种东西搞笑 搞笑影片 短视频</h3>
+                    <div class="original-title">老板竟然給員工，看這種東西#funny #搞笑 #搞笑影片 #shorts</div>
+                    <div class="meta-data">
+                        <div class="channel-name">福气</div>
+                        <div class="stats">
+                            <span>211,125 次观看</span>
+                            <span>•</span>
+                            <span>6天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=coM2YisO_bk" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/coM2YisO_bk/maxresdefault.jpg" alt="#奚梦瑶 #何猷君 同框出席活动，他没有富家公子玩世不恭的态度，更像是梦瑶的经纪人，甘当绿叶低调，好幸福的一对👍" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/coM2YisO_bk/maxresdefault.jpg", "https://i.ytimg.com/vi/coM2YisO_bk/sddefault.jpg", "https://i.ytimg.com/vi/coM2YisO_bk/hqdefault.jpg", "https://i.ytimg.com/vi/coM2YisO_bk/mqdefault.jpg", "https://i.ytimg.com/vi/coM2YisO_bk/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:13</div>
+                    <div class="play-button" onclick="openVideo('coM2YisO_bk', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">#奚梦瑶 #何猷君 同框出席活动，他没有富家公子玩世不恭的态度，更像是梦瑶的经纪人，甘当绿叶低调，好幸福的一对👍</h3>
+                    <div class="original-title">#奚梦瑶 #何猷君 同框出席活动，他没有富家公子玩世不恭的态度，更像是梦瑶的经纪人，甘当绿叶低调，好幸福的一对👍</div>
+                    <div class="meta-data">
+                        <div class="channel-name">优优娱乐</div>
+                        <div class="stats">
+                            <span>203,915 次观看</span>
+                            <span>•</span>
+                            <span>10天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=0D3p5lJGa58" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/0D3p5lJGa58/maxresdefault.jpg" alt="姜涛 《I Need You In My Li（f）e》 【ViuTV 集 《用的謊言》 主曲】 官方音乐录影带" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/0D3p5lJGa58/maxresdefault.jpg", "https://i.ytimg.com/vi/0D3p5lJGa58/sddefault.jpg", "https://i.ytimg.com/vi/0D3p5lJGa58/hqdefault.jpg", "https://i.ytimg.com/vi/0D3p5lJGa58/mqdefault.jpg", "https://i.ytimg.com/vi/0D3p5lJGa58/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">3:02</div>
+                    <div class="play-button" onclick="openVideo('0D3p5lJGa58', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">姜涛 《I Need You In My Li（f）e》 【ViuTV 集 《用的謊言》 主曲】 官方音乐录影带</h3>
+                    <div class="original-title">Keung To 姜濤 《I Need You In My Li(f)e》 【ViuTV 劇集 《無用的謊言》 主題曲】 Official Music Video</div>
+                    <div class="meta-data">
+                        <div class="channel-name">MIRROR</div>
+                        <div class="stats">
+                            <span>202,348 次观看</span>
+                            <span>•</span>
+                            <span>4天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=X-iK5K3vW7c" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/X-iK5K3vW7c/maxresdefault.jpg" alt="在美丽的地方用绳索蹦极：Asmr 蹦极#shorts" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/X-iK5K3vW7c/maxresdefault.jpg", "https://i.ytimg.com/vi/X-iK5K3vW7c/sddefault.jpg", "https://i.ytimg.com/vi/X-iK5K3vW7c/hqdefault.jpg", "https://i.ytimg.com/vi/X-iK5K3vW7c/mqdefault.jpg", "https://i.ytimg.com/vi/X-iK5K3vW7c/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">0:20</div>
+                    <div class="play-button" onclick="openVideo('X-iK5K3vW7c', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">在美丽的地方用绳索蹦极：Asmr 蹦极#shorts</h3>
+                    <div class="original-title">Bungee Jumping With Rope In Beautiful Place:Asmr Bungee Jumping#shorts</div>
+                    <div class="meta-data">
+                        <div class="channel-name">Bungee Jumping Park Official</div>
+                        <div class="stats">
+                            <span>170,581 次观看</span>
+                            <span>•</span>
+                            <span>5天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=206FiSCWB6M" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/206FiSCWB6M/maxresdefault.jpg" alt="谭咏麟直言活唔落去喇？ 病重无好转，好兄弟陈百祥反目成仇，如今妻儿仲要离开！ 消极喊话：报应嚟咗！ 【三言两娱】" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/206FiSCWB6M/maxresdefault.jpg", "https://i.ytimg.com/vi/206FiSCWB6M/sddefault.jpg", "https://i.ytimg.com/vi/206FiSCWB6M/hqdefault.jpg", "https://i.ytimg.com/vi/206FiSCWB6M/mqdefault.jpg", "https://i.ytimg.com/vi/206FiSCWB6M/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">12:36</div>
+                    <div class="play-button" onclick="openVideo('206FiSCWB6M', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">谭咏麟直言活唔落去喇？ 病重无好转，好兄弟陈百祥反目成仇，如今妻儿仲要离开！ 消极喊话：报应嚟咗！ 【三言两娱】</h3>
+                    <div class="original-title">譚詠麟直言活唔落去喇？病重無好轉，好兄弟陳百祥反目成仇，如今妻兒仲要離開！消極喊話：報應嚟咗！【三言两娱】</div>
+                    <div class="meta-data">
+                        <div class="channel-name">三言兩娛</div>
+                        <div class="stats">
+                            <span>157,017 次观看</span>
+                            <span>•</span>
+                            <span>2天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=N1PxzzqSPec" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/N1PxzzqSPec/maxresdefault.jpg" alt="中年好声音3|李创伟爆肌引全场尖叫 炸裂唱跳满分5灯|李创伟《狂野之城》|歌唱 比赛|音乐节目" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/N1PxzzqSPec/maxresdefault.jpg", "https://i.ytimg.com/vi/N1PxzzqSPec/sddefault.jpg", "https://i.ytimg.com/vi/N1PxzzqSPec/hqdefault.jpg", "https://i.ytimg.com/vi/N1PxzzqSPec/mqdefault.jpg", "https://i.ytimg.com/vi/N1PxzzqSPec/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">3:53</div>
+                    <div class="play-button" onclick="openVideo('N1PxzzqSPec', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">中年好声音3|李创伟爆肌引全场尖叫 炸裂唱跳满分5灯|李创伟《狂野之城》|歌唱 比赛|音乐节目</h3>
+                    <div class="original-title">中年好聲音3｜李創偉爆肌引全場尖叫 炸裂唱跳滿分5燈｜李創偉《狂野之城》｜歌唱 比賽｜音樂節目</div>
+                    <div class="meta-data">
+                        <div class="channel-name">TVB  綜藝 </div>
+                        <div class="stats">
+                            <span>146,634 次观看</span>
+                            <span>•</span>
+                            <span>1天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=DXNW6IQeBJw" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/DXNW6IQeBJw/maxresdefault.jpg" alt="真正嘅邓丽欣原来系咁样！!️😱12/21 深度访谈新节目：《国家级高峰会》第一集！ 嘉宾：邓丽欣!!" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/DXNW6IQeBJw/maxresdefault.jpg", "https://i.ytimg.com/vi/DXNW6IQeBJw/sddefault.jpg", "https://i.ytimg.com/vi/DXNW6IQeBJw/hqdefault.jpg", "https://i.ytimg.com/vi/DXNW6IQeBJw/mqdefault.jpg", "https://i.ytimg.com/vi/DXNW6IQeBJw/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">28:38</div>
+                    <div class="play-button" onclick="openVideo('DXNW6IQeBJw', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">真正嘅邓丽欣原来系咁样！!️😱12/21 深度访谈新节目：《国家级高峰会》第一集！ 嘉宾：邓丽欣!!</h3>
+                    <div class="original-title">真正嘅鄧麗欣原來係咁樣‼️😱12/21 深度訪談新節目：《國家級高峰會》第一集！嘉賓：鄧麗欣！！！</div>
+                    <div class="meta-data">
+                        <div class="channel-name">毛記電視</div>
+                        <div class="stats">
+                            <span>140,987 次观看</span>
+                            <span>•</span>
+                            <span>2天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=-TtEqjI7uww" class="video-link" target="_blank">
+            <article class="video-card">
+                <div class="thumbnail-container">
+                    <img src="https://i.ytimg.com/vi/-TtEqjI7uww/maxresdefault.jpg" alt="【醉酒Don't Call】kayan9896 Jaime Cheung 张張天穎 Zpecial| 🍺 酒遊戲節目|Drunk Call|若果我們未曾遇過" loading="lazy" onerror="this.onerror=null; let urls=["https://i.ytimg.com/vi/-TtEqjI7uww/maxresdefault.jpg", "https://i.ytimg.com/vi/-TtEqjI7uww/sddefault.jpg", "https://i.ytimg.com/vi/-TtEqjI7uww/hqdefault.jpg", "https://i.ytimg.com/vi/-TtEqjI7uww/mqdefault.jpg", "https://i.ytimg.com/vi/-TtEqjI7uww/default.jpg"]; let currentIndex=urls.indexOf(this.src); if(currentIndex < urls.length-1) { this.src=urls[currentIndex+1]; }">
+                    <div class="duration">23:25</div>
+                    <div class="play-button" onclick="openVideo('-TtEqjI7uww', event)"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">【醉酒Don't Call】kayan9896 Jaime Cheung 张張天穎 Zpecial| 🍺 酒遊戲節目|Drunk Call|若果我們未曾遇過</h3>
+                    <div class="original-title">【醉酒Don't Call】kayan9896 Jaime Cheung 張天穎 Zpecial｜🍺 飲酒遊戲節目｜Drunk Call｜若果我們未曾遇過</div>
+                    <div class="meta-data">
+                        <div class="channel-name">warnermusichk</div>
+                        <div class="stats">
+                            <span>91,114 次观看</span>
+                            <span>•</span>
+                            <span>3天前</span>
+                            <span>•</span>
+                            <span>中国香港</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        
+    </div>
+
+    <div class="video-popup" id="videoPopup"></div>
+    <div class="video-overlay" id="videoOverlay"></div>
+
+    <script>
+        function adjustPopupSize() {
+            const popup = document.getElementById('videoPopup');
+            const viewportHeight = window.innerHeight;
+            const viewportWidth = window.innerWidth;
+            
+            const maxHeight = viewportHeight * 0.9;
+            const widthByHeight = maxHeight * 16 / 9;
+            
+            const maxWidth = viewportWidth * 0.9;
+            const heightByWidth = maxWidth * 9 / 16;
+            
+            if (widthByHeight > maxWidth) {
+                popup.style.width = maxWidth + 'px';
+                popup.style.height = heightByWidth + 'px';
+            } else {
+                popup.style.width = widthByHeight + 'px';
+                popup.style.height = maxHeight + 'px';
+            }
+        }
+
+        function openVideo(videoId, event) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            const popup = document.getElementById('videoPopup');
+            const overlay = document.getElementById('videoOverlay');
+            
+            const loadingDiv = document.createElement('div');
+            loadingDiv.textContent = '加载中...';
+            loadingDiv.className = 'loading';
+            
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1`;
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+            iframe.setAttribute('allowfullscreen', '');
+            iframe.setAttribute('title', 'YouTube video player');
+            iframe.setAttribute('sandbox', 'allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation');
+            
+            popup.textContent = '';
+            popup.appendChild(loadingDiv);
+            popup.appendChild(iframe);
+            
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+            
+            adjustPopupSize();
+            
+            iframe.onerror = () => {
+                loadingDiv.textContent = '加载失败，请直接访问 YouTube 观看';
+            };
+            
+            iframe.onload = () => {
+                loadingDiv.remove();
+            };
+        }
+
+        function closeVideo() {
+            const popup = document.getElementById('videoPopup');
+            const overlay = document.getElementById('videoOverlay');
+            popup.textContent = '';
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+
+        // 监听窗口大小变化
+        window.addEventListener('resize', () => {
+            if (document.getElementById('videoPopup').style.display === 'block') {
+                adjustPopupSize();
+            }
+        });
+
+        // 点击遮罩层关闭视频
+        document.getElementById('videoOverlay').addEventListener('click', closeVideo);
+
+        // 按 ESC 键关闭视频
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('videoPopup').style.display === 'block') {
+                closeVideo();
+            }
+        });
+    </script>
+</body>
+</html>
