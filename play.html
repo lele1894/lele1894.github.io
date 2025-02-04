@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M3U8广告过滤播放器</title>
+    <style>
+        body {
+            max-width: 60%;
+            margin: 5px auto;
+            font-family: Arial, sans-serif;
+        }
+
+        #player-container {
+            position: relative;
+            margin-bottom: 5px; /* 添加底部间距 */
+        }
+
+        #ad-alert {
+            position: absolute;
+            bottom: 60px;
+            left: 20px;
+            background: rgba(255,0,0,0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+            z-index: 100;
+        }
+
+        .controls {
+            margin: 10px 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 8px;
+        }
+
+        button {
+            padding: 8px 20px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        video {
+            width: 100%;
+            background: #000;
+        }
+
+        #log {
+            margin-top: 5px;
+            padding: 10px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+
+        #suggestions {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div id="player-container">
+        <video id="video" controls></video>
+        <div id="ad-alert"></div>
+    </div>
+
+    <div class="controls">
+        <input type="url" id="m3u8-url" placeholder="输入M3U8地址..." onkeydown="handleKeyDown(event)">
+        <button onclick="showM3U8Content()">加载M3U8内容</button>
+    </div>
+
+    <div class="controls">
+        <input type="text" id="ad-keywords" placeholder="输入广告关键词（用逗号分隔）">
+        <label>
+            <input type="checkbox" id="should-concat"> 是否拼接不完整链接
+        </label>
+        <button onclick="initPlayer()">播放</button>
+    </div>
+
+    <div id="log"></div>
+    <div id="suggestions"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+        let hls;
+        let baseUrl = ''; // 存储基础 URL
+        let filteredM3U8 = ''; // 存储过滤后的 M3U8 内容
+        let adCount = 0; // 记录剔除的广告片段数量
+
+        // 初始化日志
+        function initLog() {
+            log('使用说明：');
+            log('1. 输入有效的 M3U8 地址，然后点击“加载M3U8内容”按钮。');
+            log('2. 在下面的输入框中输入要剔除的广告关键词，多个关键词用逗号分隔。');
+            log('3. 选择“是否拼接不完整链接”选项，决定是否拼接不完整的 TS 链接。');
+            log('4. 点击“播放”按钮开始播放视频。');
+            log('5. 日志框将显示加载过程中的信息和提示。');
+        }
+
+        // 日志输出
+        function log(message) {
+            const logDiv = document.getElementById('log');
+            logDiv.innerHTML += `<div>${new Date().toLocaleTimeString()}: ${message}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight; // 自动滚动到底部
+        }
+
+        // 页面加载时初始化日志
+        window.onload = function() {
+            initLog();
+        };
+
+        // 显示 M3U8 文件内容
+        async function showM3U8Content() {
+            const url = document.getElementById('m3u8-url').value;
+            if (!url) {
+                log('请输入有效的M3U8地址');
+                return;
+            }
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP错误: ${response.status}`);
+                }
+                const content = await response.text();
+                log('M3U8内容:\n' + content); // 显示内容到日志框
+                log('已成功显示M3U8内容');
+                analyzeM3U8Content(content); // 分析 M3U8 内容
+            } catch (error) {
+                log('加载M3U8失败: ' + error.message);
+            }
+        }
+
+        // 分析 M3U8 内容，提取文件名并进行比较
+        function analyzeM3U8Content(content) {
+            const lines = content.split('\n');
+            const httpFiles = lines.filter(line => line.startsWith('http'));
+            const nonHttpFiles = lines.filter(line => !line.startsWith('http') && line.endsWith('.ts'));
+
+            // 处理 HTTP 文件
+            const httpCounts = {};
+            httpFiles.forEach(line => {
+                const start = line.indexOf('https://') + 8; // 计算 "https://" 之后的起始位置
+                const end = line.indexOf('/', start); // 查找下一个 "/" 的位置
+                const domain = end !== -1 ? line.substring(start, end) : line.substring(start); // 提取域名部分
+                httpCounts[domain] = (httpCounts[domain] || 0) + 1; // 统计数量
+            });
+
+            // 处理非HTTP文件
+            const nonHttpCounts = {};
+            let previousLength = null; // 存储上一个文件名前缀的长度
+            let lengthMismatchDetected = false; // 跳跃检测标志
+
+            for (let i = 0; i < nonHttpFiles.length; i++) {
+                const line = nonHttpFiles[i];
+                const prefix = line.substring(0, line.indexOf('.ts')); // 提取 .ts 前的内容
+                const length = prefix.length; // 获取长度
+
+                // 每5行检测一次
+                if (i % 5 === 0 && previousLength !== null && previousLength !== length) {
+                    log(`检测到长度不一致，停止检查。当前文件: ${line}`);
+                    lengthMismatchDetected = true;
+                    break;
+                }
+
+                nonHttpCounts[prefix] = length; // 存储长度
+                previousLength = length; // 更新上一个长度
+            }
+
+            // 输出结果
+            log(`完整URL分布:`);
+            log(`- 域名分布: ${JSON.stringify(httpCounts)}`);
+            log(`非完整URL分布:`);
+            Object.entries(nonHttpCounts).forEach(([fileName, length]) => {
+                log(`- 文件名: ${fileName}, 长度: ${length}`);
+            });
+
+            if (!lengthMismatchDetected) {
+                log('所有非完整URL文件名前缀长度一致。');
+            } else {
+                log('非完整URL文件名长度检测完成，已停止。');
+            }
+        }
+
+        // 回车键处理
+        function handleKeyDown(event) {
+            if (event.key === 'Enter') {
+                initPlayer();
+            }
+        }
+
+        // 解析 M3U8 文件并过滤广告片段
+        async function parseM3U8(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP错误: ${response.status}`);
+                }
+                const content = await response.text();
+
+                // 处理 M3U8 内容
+                const lines = content.split('\n');
+                baseUrl = url.substring(0, url.lastIndexOf('/')) + '/'; // 获取基础 URL
+                const filteredLines = [];
+                const adKeywords = document.getElementById('ad-keywords').value.split(',').map(k => k.trim());
+
+                adCount = 0; // 重置广告计数
+
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
+
+                    // 判断广告片段
+                    if (adKeywords.some(keyword => line.includes(keyword))) {
+                        log(`[广告片段剔除] 文件: ${line}`);
+                        adCount++; // 增加广告计数
+                        continue; // 跳过广告片段
+                    }
+
+                    // 处理 TS 片段
+                    if (line.endsWith('.ts')) {
+                        // 根据复选框选择是否拼接
+                        filteredLines.push(document.getElementById('should-concat').checked ? baseUrl + line : line);
+                    } else {
+                        filteredLines.push(line); // 保留其他行
+                    }
+                }
+
+                filteredM3U8 = filteredLines.join('\n'); // 生成新的 M3U8 内容
+                log(`解析完成，共生成 ${filteredLines.length} 个有效片段，剔除广告片段数量: ${adCount}`);
+
+            } catch (error) {
+                log('解析失败: ' + error.message);
+            }
+        }
+
+        // 初始化播放器
+        async function initPlayer() {
+            const url = document.getElementById('m3u8-url').value;
+            if (!url) {
+                log('请输入有效的M3U8地址');
+                return;
+            }
+
+            if (hls) hls.destroy();
+
+            await parseM3U8(url);
+
+            if (!filteredM3U8) {
+                log('处理后的M3U8内容为空，无法播放');
+                return; // 如果解析失败则返回
+            }
+
+            const video = document.getElementById('video');
+            hls = new Hls();
+
+            // 创建 Blob 对象以加载过滤后的 M3U8 内容
+            const blob = new Blob([filteredM3U8], { type: 'application/vnd.apple.mpegurl' });
+            const newUrl = URL.createObjectURL(blob);
+
+            hls.loadSource(newUrl);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                video.play();
+            });
+
+            // 监听错误事件
+            hls.on(Hls.Events.ERROR, function (event, data) {
+                if (data.fatal) {
+                    switch (data.fatal) {
+                        case Hls.ErrorTypes.NETWORK_ERROR:
+                            log('网络错误，无法加载视频');
+                            break;
+                        case Hls.ErrorTypes.MEDIA_ERROR:
+                            log('媒体错误，无法播放视频');
+                            break;
+                        case Hls.ErrorTypes.OTHER_ERROR:
+                            log('其他错误，无法播放视频');
+                            break;
+                    }
+                }
+            });
+        }
+
+        function showAdAlert(msg) {
+            const alert = document.getElementById('ad-alert');
+            alert.textContent = msg;
+            alert.style.display = 'block';
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
