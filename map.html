@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>高德地图图片GPS标注工具</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body { height:100%; margin:0; padding:0; font-family: Arial, sans-serif; }
+    header { background:#2196F3; color:white; padding:1px; text-align:center; }
+    .bar { margin-top:1px; display:flex; flex-wrap:wrap; gap:1px; justify-content:center; align-items:center; }
+    #picker, #amapKey { padding:1px; }
+    .btn { padding:1px 12px; background:#f44336; color:white; border:none; border-radius:4px; cursor:pointer; }
+    .btn:hover { background:#d32f2f; }
+    .hint { font-size:12px; color:#fff; }
+    #container { width:100%; height:50vh; }
+    #info { padding:10px; max-height:40vh; overflow:auto; background:#f9f9f9; }
+    .info-item { border-bottom:1px solid #ddd; padding:5px 0; display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+    img.thumb { max-width:100px; max-height:100px; cursor:pointer; border-radius:4px; }
+    @media (min-width:768px){
+      #container { height:60vh; }
+      #info { max-height:30vh; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <h5>图片GPS信息提取-本地-不上传</h5>
+    <input id="picker" type="file" multiple />
+    <input id="amapKey" type="text" placeholder="请输入高德Web API Key" value="66f613bf63868ab5876a6ec2c1835fcf" />
+    <button class="btn" id="clearBtn">清空列表</button>
+    <div class="hint">请用 <b>文件管理器</b> 选择原始图片，部分系统相册会自动去除GPS信息。手机相机文件夹-DCIM-Camera</div>
+  </div>
+</header>
+
+<div id="container"></div>
+<div id="info"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+<script>
+let map, markers = [];
+
+// 判断是否移动设备
+function isMobile() {
+  return /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
+}
+
+// 加载高德地图
+function loadMap(key){
+  return new Promise((resolve, reject)=>{
+    if(window.AMap){
+      map = new AMap.Map('container', { zoom:4, center:[105,36] });
+      resolve(map);
+    }else{
+      const script = document.createElement('script');
+      script.src = `https://webapi.amap.com/maps?v=2.0&key=${encodeURIComponent(key)}`;
+      script.onload = ()=>{ map = new AMap.Map('container', { zoom:4, center:[105,36] }); resolve(map); };
+      script.onerror = ()=>reject('加载高德地图失败');
+      document.head.appendChild(script);
+    }
+  });
+}
+
+// 解析图片GPS
+function getGps(file, callback){
+  EXIF.getData(file, function(){
+    let lat = EXIF.getTag(this,"GPSLatitude");
+    let lon = EXIF.getTag(this,"GPSLongitude");
+    let latRef = EXIF.getTag(this,"GPSLatitudeRef");
+    let lonRef = EXIF.getTag(this,"GPSLongitudeRef");
+    if(lat && lon){
+      let toDecimal = arr => arr[0] + arr[1]/60 + arr[2]/3600;
+      let latitude = toDecimal(lat)*(latRef==='S'?-1:1);
+      let longitude = toDecimal(lon)*(lonRef==='W'?-1:1);
+      callback({lat:latitude, lon:longitude});
+    }else{
+      callback(null);
+    }
+  });
+}
+
+// 点击图片跳转高德地图
+function gotoAmap(lat, lon, name){
+  let url;
+  if(isMobile()){
+    url = `amapuri://viewMap?sourceApplication=web&lat=${lat}&lon=${lon}&poiname=${encodeURIComponent(name)}&dev=0`;
+  }else{
+    url = `https://uri.amap.com/marker?position=${lon},${lat}&name=${encodeURIComponent(name)}`;
+  }
+  window.open(url,'_blank');
+}
+
+// 处理文件选择
+document.getElementById('picker').addEventListener('change', async function(e){
+  const files = e.target.files;
+  const key = document.getElementById('amapKey').value.trim();
+  if(!key){ alert('请先输入高德Key'); return; }
+  await loadMap(key);
+  const infoDiv = document.getElementById('info');
+
+  Array.from(files).forEach(file=>{
+    const reader = new FileReader();
+    reader.onload = function(evt){
+      getGps(file, gps=>{
+        let item = document.createElement('div'); 
+        item.className='info-item';
+
+        // 图片缩略图
+        let img = document.createElement('img'); 
+        img.src = evt.target.result; 
+        img.className='thumb';
+        item.appendChild(img);
+
+        // 文件名
+        let filenameDiv = document.createElement('div');
+        filenameDiv.textContent = `文件名: ${file.name}`;
+        item.appendChild(filenameDiv);
+
+        if (gps){
+          // 坐标
+          let coordDiv = document.createElement('div');
+          coordDiv.textContent = `坐标: ${gps.lon.toFixed(6)}, ${gps.lat.toFixed(6)}`;
+          item.appendChild(coordDiv);
+
+          // 地图标记
+          let marker = new AMap.Marker({ position:[gps.lon,gps.lat], map:map, title:file.name });
+          markers.push(marker);
+          map.setFitView(markers);
+
+          // 点击图片跳转高德地图
+          img.addEventListener('click', ()=>gotoAmap(gps.lat, gps.lon, file.name));
+
+          // 新增按钮：聚焦地图
+          let focusBtn = document.createElement('button');
+          focusBtn.textContent = '定位';
+          focusBtn.className = 'btn';
+          focusBtn.addEventListener('click', ()=>{
+            map.setZoomAndCenter(15, [gps.lon, gps.lat]);
+          });
+          item.appendChild(focusBtn);
+
+        } else {
+          let errorDiv = document.createElement('div');
+          errorDiv.style.color='red';
+          errorDiv.textContent='未检测到GPS信息';
+          item.appendChild(errorDiv);
+        }
+
+        infoDiv.appendChild(item);
+      });
+    };
+    reader.readAsDataURL(file);
+  });
+});
+
+// 清空按钮
+document.getElementById('clearBtn').addEventListener('click', function(){
+  document.getElementById('info').innerHTML = "";
+  markers.forEach(m=>m.setMap(null));
+  markers=[];
+  if(map) map.setZoomAndCenter(4,[105,36]);
+});
+</script>
+</body>
+</html>
