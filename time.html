@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字时钟</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            font-family: 'Arial', 'Microsoft YaHei', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .clock-wrapper {
+            width: 80%;
+            max-width: 80vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .date-container {
+            font-size: 4vw;
+            margin-bottom: 30px;
+            text-align: center;
+            opacity: 0.9;
+            text-shadow: 
+                2px 2px 0px #333333,
+                4px 4px 0px #555555,
+                6px 6px 0px #777777,
+                8px 8px 15px rgba(255, 255, 255, 0.3),
+                10px 10px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .time-container {
+            font-size: 12vw;
+            font-weight: bold;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+            text-shadow: 
+                3px 3px 0px #333333,
+                6px 6px 0px #555555,
+                9px 9px 0px #777777,
+                12px 12px 20px rgba(255, 255, 255, 0.4),
+                15px 15px 30px rgba(0, 0, 0, 0.9);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .date-container {
+                font-size: 6vw;
+                margin-bottom: 20px;
+            }
+            
+            .time-container {
+                font-size: 16vw;
+                letter-spacing: 1px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .date-container {
+                font-size: 7vw;
+                margin-bottom: 15px;
+            }
+            
+            .time-container {
+                font-size: 18vw;
+                letter-spacing: 0px;
+            }
+        }
+
+        /* 大屏幕优化 */
+        @media (min-width: 1200px) {
+            .date-container {
+                font-size: 96px;
+            }
+            
+            .time-container {
+                font-size: 288px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-wrapper">
+        <div class="date-container" id="date">
+            <!-- 日期将在这里显示 -->
+        </div>
+        <div class="time-container" id="time">
+            <!-- 时间将在这里显示 -->
+        </div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            
+            // 星期数组
+            const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+            
+            // 格式化日期
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const weekday = weekdays[now.getDay()];
+            const dateString = `${year}年${month}月${day}日 ${weekday}`;
+            
+            // 格式化时间
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            
+            // 更新显示
+            document.getElementById('date').textContent = dateString;
+            document.getElementById('time').textContent = timeString;
+        }
+
+        // 立即更新一次
+        updateClock();
+        
+        // 每秒更新一次
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>
