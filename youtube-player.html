@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube视频播放器 - lele1894网站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .header {
+            background-color: #ff0000;
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .header h1 {
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .header h1 svg {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+        
+        .player-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .player-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        
+        #youtube-player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-info {
+            padding: 20px;
+        }
+        
+        .video-info h2 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .video-info p {
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .video-input-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .video-input-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .video-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .video-input:focus {
+            outline: none;
+            border-color: #ff0000;
+        }
+        
+        .play-btn {
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .play-btn:hover {
+            background-color: #cc0000;
+        }
+        
+        .examples {
+            margin-top: 20px;
+        }
+        
+        .examples h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .example-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .example-link {
+            background-color: #f0f0f0;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #ff0000;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .example-link:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .header h1 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path fill="white" d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+            </svg>
+            YouTube视频播放器
+        </h1>
+    </div>
+    
+    <div class="container">
+        <div class="video-input-section">
+            <h2>播放YouTube视频</h2>
+            <div class="input-group">
+                <input type="text" id="video-url" class="video-input" placeholder="输入YouTube视频链接或视频ID">
+                <button id="play-button" class="play-btn">播放视频</button>
+            </div>
+            
+            <div class="examples">
+                <h3>示例视频:</h3>
+                <div class="example-links">
+                    <a href="#" class="example-link" data-id="dQw4w9WgXcQ">Rick Astley - Never Gonna Give You Up</a>
+                    <a href="#" class="example-link" data-id="jNQXAC9IVRw">Me at the zoo</a>
+                    <a href="#" class="example-link" data-id="W7767P3sucs">Gangnam Style</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="player-section">
+            <div class="player-container">
+                <iframe id="youtube-player" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="video-info">
+                <h2 id="video-title">YouTube视频播放器</h2>
+                <p id="video-description">在上方输入YouTube视频链接或ID来播放视频。支持大多数YouTube视频链接格式。</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2023 YouTube视频播放器 | 集成到 lele1894.tk 网站</p>
+    </div>
+
+    <script>
+        // 获取URL参数
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(window.location.href);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // 提取视频ID的函数
+        function extractVideoId(url) {
+            if (!url) return null;
+            
+            // 如果已经是视频ID（11位字符）
+            if (url.length === 11 && /^[a-zA-Z0-9_-]+$/.test(url)) {
+                return url;
+            }
+            
+            // 匹配各种YouTube URL格式
+            const regExp = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([^#&?]{11})/;
+            const match = url.match(regExp);
+            return match ? match[1] : null;
+        }
+
+        // 更新播放器
+        function updatePlayer(videoId) {
+            if (videoId) {
+                const iframe = document.getElementById('youtube-player');
+                // 添加自动播放参数
+                iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1';
+                console.log('正在加载YouTube视频，ID: ' + videoId);
+                
+                // 更新页面标题
+                document.title = '正在播放 - YouTube视频';
+                
+                // 更新视频信息（可选，需要YouTube API）
+                document.getElementById('video-title').textContent = '正在播放视频 (ID: ' + videoId + ')';
+                document.getElementById('video-description').textContent = '正在播放YouTube视频。视频ID: ' + videoId;
+            }
+        }
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取URL中的视频ID参数
+            var videoId = getUrlParameter('v');
+            
+            // 如果有视频ID，则更新播放器
+            if (videoId) {
+                document.getElementById('video-url').value = videoId;
+                updatePlayer(videoId);
+            }
+            
+            // 绑定播放按钮事件
+            document.getElementById('play-button').addEventListener('click', function() {
+                const url = document.getElementById('video-url').value;
+                const videoId = extractVideoId(url);
+                
+                if (videoId) {
+                    updatePlayer(videoId);
+                } else {
+                    alert('请输入有效的YouTube视频链接或视频ID');
+                }
+            });
+            
+            // 绑定示例链接事件
+            document.querySelectorAll('.example-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const videoId = this.getAttribute('data-id');
+                    document.getElementById('video-url').value = videoId;
+                    updatePlayer(videoId);
+                });
+            });
+            
+            // 绑定回车键事件
+            document.getElementById('video-url').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('play-button').click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
