@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>YouTube Video Player</title>
+    <title>YouTube Video Player (Chinese Optimized)</title>
     <style>
         html, body {
             height: 100%;
             margin: 0;
             padding: 0;
             overflow: hidden;
+            background-color: #000;
         }
         
         .container {
@@ -36,7 +37,6 @@
     </div>
 
     <script>
-        // 获取URL参数
         function getUrlParameter(name) {
             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
             var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
@@ -44,29 +44,28 @@
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
         }
 
-        // 获取YouTube视频ID
         var videoId = getUrlParameter('v');
+        var iframe = document.getElementById('youtube-player');
         
-        // 如果有视频ID，则更新iframe的src
+        // 核心修改部分：添加语言相关参数
+        // hl=zh-CN: 强制播放器界面显示简体中文
+        // cc_lang_pref=zh-Hans: 提示 YouTube 优先选择中文相关资源（音轨/字幕）
+        // cc_load_policy=1: 自动开启字幕（如果不需要自动开启，可改为0）
+        var languageParams = '&hl=zh-CN&cc_lang_pref=zh-Hans&cc_load_policy=1';
+
         if (videoId) {
-            var iframe = document.getElementById('youtube-player');
-            // 添加自动播放、静音和其他兼容性参数
-            iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1';
+            iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1' + languageParams;
             console.log('正在加载YouTube视频，ID: ' + videoId);
         } else {
-            // 默认视频（可选）
-            var iframe = document.getElementById('youtube-player');
-            iframe.src = 'https://www.youtube.com/embed/j-xpSgXZT-4?autoplay=1';
+            // 默认视频
+            iframe.src = 'https://www.youtube.com/embed/j-xpSgXZT-4?autoplay=1' + languageParams;
             console.log('加载默认YouTube视频');
         }
         
-        // 监听窗口大小变化，确保iframe填满容器
         window.addEventListener('resize', function() {
-            var iframe = document.getElementById('youtube-player');
             iframe.style.width = '100%';
             iframe.style.height = '100%';
         });
     </script>
 </body>
-
 </html>
