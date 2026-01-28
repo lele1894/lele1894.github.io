@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pexels 图片与视频搜索</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        .media-item {
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            background: white;
+        }
+        .media-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        .search-section {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .search-section h1 {
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .filter-section {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        .media-container {
+            position: relative;
+            width: 100%;
+        }
+        .media-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .pagination-container {
+            margin-top: 30px;
+        }
+        .media-info {
+            padding: 12px;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .media-info h5 {
+            font-size: 14px;
+            margin: 0 10px 5px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: 600;
+            flex-grow: 1;
+        }
+        .media-info p {
+            font-size: 11px;
+            color: #6c757d;
+            margin: 0 10px 5px 0;
+            flex: 0 0 auto;
+        }
+        .download-link {
+            margin-left: auto;
+            font-size: 12px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .download-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+            border-top: 1px solid #dee2e6;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            border: none;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+        }
+        .card {
+            transition: all 0.3s ease;
+        }
+        .search-box {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .media-item:hover .video-overlay {
+            opacity: 1;
+        }
+        .play-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .cors-warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            display: none;
+        }
+        /* 修复清空按钮颜色 */
+        .btn-clear {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+        }
+        .btn-clear:hover {
+            background-color: #5a6268;
+            color: white;
+        }
+        /* 大图模态框样式 */
+        .image-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .image-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .image-modal-content {
+            max-width: 95vw; /* 增加图片最大宽度 */
+            max-height: 95vh; /* 增加图片最大高度 */
+            object-fit: contain; /* 保持图片比例 */
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 10000;
+        }
+        /* 视频播放器响应式样式 */
+        .video-responsive {
+            position: relative;
+            width: 100%;
+            height: 85vh; /* 固定高度 */
+            max-height: 90vh; /* 最大高度 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: black;
+        }
+        .video-responsive video {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain; /* 保持宽高比，适合容器 */
+        }
+        /* 竖屏视频特殊样式 */
+        .video-responsive.vertical {
+            height: 85vh;
+        }
+        /* 视频模态框调整 */
+        .modal-xl {
+            max-width: 95vw; /* 调整模态框大小 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="search-section text-center">
+            <h1 class="mb-4">🌟 Pexels 图片与视频搜索</h1>
+            <p class="lead">发现数百万张免费高质量图片和视频</p>
+        </div>
+        
+        <div class="cors-warning" id="corsWarning">
+            <strong>⚠️ 注意:</strong> 检测到CORS跨域限制。首次加载可能失败，但搜索功能通常仍可使用。
+            如需稳定使用，请部署到支持后端代理的服务器。
+        </div>
+        
+        <div class="search-section search-box">
+            <form id="searchForm" class="row g-3">
+                <div class="col-md-4">
+                    <input type="text" id="queryInput" class="form-control form-control-lg" placeholder="🔍 搜索关键词..." value="pretty woman">
+                </div>
+                <div class="col-md-2">
+                    <select id="mediaType" class="form-select form-select-lg">
+                        <option value="photos">📸 图片</option>
+                        <option value="videos">🎥 视频</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary btn-lg w-100">搜索</button>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" id="clearBtn" class="btn btn-clear btn-lg w-100">🗑️ 清空</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="filter-section">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="orientationFilter" class="form-label fw-bold">📐 方向</label>
+                    <select id="orientationFilter" class="form-select">
+                        <option value="any">不限</option>
+                        <option value="landscape">横向</option>
+                        <option value="portrait">纵向</option>
+                        <option value="square">方形</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="sizeFilter" class="form-label fw-bold">📏 尺寸</label>
+                    <select id="sizeFilter" class="form-select">
+                        <option value="any">不限</option>
+                        <option value="large">大图</option>
+                        <option value="medium">中图</option>
+                        <option value="small">小图</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div id="loadingIndicator" class="loading">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">加载中...</span>
+            </div>
+            <h4 class="mt-3 text-primary">正在为您寻找精彩内容...</h4>
+            <p class="text-muted">这可能需要几秒钟</p>
+        </div>
+        
+        <div id="resultsContainer" class="row">
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <h3 class="text-muted">👋 欢迎使用Pexels搜索</h3>
+                    <p class="text-muted">请输入关键词开始搜索</p>
+                </div>
+            </div>
+        </div>
+        
+        <nav id="paginationContainer" class="pagination-container" style="display: none;">
+            <ul class="pagination justify-content-center" id="paginationList"></ul>
+        </nav>
+        
+        <footer>
+            <p>基于 <a href="https://www.pexels.com/api/documentation/" target="_blank" class="text-decoration-none">Pexels API</a> 构建</p>
+            <!--
+            <p class="mb-0">💡 提示：此工具直接从前端调用API，可能受CORS限制。如需稳定使用，请部署到支持代理的服务器。</p>
+        -->
+        </footer>
+    </div>
+
+    <!-- 图片模态框 -->
+    <div id="imageModal" class="image-modal">
+        <span class="modal-close" id="closeImageModal">&times;</span>
+        <img id="modalImage" class="image-modal-content" alt="大图预览">
+    </div>
+
+    <!-- 视频模态框 -->
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-fullscreen-md-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">🎬 视频预览</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center p-0">
+                    <div class="video-responsive" id="videoContainer">
+                        <video id="videoPlayer" controls>
+                            <source src="" type="video/mp4">
+                            您的浏览器不支持视频标签。
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 请在此处输入您的Pexels API密钥
+        const API_KEY = 'xDC24ho5apJjOxrE3DblofB7rKbMopSEMSgoTHtJXNzgskkMm5vwbHr6'; // 替换为您的API密钥
+        
+        const PHOTO_BASE_URL = 'https://api.pexels.com/v1';
+        const VIDEO_BASE_URL = 'https://api.pexels.com/videos';
+        
+        let currentPage = 1;
+        let currentQuery = '';
+        let currentMediaType = 'photos';
+        let currentOrientation = 'any';
+        let currentSize = 'any';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('searchForm');
+            const clearBtn = document.getElementById('clearBtn');
+            const orientationFilter = document.getElementById('orientationFilter');
+            const sizeFilter = document.getElementById('sizeFilter');
+
+            searchForm.addEventListener('submit', handleSearch);
+            clearBtn.addEventListener('click', clearResults);
+            orientationFilter.addEventListener('change', handleFilterChange);
+            sizeFilter.addEventListener('change', handleFilterChange);
+
+            // 图片模态框功能
+            const imageModal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const closeImageModal = document.getElementById('closeImageModal');
+            
+            closeImageModal.onclick = function() {
+                imageModal.classList.remove('active');
+            }
+            
+            window.onclick = function(event) {
+                if (event.target === imageModal) {
+                    imageModal.classList.remove('active');
+                }
+            }
+        });
+
+        function handleSearch(e) {
+            e.preventDefault();
+            currentQuery = document.getElementById('queryInput').value.trim();
+            currentMediaType = document.getElementById('mediaType').value;
+            currentOrientation = document.getElementById('orientationFilter').value;
+            currentSize = document.getElementById('sizeFilter').value;
+            
+            if (!currentQuery) {
+                alert('⚠️ 请输入搜索关键词');
+                return;
+            }
+            
+            currentPage = 1;
+            searchMedia();
+        }
+
+        function handleFilterChange() {
+            currentOrientation = document.getElementById('orientationFilter').value;
+            currentSize = document.getElementById('sizeFilter').value;
+            
+            // 如果已有搜索结果，则重新搜索
+            if (currentQuery) {
+                searchMedia();
+            }
+        }
+
+        async function searchMedia() {
+            showLoading(true);
+            hideCorsWarning(); // 隐藏CORS警告
+            
+            try {
+                let url;
+                const headers = {
+                    'Authorization': API_KEY
+                };
+                
+                const params = new URLSearchParams({
+                    query: currentQuery,
+                    per_page: 12,
+                    page: currentPage
+                });
+                
+                if (currentOrientation !== 'any') {
+                    params.append('orientation', currentOrientation);
+                }
+                if (currentSize !== 'any') {
+                    params.append('size', currentSize);
+                }
+                
+                if (currentMediaType === 'videos') {
+                    url = `${VIDEO_BASE_URL}/search?${params.toString()}`;
+                } else {
+                    url = `${PHOTO_BASE_URL}/search?${params.toString()}`;
+                }
+                
+                const response = await fetch(url, { headers });
+                
+                if (!response.ok) {
+                    throw new Error(`API请求失败: ${response.status} - ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                displayResults(data);
+            } catch (error) {
+                console.error('搜索错误:', error);
+                // 尝试使用代理API来绕过CORS限制
+                await searchViaProxy(currentQuery, currentMediaType, currentOrientation, currentSize);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function searchViaProxy(query, mediaType, orientation, size) {
+            try {
+                const params = new URLSearchParams({
+                    query: query,
+                    per_page: 12,
+                    page: currentPage
+                });
+                
+                if (orientation !== 'any') {
+                    params.append('orientation', orientation);
+                }
+                if (size !== 'any') {
+                    params.append('size', size);
+                }
+                
+                let apiUrl;
+                if (mediaType === 'videos') {
+                    apiUrl = `${VIDEO_BASE_URL}/search?${params.toString()}`;
+                } else {
+                    apiUrl = `${PHOTO_BASE_URL}/search?${params.toString()}`;
+                }
+                
+                // 使用allorigins代理
+                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(apiUrl)}`;
+                const response = await fetch(proxyUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`代理请求失败: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                displayResults(data);
+            } catch (error) {
+                console.error('代理搜索错误:', error);
+                showError('搜索失败，请稍后重试。可能由于CORS限制导致。');
+            }
+        }
+
+        function displayResults(data) {
+            const container = document.getElementById('resultsContainer');
+            const paginationContainer = document.getElementById('paginationContainer');
+            const paginationList = document.getElementById('paginationList');
+            
+            container.innerHTML = '';
+            
+            let items = [];
+            if (currentMediaType === 'photos') {
+                items = data.photos || [];
+            } else {
+                items = data.videos || [];
+                // 对于视频，我们只取前12个展示
+                items = items.slice(0, 12);
+            }
+            
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12">
+                        <div class="text-center py-5">
+                            <h3 class="text-muted">😢 没有找到相关结果</h3>
+                            <p class="text-muted">请尝试其他关键词或调整筛选条件</p>
+                        </div>
+                    </div>
+                `;
+                paginationContainer.style.display = 'none';
+                return;
+            }
+            
+            items.forEach(item => {
+                const colDiv = document.createElement('div');
+                colDiv.className = 'col-lg-3 col-md-4 col-sm-6';
+                
+                if (currentMediaType === 'photos') {
+                    // 查找原始图片URL
+                    let originalUrl = item.src.original || item.src.large2x || item.src.large || item.src.medium;
+                    
+                    colDiv.innerHTML = `
+                        <div class="media-item card h-100">
+                            <div class="media-container" style="padding-top: ${calculateAspectRatioPadding(item.width, item.height)}%;">
+                                <img src="${item.src.medium}" alt="${item.alt || 'Image'}" class="media-content card-img-top img-clickable">
+                            </div>
+                            <div class="media-info card-body">
+                                <h5 class="card-title">${item.photographer || '未知摄影师'}</h5>
+                                <p class="card-text">ID: ${item.id} | ${item.width}×${item.height}</p>
+                                <a href="${originalUrl}" class="download-link" target="_blank">📥 下载</a>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // 添加点击显示大图功能
+                    const imgElement = colDiv.querySelector('.img-clickable');
+                    imgElement.addEventListener('click', () => {
+                        showImageModal(item.src.large || item.src.original || item.src.medium);
+                    });
+                } else { // videos
+                    // 获取最佳质量的视频链接和预览图
+                    let videoUrl = '#';
+                    let previewUrl = item.image || '';
+                    let videoWidth = 16; // 默认宽高比
+                    let videoHeight = 9;
+                    
+                    if (item.video_files && item.video_files.length > 0) {
+                        // 寻找最高分辨率的视频文件并获取其宽高比
+                        const highestRes = item.video_files.reduce((prev, current) => 
+                            (prev.width * prev.height) > (current.width * current.height) ? prev : current
+                        );
+                        videoUrl = highestRes.link;
+                        videoWidth = highestRes.width || 16;
+                        videoHeight = highestRes.height || 9;
+                    }
+                    
+                    // 计算宽高比百分比
+                    const aspectRatioPercent = (videoHeight/videoWidth)*100;
+                    
+                    colDiv.innerHTML = `
+                        <div class="media-item card h-100 position-relative">
+                            <div class="media-container" style="padding-top: ${aspectRatioPercent}%;">
+                                <img src="${previewUrl}" alt="Video thumbnail" class="media-content card-img-top video-clickable">
+                                <div class="video-overlay">
+                                    <div class="play-icon video-play-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+                                          <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media-info card-body">
+                                <h5 class="card-title">🎬 视频 ID: ${item.id}</h5>
+                                <p class="card-text">下载次数: ${item.download_count || 0}</p>
+                                <a href="${videoUrl}" class="download-link" target="_blank">📥 下载</a>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // 添加点击播放视频功能
+                    const imgElement = colDiv.querySelector('.video-clickable');
+                    imgElement.addEventListener('click', () => {
+                        showVideoModal(videoUrl, videoWidth, videoHeight);
+                    });
+                    
+                    // 添加播放按钮点击事件
+                    const playBtn = colDiv.querySelector('.video-play-btn');
+                    playBtn.addEventListener('click', (e) => {
+                        e.stopPropagation(); // 阻止冒泡，防止触发图片点击事件
+                        showVideoModal(videoUrl, videoWidth, videoHeight);
+                    });
+                }
+                
+                container.appendChild(colDiv);
+            });
+            
+            // 分页处理
+            const totalResults = data.total_results || (currentMediaType === 'photos' ? data.photos?.length : data.videos?.length) || 0;
+            const totalPages = Math.ceil(totalResults / 12);
+            
+            if (totalPages > 1) {
+                paginationList.innerHTML = '';
+                
+                // 上一页
+                const prevLi = document.createElement('li');
+                prevLi.className = `page-item ${currentPage <= 1 ? 'disabled' : ''}`;
+                prevLi.innerHTML = `<a class="page-link" href="#" onclick="changePage(${currentPage - 1})">‹ 上一页</a>`;
+                paginationList.appendChild(prevLi);
+                
+                // 页码
+                const startPage = Math.max(1, currentPage - 2);
+                const endPage = Math.min(totalPages, currentPage + 2);
+                
+                for (let i = startPage; i <= endPage; i++) {
+                    const li = document.createElement('li');
+                    li.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                    li.innerHTML = `<a class="page-link" href="#" onclick="changePage(${i})">${i}</a>`;
+                    paginationList.appendChild(li);
+                }
+                
+                // 下一页
+                const nextLi = document.createElement('li');
+                nextLi.className = `page-item ${currentPage >= totalPages ? 'disabled' : ''}`;
+                nextLi.innerHTML = `<a class="page-link" href="#" onclick="changePage(${currentPage + 1})">下一页 ›</a>`;
+                paginationList.appendChild(nextLi);
+                
+                paginationContainer.style.display = 'block';
+            } else {
+                paginationContainer.style.display = 'none';
+            }
+        }
+
+        // 计算宽高比填充百分比的辅助函数
+        function calculateAspectRatioPadding(width, height) {
+            if (!width || !height) return 66.67; // 默认3:2比例
+            return (height / width) * 100;
+        }
+
+        function showImageModal(imageSrc) {
+            const modalImage = document.getElementById('modalImage');
+            const imageModal = document.getElementById('imageModal');
+            
+            modalImage.src = imageSrc;
+            modalImage.style.maxWidth = '95vw';  // 增加图片最大宽度
+            modalImage.style.maxHeight = '95vh'; // 增加图片最大高度
+            imageModal.classList.add('active');
+        }
+
+        function showVideoModal(videoUrl, videoWidth, videoHeight) {
+            // 设置视频源
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.innerHTML = `<source src="${videoUrl}" type="video/mp4">`;
+            videoPlayer.load();
+            videoPlayer.play();
+            
+            // 更新视频容器的宽高比
+            const videoContainer = document.getElementById('videoContainer');
+            // 移除之前的垂直类
+            videoContainer.classList.remove('vertical');
+            
+            // 计算宽高比
+            const aspectRatio = videoHeight / videoWidth;
+            
+            // 如果是竖屏视频（高度大于宽度），添加特殊类
+            if (aspectRatio > 1) {
+                videoContainer.classList.add('vertical');
+            }
+            
+            const modalElement = document.getElementById('videoModal');
+            const modal = new bootstrap.Modal(modalElement);
+            modal.show();
+        }
+
+        function changePage(page) {
+            if (page < 1) page = 1;
+            
+            // 计算最大页数
+            let maxPage = 1;
+            const allLinks = document.querySelectorAll('.page-item:not(.disabled) .page-link');
+            if (allLinks.length > 0) {
+                const pageNumbers = Array.from(allLinks).map(link => parseInt(link.textContent)).filter(num => !isNaN(num));
+                maxPage = pageNumbers.length > 0 ? Math.max(...pageNumbers) : 1;
+            }
+            
+            if (page > maxPage) page = maxPage;
+            
+            currentPage = page;
+            
+            if (currentQuery) {
+                searchMedia();
+            }
+        }
+
+        function clearResults() {
+            document.getElementById('resultsContainer').innerHTML = `
+                <div class="col-12">
+                    <div class="text-center py-5">
+                        <h3 class="text-muted">👋 欢迎使用Pexels搜索</h3>
+                        <p class="text-muted">请输入关键词开始搜索</p>
+                    </div>
+                </div>
+            `;
+            document.getElementById('queryInput').value = '';
+            document.getElementById('paginationContainer').style.display = 'none';
+            currentQuery = '';
+        }
+
+        function showLoading(show) {
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            loadingIndicator.style.display = show ? 'block' : 'none';
+        }
+
+        function showError(message) {
+            document.getElementById('resultsContainer').innerHTML = `
+                <div class="col-12">
+                    <div class="alert alert-danger text-center">
+                        <h4>❌ 错误</h4>
+                        <p>${message}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showCorsWarning() {
+            document.getElementById('corsWarning').style.display = 'block';
+        }
+
+        function hideCorsWarning() {
+            document.getElementById('corsWarning').style.display = 'none';
+        }
+
+        // 全局函数供分页使用
+        window.changePage = changePage;
+    </script>
+</body>
+</html>
