@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install google-api-python-client translators jinja2 tzdata
+          pip install google-api-python-client googletrans==4.0.0-rc1 jinja2 tzdata
 
       - name: Run trending script
         env:
