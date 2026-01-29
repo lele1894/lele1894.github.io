@@ -3,8 +3,6 @@ google-trans-new
 python-dateutil
 jinja2
 pytz
-translators==5.9.1
+googletrans==4.1.0
 tqdm
 ipywidgets
-psutil
-cloudscraper

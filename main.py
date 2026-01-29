@@ -1,5 +1,6 @@
 from googleapiclient.discovery import build
-import translators as ts
+from googletrans import Translator
+ts = Translator()
 from datetime import datetime
 import json
 import os
@@ -17,22 +18,14 @@ print_lock = threading.Lock()
 result_lock = threading.Lock()
 
 def translate_text(text, max_retries=3):
-    """使用多个翻译API尝试翻译文本"""
-    translation_services = ['bing', 'baidu', 'google']
-    
-    for service in translation_services:
-        for attempt in range(max_retries):
-            try:
-                time.sleep(random.uniform(0.5, 1))
-                translated = ts.translate_text(
-                    text,
-                    from_language='auto',
-                    to_language='zh-CN',
-                    translator=service
-                )
-                return translated
-            except Exception as e:
-                continue
+    """使用googletrans翻译文本"""
+    for attempt in range(max_retries):
+        try:
+            time.sleep(random.uniform(0.5, 1))
+            result = ts.translate(text, dest='zh-cn', src='auto')
+            return result.text
+        except Exception as e:
+            continue
     return text
 
 def get_video_duration(duration):
