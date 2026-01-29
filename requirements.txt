@@ -3,6 +3,6 @@ google-trans-new
 python-dateutil
 jinja2
 pytz
-googletrans==4.1.0
+googletrans==3.1.0a1
 tqdm
 ipywidgets
