@@ -3,7 +3,7 @@ google-trans-new
 python-dateutil
 jinja2
 pytz
-translators
+translators==5.9.1
 tqdm
 ipywidgets
 psutil
