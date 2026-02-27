@@ -1,25 +1,33 @@
 name: Update YouTube Trending
 
 on:
-  workflow_dispatch:  # 保留手动触发选项
+  workflow_dispatch:  # 手动触发
     inputs:
       message:
         description: '手动触发更新'
         required: false
   schedule:
-    - cron: "0 0 * * *"  # 每4小时运行一次
+    - cron: "0 */4 * * *"  # 修正：每 4 小时运行一次 (0:00, 4:00, 8:00...)
+
+# 防止多个作业同时运行导致冲突
+concurrency:
+  group: youtube-update
+  cancel-in-progress: true
 
 jobs:
   update-youtube:
     runs-on: ubuntu-latest
+    # 关键：设置单次作业最长运行时间，防止卡死
+    timeout-minutes: 15 
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5 # 升级到 v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'     # 升级到 3.11 消除 FutureWarning
 
       - name: Install dependencies
         run: |
@@ -30,13 +38,19 @@ jobs:
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           TZ: 'Asia/Shanghai'
-        run: python main.py
+        # 使用 -u 参数强制不缓存日志输出，方便在 Actions 页面实时看到进度
+        run: python -u main.py
         shell: bash
 
       - name: Commit and push changes
         run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          # 检查是否有文件变动
           git add us.html hk.html tw.html index.html
-          git diff --quiet && git diff --staged --quiet || git commit -m "Update trending videos at $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')"
-          git push
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update trending videos at $(date '+%Y-%m-%d %H:%M:%S')"
+            git push
+          fi
