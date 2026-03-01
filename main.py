@@ -52,13 +52,26 @@ def get_video_duration(duration):
 def process_video(video, region):
     """处理单个视频信息"""
     try:
-        video_title = video['snippet']['title']
-        translated_title = translate_text(video_title)
+        # 使用 .get() 避免字段缺失导致 Key Error
+        snippet = video.get('snippet', {})
+        video_id = video.get('id', '')
+        video_title = snippet.get('title', '无标题')
         
-        # 处理上传时间
-        published_at = datetime.fromisoformat(video['snippet']['publishedAt'].replace('Z', '+00:00'))
+        # 翻译处理：增加 try-except 确保翻译失败不中断程序
+        try:
+            translated_title = translate_text(video_title)
+        except Exception as e:
+            print(f"翻译失败 ({video_title}): {str(e)}")
+            translated_title = video_title
+        
+        # 处理上传时间（带默认值保护）
+        published_at_str = snippet.get('publishedAt')
         shanghai_tz = ZoneInfo("Asia/Shanghai")
-        published_at = published_at.astimezone(shanghai_tz)
+        if published_at_str:
+            published_at = datetime.fromisoformat(published_at_str.replace('Z', '+00:00'))
+            published_at = published_at.astimezone(shanghai_tz)
+        else:
+            published_at = datetime.now(shanghai_tz)
         
         # 计算发布时间差
         now = datetime.now(shanghai_tz)
@@ -75,8 +88,17 @@ def process_video(video, region):
         else:
             upload_time = f"{time_diff.seconds // 60}分钟前"
         
-        # 获取视频封面图,按分辨率从高到低尝试
-        video_id = video['id']
+        # 关键修复：安全获取播放量 viewCount
+        stats = video.get('statistics', {})
+        # 如果 viewCount 不存在，默认设为 0
+        view_count_str = stats.get('viewCount', '0')
+        view_count = int(view_count_str)
+        
+        # 获取视频时长（带默认值保护）
+        duration_str = video.get('contentDetails', {}).get('duration', 'PT0S')
+        video_duration = get_video_duration(duration_str)
+        
+        # 封面图逻辑保持不变
         thumbnail_urls = [
             f"https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg",
             f"https://i.ytimg.com/vi/{video_id}/sddefault.jpg",
@@ -88,16 +110,17 @@ def process_video(video, region):
         return {
             '原标题': video_title,
             '中文标题': translated_title,
-            '创作者': video['snippet']['channelTitle'],
-            'URL': f"https://www.youtube.com/watch?v={video['id']}",
-            '时长': get_video_duration(video['contentDetails']['duration']),
-            '播放量': int(video['statistics']['viewCount']),
+            '创作者': snippet.get('channelTitle', '未知频道'),
+            'URL': f"https://www.youtube.com/watch?v={video_id}",
+            '时长': video_duration,
+            '播放量': view_count,
             '地区': region,
             '上传时间': upload_time,
             'thumbnail': thumbnail_urls
         }
     except Exception as e:
-        print(f"处理视频时出错: {str(e)}")
+        # 这里记录具体的错误原因，方便调试
+        print(f"处理视频 {video.get('id', 'unknown')} 时出错: {str(e)}")
         return None
 
 def get_trending_videos(api_key, region_code, region_name):
@@ -109,7 +132,7 @@ def get_trending_videos(api_key, region_code, region_name):
             part='snippet,contentDetails,statistics',
             chart='mostPopular',
             regionCode=region_code,
-            maxResults=50  # 每个地区获取50个视频
+            maxResults=25  # 每个地区获取50个视频
         )
         
         response = request.execute()
